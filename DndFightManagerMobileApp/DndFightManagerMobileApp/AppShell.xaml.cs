@@ -17,6 +17,7 @@ namespace DndFightManagerMobileApp
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(MainMenuPage), typeof(MainMenuPage));
+            Routing.RegisterRoute(nameof(BestiaryPage), typeof(BestiaryPage));
         }
     }
 }

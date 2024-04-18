@@ -3,8 +3,12 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:DndFightManagerMobileApp.Views"
-    x:Class="DndFightManagerMobileApp.AppShell">
+    x:Class="DndFightManagerMobileApp.AppShell"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    Shell.FlyoutBehavior="Disabled">
 
     <ShellContent Route="MainMenuPage" ContentTemplate="{DataTemplate views:MainMenuPage}"/>
+    <ShellContent Route="BestiaryPage" ContentTemplate="{DataTemplate views:BestiaryPage}"/>
 
 </Shell>
