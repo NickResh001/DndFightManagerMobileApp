@@ -11,10 +11,10 @@ using Xamarin.Forms.Xaml;
 namespace DndFightManagerMobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class BestiaryPage : ContentPage
+    public partial class CreateEditBeastNoteStatsPage : ContentPage
     {
-        private static BestiaryViewModel vm = new();
-        public BestiaryPage()
+        private static CreateEditBeastNoteStatsViewModel vm = new();
+        public CreateEditBeastNoteStatsPage()
         {
             InitializeComponent();
             BindingContext = vm;

@@ -13,7 +13,7 @@ namespace DndFightManagerMobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainMenuPage : ContentPage
     {
-        private static MainMenuViewModel vm = new MainMenuViewModel();
+        private static MainMenuViewModel vm = new();
         public MainMenuPage()
         {
             InitializeComponent();

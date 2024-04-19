@@ -15,14 +15,17 @@
                 Text="Бестиарий"
                 Style="{DynamicResource Key=DefaultButton}"
                 Command="{Binding NavigateToBestiaryCommand}"
+                Margin="0,3"
             />
             <Button
                 Text="Сцены"
                 Style="{DynamicResource Key=DefaultButton}"
+                Margin="0,3"
             />
             <Button
                 Text="Модерация"
                 Style="{DynamicResource Key=DefaultButton}"
+                Margin="0,3"
             />
             <!--<Button
                 Text="Последний моб"

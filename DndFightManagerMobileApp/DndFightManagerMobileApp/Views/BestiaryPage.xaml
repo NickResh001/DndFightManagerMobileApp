@@ -1,13 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DndFightManagerMobileApp.Views.BestiaryPage">
+             x:Class="DndFightManagerMobileApp.Views.BestiaryPage"
+             Background="{DynamicResource MainMedium}">
     <ContentPage.Content>
-        <StackLayout>
-            <Label 
-                Text="Beastiary"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  BackgroundColor="{DynamicResource MainDark}">
+                <Button Text="+"
+                        Style="{DynamicResource DefaultButton}"
+                        Command="{Binding NavigateToCreateEditBeastNoteStatsCommand}"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Margin="10"/>
+            </Grid>
+            
+            
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

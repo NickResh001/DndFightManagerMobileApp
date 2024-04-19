@@ -4,21 +4,22 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using DndFightManagerMobileApp.Views;
+using CommunityToolkit.Mvvm.Input;
+using System.Threading.Tasks;
 
 namespace DndFightManagerMobileApp.ViewModels
 {
-    public class MainMenuViewModel : BaseViewModel
+    public partial class MainMenuViewModel : BaseViewModel
     {
-        public ICommand NavigateToBestiaryCommand { get; set; }
-
         public MainMenuViewModel()
         {
-            NavigateToBestiaryCommand = new Command(NavigateToBestiary);
+            
         }
 
-        public void NavigateToBestiary(object parameter)
+        [RelayCommand]
+        private async Task NavigateToBestiary(object parameter)
         {
-            Shell.Current.GoToAsync($"{nameof(BestiaryPage)}");
+            await Shell.Current.GoToAsync($"{nameof(BestiaryPage)}");
         }
     }
 }
