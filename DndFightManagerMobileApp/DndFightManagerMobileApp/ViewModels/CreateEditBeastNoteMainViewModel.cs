@@ -4,14 +4,42 @@ using DndFightManagerMobileApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Xml.Linq;
 using Xamarin.Forms;
 
 namespace DndFightManagerMobileApp.ViewModels
 {
+    public enum LocalNavigation
+    {
+        Left,
+        Right
+    }
     public partial class CreateEditBeastNoteMainViewModel : BaseViewModel
     {
+        #region IncomingParametres
+
+        private string _beastNoteId;
+        public string BeastNoteId
+        {
+            get { return _beastNoteId; }
+            set
+            {
+                _beastNoteId = value;
+                if (value == string.Empty)
+                {
+                    // this is Creation act
+                }
+                else
+                {
+                    // Getting beastNote by id (this is Edit act)
+                }
+            }
+        }
+
+        #endregion
+
         #region ObservableProperties
 
         [ObservableProperty] private string _pageHeader;
@@ -42,7 +70,7 @@ namespace DndFightManagerMobileApp.ViewModels
 
         #endregion
 
-        public CreateEditBeastNoteMainViewModel() 
+        public CreateEditBeastNoteMainViewModel()
         {
             _crudViews =
                 [
@@ -60,39 +88,41 @@ namespace DndFightManagerMobileApp.ViewModels
             PageHeader = "Создание моба";
 
             CurrentViewIndex = 0;
-            SetCurrentView();
+            CurrentView = _crudViews[CurrentViewIndex].v;
+            CurrentViewName = _crudViews[CurrentViewIndex].vname;
         }
-        private void SetCurrentView()
+        private void LocalNavigateTo(LocalNavigation localNavigation)
         {
-            _crudViews[CurrentViewIndex].vm.OnNavigate(null);
+            // Take parametres from view I left
+
+            if (localNavigation == LocalNavigation.Left)
+                CurrentViewIndex--;
+            else if (localNavigation == LocalNavigation.Right)
+                CurrentViewIndex++;
+
+            _crudViews[CurrentViewIndex].vm.OnNavigateTo(null);
             CurrentView = _crudViews[CurrentViewIndex].v;
             CurrentViewName = _crudViews[CurrentViewIndex].vname;
         }
 
         [RelayCommand]
-        private void ToLeftView()
-        {
-            if (CurrentViewIndex > 0)
-            {
-                CurrentViewIndex--;
-                SetCurrentView();
-            }
+        public void ToLeftView() 
+        { 
+            if (CurrentViewIndex > 0) 
+                LocalNavigateTo(LocalNavigation.Left); 
         }
 
         [RelayCommand]
         private void ToRightView()
         {
             if (CurrentViewIndex < _crudViews.Count - 1)
-            {
-                CurrentViewIndex++;
-                SetCurrentView();
-            }
+                LocalNavigateTo(LocalNavigation.Right);
         }
         
         [RelayCommand]
         private void NavigateBackTo() 
-        { 
-
+        {
+            Shell.Current.GoToAsync("..");
         }
     }
 }

@@ -6,6 +6,7 @@ namespace DndFightManagerMobileApp.ViewModels
 {
     public abstract class BaseViewModelHandNavigation : BaseViewModel
     {
-        public abstract void OnNavigate(object parameter);
+        public virtual void OnNavigateTo(object parameter) { }
+        public virtual object OnNavigateFrom() { return null; }
     }
 }

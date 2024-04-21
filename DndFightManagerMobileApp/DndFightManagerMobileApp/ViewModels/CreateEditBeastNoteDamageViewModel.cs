@@ -13,7 +13,7 @@ namespace DndFightManagerMobileApp.ViewModels
         {
             Header = "Damage";
         }
-        public override void OnNavigate(object parameter)
+        public override void OnNavigateTo(object parameter)
         {
             //throw new NotImplementedException();
         }
