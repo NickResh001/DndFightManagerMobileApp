@@ -11,13 +11,13 @@ using Xamarin.Forms.Xaml;
 namespace DndFightManagerMobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CreateEditBeastNoteStatsPage : ContentPage
+    public partial class CreateEditBeastNoteDamageView : ContentView
     {
-        private static CreateEditBeastNoteStatsViewModel vm = new();
-        public CreateEditBeastNoteStatsPage()
+        public static BaseViewModelHandNavigation _vm = new CreateEditBeastNoteDamageViewModel();
+        public CreateEditBeastNoteDamageView()
         {
             InitializeComponent();
-            BindingContext = vm;
+            BindingContext = _vm;
         }
     }
 }

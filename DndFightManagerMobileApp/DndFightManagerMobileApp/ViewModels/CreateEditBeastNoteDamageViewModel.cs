@@ -5,15 +5,14 @@ using System.Text;
 
 namespace DndFightManagerMobileApp.ViewModels
 {
-    public partial class CreateEditBeastNoteStatsViewModel : BaseViewModelHandNavigation
+    public partial class CreateEditBeastNoteDamageViewModel : BaseViewModelHandNavigation
     {
         [ObservableProperty] private string _header;
 
-        public CreateEditBeastNoteStatsViewModel()
+        public CreateEditBeastNoteDamageViewModel()
         {
-            Header = "Stats";
+            Header = "Damage";
         }
-
         public override void OnNavigate(object parameter)
         {
             //throw new NotImplementedException();

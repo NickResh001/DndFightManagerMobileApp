@@ -16,7 +16,7 @@ namespace DndFightManagerMobileApp.ViewModels
         [RelayCommand]
         private async Task NavigateToCreateEditBeastNoteStats(object parameter)
         {
-            await Shell.Current.GoToAsync($"{nameof(CreateEditBeastNoteStatsPage)}");
+            await Shell.Current.GoToAsync($"{nameof(CreateEditBeastNoteMainPage)}");
         }
     }
 }

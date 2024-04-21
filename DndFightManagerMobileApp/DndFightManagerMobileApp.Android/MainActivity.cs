@@ -17,6 +17,12 @@ namespace DndFightManagerMobileApp.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
+
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+            {
+                Window.SetStatusBarColor(new Android.Graphics.Color(0x04, 0x34, 0x2B));
+                Window.SetNavigationBarColor(new Android.Graphics.Color(0x04, 0x34, 0x2B));
+            }
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {

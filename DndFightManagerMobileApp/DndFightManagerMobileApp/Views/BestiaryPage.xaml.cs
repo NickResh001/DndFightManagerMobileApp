@@ -13,11 +13,11 @@ namespace DndFightManagerMobileApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BestiaryPage : ContentPage
     {
-        private static BestiaryViewModel vm = new();
+        private static BestiaryViewModel _vm = new BestiaryViewModel();
         public BestiaryPage()
         {
             InitializeComponent();
-            BindingContext = vm;
+            BindingContext = _vm;
         }
     }
 }

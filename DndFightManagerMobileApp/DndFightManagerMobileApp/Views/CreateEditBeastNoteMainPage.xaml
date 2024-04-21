@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteMainPage">
+    <ContentPage.Content>
+        <Grid BackgroundColor="red"
+              RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="10*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  BackgroundColor="{DynamicResource MainDark}">
+                <Label Text="{Binding PageHeader}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+            </Grid>
+
+            <ScrollView Grid.Row="1"
+                        BackgroundColor="{DynamicResource MainMedium}">
+                <ContentView Content="{Binding CurrentView}"
+                             VerticalOptions="FillAndExpand"
+                             HorizontalOptions="FillAndExpand"/>
+            </ScrollView>
+
+            <Grid Grid.Row="2"
+                  BackgroundColor="{DynamicResource MainDark}">
+                <Label Text="{Binding CurrentViewName}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+                <Button Text="Влево"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Start"
+                        Command="{Binding ToLeftViewCommand}"
+                        IsVisible="{Binding IsToLeftVisible}"/>
+                <Button Text="Вправо"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"
+                        Command="{Binding ToRightViewCommand}"
+                        IsVisible="{Binding IsToRightVisible}"/>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
