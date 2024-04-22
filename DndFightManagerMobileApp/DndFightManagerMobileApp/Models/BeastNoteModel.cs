@@ -4,9 +4,8 @@ using System.Text;
 
 namespace DndFightManagerMobileApp.Models
 {
-    public class BeastNoteModel
+    public class BeastNoteModel : BaseEntityModel
     {
-        public string Id { get; set; }
         public string HitPoitsDice { get; set; }
         public int InitiativeBonus { get; set; }
         public int ArmorClass { get; set; }
@@ -16,24 +15,24 @@ namespace DndFightManagerMobileApp.Models
         public AlignmentModel Alignment { get; set; }
         public SizeModel Size { get; set; }
         public BeastTypeModel BeastType { get; set; }
-        public int ChallengeRating { get; set; }
+        public double ChallengeRating { get; set; }
         public string Description { get; set; }
-        public AbilityModel SpellAbility { get; set; }
-        public int? SpellAttackBonus { get; set; }
-        public int SpellSaveThrowDifficulty { get; set; }
+        public AbilityModel SpellAbility { get; set; } = null;
+        public int? SpellAttackBonus { get; set; } = null;
+        public int? SpellSaveThrowDifficulty { get; set; } = null;
 
         //public string Author { get; set; }
 
         //public string Moderator { get; set; }
 
-        public string ModeratorComment { get; set; }
+        public string ModeratorComment { get; set; } = string.Empty;
         public DateTime CreationDate { get; set; }
         public DateTime LastEditingDate { get; set; }
-        public int AllUses { get; set; }
-        public int UniqueUses { get; set; }
-        public double UserRating { get; set; }
-        public bool IsBeingModerated { get; set; }
-        public bool IsPublished { get; set; }
+        public int AllUses { get; set; } = 0;
+        public int UniqueUses { get; set; } = 0;
+        public double UserRating { get; set; } = 0;
+        public bool IsBeingModerated { get; set; } = false;
+        public bool IsPublished { get; set; } = false;
 
         public List<SpeedListModel> SpeedList { get; set; } = [];
         public List<DamageTendencyModel> DamageTendencyList { get; set; } = [];

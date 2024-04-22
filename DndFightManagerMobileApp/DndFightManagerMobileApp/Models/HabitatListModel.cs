@@ -4,9 +4,8 @@ using System.Text;
 
 namespace DndFightManagerMobileApp.Models
 {
-    public class HabitatListModel
+    public class HabitatListModel : BaseEntityModel
     {
-        public string Id { get; set; } = null!;
         public HabitatModel Habitat { get; set; }
     }
 }

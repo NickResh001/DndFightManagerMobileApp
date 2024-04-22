@@ -4,9 +4,8 @@ using System.Text;
 
 namespace DndFightManagerMobileApp.Models
 {
-    public class SpeedListModel
+    public class SpeedListModel : BaseEntityModel
     {
-        public string Id { get; set; } = null!;
         public SpeedModel Speed { get; set; }
         public int DistanceInFeet { get; set; }
     }

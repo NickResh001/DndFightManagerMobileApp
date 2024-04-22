@@ -4,9 +4,8 @@ using System.Text;
 
 namespace DndFightManagerMobileApp.Models
 {
-    public class SpellSlotModel
+    public class SpellSlotModel : BaseEntityModel
     {
-        public string Id { get; set; } = null!;
         public int Level { get; set; }
         public int Count { get; set; }
     }

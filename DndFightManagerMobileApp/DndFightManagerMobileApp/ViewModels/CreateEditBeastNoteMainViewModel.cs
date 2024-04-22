@@ -90,10 +90,11 @@ namespace DndFightManagerMobileApp.ViewModels
             CurrentViewIndex = 0;
             CurrentView = _crudViews[CurrentViewIndex].v;
             CurrentViewName = _crudViews[CurrentViewIndex].vname;
+            
         }
         private void LocalNavigateTo(LocalNavigation localNavigation)
         {
-            // Take parametres from view I left
+            _crudViews[CurrentViewIndex].vm.OnNavigateFrom();
 
             if (localNavigation == LocalNavigation.Left)
                 CurrentViewIndex--;

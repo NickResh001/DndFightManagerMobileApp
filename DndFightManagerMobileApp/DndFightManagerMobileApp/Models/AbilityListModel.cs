@@ -4,11 +4,10 @@ using System.Text;
 
 namespace DndFightManagerMobileApp.Models
 {
-    public class AbilityListModel
+    public class AbilityListModel : BaseEntityModel
     {
-        public string Id { get; set; } = null!;
         public AbilityModel Ability { get; set; }
         public int Value { get; set; }
-        public bool SavingThrowProficiency { get; set; }
+        public bool SavingThrowProficiency { get; set; } = false;
     }
 }

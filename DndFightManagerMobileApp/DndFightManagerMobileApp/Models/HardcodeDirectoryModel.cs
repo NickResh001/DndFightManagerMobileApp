@@ -4,9 +4,8 @@ using System.Text;
 
 namespace DndFightManagerMobileApp.Models
 {
-    public class HardcodeDirectoryModel
+    public class HardcodeDirectoryModel : BaseEntityModel
     {
-        public string Id { get; set; } = null!;
         public string Title { get; set; } = null!;
     }
 }

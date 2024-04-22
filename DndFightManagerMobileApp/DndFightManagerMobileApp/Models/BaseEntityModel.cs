@@ -4,8 +4,8 @@ using System.Text;
 
 namespace DndFightManagerMobileApp.Models
 {
-    public class ConditionImmunitiesListModel : BaseEntityModel
+    public class BaseEntityModel
     {
-        public ConditionModel Condition { get; set; }
+        public string Id { get; set; } = null!;
     }
 }
