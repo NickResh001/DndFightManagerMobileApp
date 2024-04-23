@@ -12,12 +12,13 @@
 
             <Grid Grid.Row="0"
                   BackgroundColor="{DynamicResource MainDark}">
-                <Button ImageSource="AddButton.png"
-                        Style="{DynamicResource LinkButton}"
+                <Button Style="{DynamicResource AddButton}"
                         Command="{Binding NavigateToCreateEditBeastNoteStatsCommand}"
                         HorizontalOptions="End"
                         VerticalOptions="Center"
-                        Margin="10"/>
+                        Margin="10"                        
+                        x:Name="ButtonAdd"
+                        WidthRequest="{Binding Height, Source={x:Reference ButtonAdd}}"/>
             </Grid>
             
             

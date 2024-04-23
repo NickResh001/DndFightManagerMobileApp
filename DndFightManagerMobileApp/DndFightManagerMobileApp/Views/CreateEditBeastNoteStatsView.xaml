@@ -1,11 +1,177 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteStatsView">
   <ContentView.Content>
       <StackLayout>
-          <Label Text="{Binding Header, Mode=TwoWay}" />
-          <Label Text="sasageo"/>
+          
+            <Frame BackgroundColor="{DynamicResource MainDark}"
+                   CornerRadius="5"
+                   Padding="0,5"
+                   Margin="0,12,0,7">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="13*"/>
+                            <ColumnDefinition Width="50*"/>
+                            <ColumnDefinition Width="37*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Style="{DynamicResource InfoButton}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                x:Name="ButtonInfo"
+                                WidthRequest="{Binding Height, Source={x:Reference ButtonInfo}}"/>
+                        <Label Grid.Column="1"
+                               Text="Характеристики"
+                               Style="{DynamicResource Header3}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"/>
+                        <Label Grid.Column="2"
+                               Text="Спасброски"
+                               Style="{DynamicResource Header3}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"/>
+                    </Grid>
+
+                    <StackLayout Grid.Row="1" 
+                                 BindableLayout.ItemsSource="{Binding Abilities, Mode=TwoWay}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="63*"/>
+                                        <ColumnDefinition Width="37*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout Grid.Column="0"
+                                                 VerticalOptions="Center"
+                                                 HorizontalOptions="End"
+                                                 Orientation="Horizontal">
+
+                                        <Label Text="{Binding Path=Ability.Title}"
+                                               Style="{DynamicResource Header3}"
+                                               VerticalOptions="Center"/>
+                                        <Entry Text="{Binding Path=Value, Mode=TwoWay}"
+                                               Keyboard="Numeric"
+                                               HorizontalTextAlignment="Center"
+                                               WidthRequest="60">
+                                            <Entry.Behaviors>
+                                                <xct:CharactersValidationBehavior
+                                                    CharacterType="Digit"
+                                                    MaximumCharacterCount="2"
+                                                    MinimumCharacterCount="1"/>
+                                            </Entry.Behaviors>
+                                        </Entry>
+
+                                    </StackLayout>
+
+                                    <CheckBox Grid.Column="1"
+                                              VerticalOptions="Center"
+                                              HorizontalOptions="Center"
+                                              IsChecked="{Binding Path=SavingThrowProficiency}"/>
+
+                                </Grid>
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                    
+                </Grid>
+            </Frame>
+            
+            <Frame BackgroundColor="{DynamicResource MainDark}"
+                   CornerRadius="5"
+                   Padding="5"
+                   Margin="0,7">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50*"/>
+                        <RowDefinition Height="50*"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="13*"/>
+                            <ColumnDefinition Width="87*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="0"
+                                Style="{DynamicResource InfoButton}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                WidthRequest="{Binding Height, Source={x:Reference ButtonInfo}}"/>
+                        
+                        <Label Style="{DynamicResource Header3}"
+                               Grid.Column="1"
+                               Text="Кости хитов"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"/>
+                    </Grid>
+
+                    <StackLayout Grid.Row="1"
+                                 Orientation="Horizontal"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Start">
+                        <Entry Text="{Binding Path=HitPointDiceField1, Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               HorizontalTextAlignment="Center"
+                               WidthRequest="60">
+                            <Entry.Behaviors>
+                                <xct:CharactersValidationBehavior
+                                    CharacterType="Digit"
+                                    MaximumCharacterCount="3"
+                                    MinimumCharacterCount="1"
+                                    IsValid="{Binding HitPointDice1isValid}"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Style="{DynamicResource Header3}"
+                               VerticalOptions="Center"
+                               Text="к"/>
+                        <Entry Text="{Binding Path=HitPointDiceField2, Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               HorizontalTextAlignment="Center"
+                               WidthRequest="60">
+                            <Entry.Behaviors>
+                                <xct:CharactersValidationBehavior
+                                    CharacterType="Digit"
+                                    MaximumCharacterCount="3"
+                                    MinimumCharacterCount="1"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Label Style="{DynamicResource Header3}"
+                               VerticalOptions="Center"
+                               Text="+"/>
+                        <Entry Text="{Binding Path=HitPointDiceField3, Mode=TwoWay}"
+                               Keyboard="Numeric"
+                               HorizontalTextAlignment="Center"
+                               WidthRequest="60">
+                            <Entry.Behaviors>
+                                <xct:CharactersValidationBehavior
+                                    CharacterType="Digit"
+                                    MaximumCharacterCount="10"
+                                    MinimumCharacterCount="1"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                    </StackLayout>
+
+                </Grid>
+            </Frame>
+            <Frame BackgroundColor="{DynamicResource MainDark}"
+                   CornerRadius="5"
+                   Padding="0"
+                   Margin="0,7,0,12">
+                <Label Text="adadada"
+                       HeightRequest="40"/>
+            </Frame>
       </StackLayout>
   </ContentView.Content>
 </ContentView>

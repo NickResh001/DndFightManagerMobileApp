@@ -9,5 +9,7 @@ namespace DndFightManagerMobileApp.Models
         public AbilityModel Ability { get; set; }
         public int Value { get; set; }
         public bool SavingThrowProficiency { get; set; } = false;
+
+
     }
 }

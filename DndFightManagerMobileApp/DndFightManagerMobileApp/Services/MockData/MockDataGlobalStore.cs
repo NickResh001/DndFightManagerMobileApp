@@ -1,4 +1,5 @@
 ﻿using DndFightManagerMobileApp.Models;
+using DndFightManagerMobileApp.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace DndFightManagerMobileApp.Services.MockData
 {
     public class MockDataGlobalStore : IGLobalDataStore
     {
-        public IDataStore<AbilityModel> Ability { get; private set; }
+        public IAbilityDataStore Ability { get; private set; }
         public IDataStore<AlignmentModel> Alignment { get; private set; }
         public IDataStore<BeastNoteModel> BeastNote { get; private set; }
         public IDataStore<BeastTypeModel> BeastType { get; private set; }
@@ -790,6 +791,101 @@ namespace DndFightManagerMobileApp.Services.MockData
                     ],
                 });
 
+                await BeastNote.Create(new BeastNoteModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    HitPoitsDice = "2d8+2",
+                    ArmorClass = 13,
+                    SpecialBonus = 2,
+                    //Image = [],
+                    Title = "Волчара",
+                    Alignment = await AlignmentStore.GetByTitle("Отсутствует"),
+                    Size = await SizeStore.GetByTitle("Средний"),
+                    BeastType = await BestTypeStore.GetByTitle("Зверь"),
+                    ChallengeRating = 0.25,
+                    Description = "Волки встречаются в субарктических и умеренных регионах мира, где они часто передвигаются стаями через холмы и леса.",
+                    CreationDate = DateTime.Today,
+                    LastEditingDate = DateTime.Now,
+                    SpeedList =
+                    [
+                        new SpeedListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Speed = await SpeedStore.GetByTitle(),
+                            DistanceInFeet = 40
+                        }
+                    ],
+                    SkillList =
+                    [
+                        new SkillListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Skill = await SkillStore.GetByTitle("Внимательность"),
+                        },
+                        new SkillListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Skill = await SkillStore.GetByTitle("Скрытность"),
+                        },
+                    ],
+                    AbilityList =
+                    [
+                        new AbilityListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Ability = await AbilityStore.GetByTitle("Сила"),
+                            Value = 12
+                        },
+                        new AbilityListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Ability = await AbilityStore.GetByTitle("Ловкость"),
+                            Value = 15
+                        },
+                        new AbilityListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Ability = await AbilityStore.GetByTitle("Телосложение"),
+                            Value = 12
+                        },
+                        new AbilityListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Ability = await AbilityStore.GetByTitle("Интеллект"),
+                            Value = 3
+                        },
+                        new AbilityListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Ability = await AbilityStore.GetByTitle("Мудрость"),
+                            Value = 12
+                        },
+                        new AbilityListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Ability = await AbilityStore.GetByTitle("Харизма"),
+                            Value = 6
+                        },
+                    ],
+                    HabitatList =
+                    [
+                        new HabitatListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Habitat = await HabitatTypeStore.GetByTitle("Лес"),
+                        },
+                        new HabitatListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Habitat = await HabitatTypeStore.GetByTitle("Равнина/луг"),
+                        },
+                        new HabitatListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Habitat = await HabitatTypeStore.GetByTitle("Холмы"),
+                        }
+                    ],
+                });
 
                 /*await BeastNote.Create(new BeastNoteModel
                 {

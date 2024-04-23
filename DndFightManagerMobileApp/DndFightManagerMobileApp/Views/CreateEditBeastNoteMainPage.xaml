@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteMainPage">
     <ContentPage.Content>
-        <Grid BackgroundColor="red"
-              RowSpacing="0">
+        <Grid RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="80*"/>
@@ -14,48 +13,55 @@
             <Grid Grid.Row="0"
                   BackgroundColor="{DynamicResource MainDark}">
 
-                <Button ImageSource="BackButton.png"
-                        x:Name="ButtonBack"
-                        VerticalOptions="Center"
+                <Button VerticalOptions="Center"
                         HorizontalOptions="Start"
-                        Style="{DynamicResource LinkButton}"
+                        Style="{DynamicResource BackButton}"
                         Command="{Binding NavigateBackToCommand}"
+                        x:Name="ButtonBack"                        
                         WidthRequest="{Binding Height, Source={x:Reference ButtonBack}}"/>
 
                 <Label Text="{Binding PageHeader}"
                        VerticalOptions="Center"
-                       HorizontalOptions="Center"/>
+                       HorizontalOptions="Center"
+                       Style="{DynamicResource Header2}"/>
+
             </Grid>
 
-            <ScrollView Grid.Row="1"
-                        BackgroundColor="{DynamicResource MainMedium}">
-                <ContentView Content="{Binding CurrentView}"
-                             VerticalOptions="FillAndExpand"
-                             HorizontalOptions="FillAndExpand"/>
-            </ScrollView>
+            <Grid Grid.Row="1"
+                   BackgroundColor="{DynamicResource MainMedium}"
+                   Padding="0,2">
+                <ScrollView BackgroundColor="{DynamicResource MainMedium}"
+                            Padding="12,0">
+                    <ContentView Content="{Binding CurrentView}"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand"/>
+                </ScrollView>  
+            </Grid>
+            
+
 
             <Grid Grid.Row="2"
                   BackgroundColor="{DynamicResource MainDark}">
+                
                 <Label Text="{Binding CurrentViewName}"
                        VerticalOptions="Center"
-                       HorizontalOptions="Center"/>
+                       HorizontalOptions="Center"
+                       Style="{DynamicResource Header2}"/>
                 
-                <Button ImageSource="LeftScrollButton.png"
-                        x:Name="ButtonLeft"
-                        VerticalOptions="Center"
+                <Button VerticalOptions="Center"
                         HorizontalOptions="Start"
-                        Style="{DynamicResource LinkButton}"
+                        Style="{DynamicResource LeftScrollButton}"
                         Command="{Binding ToLeftViewCommand}"
                         IsVisible="{Binding IsToLeftVisible}"
+                        x:Name="ButtonLeft"                        
                         WidthRequest="{Binding Height, Source={x:Reference ButtonLeft}}"/>
 
-                <Button ImageSource="RightScrollButton.png"
-                        x:Name="ButtonRight"
-                        VerticalOptions="Center"
+                <Button VerticalOptions="Center"
                         HorizontalOptions="End"
-                        Style="{DynamicResource LinkButton}"
+                        Style="{DynamicResource RightScrollButton}"
                         Command="{Binding ToRightViewCommand}"
                         IsVisible="{Binding IsToRightVisible}"
+                        x:Name="ButtonRight"
                         WidthRequest="{Binding Height, Source={x:Reference ButtonRight}}"/>
             </Grid>
 

@@ -16,6 +16,17 @@ namespace DndFightManagerMobileApp.Models
         public SizeModel Size { get; set; }
         public BeastTypeModel BeastType { get; set; }
         public double ChallengeRating { get; set; }
+        public string ChallangeRatingString()
+        {
+            if (ChallengeRating == 0.5)
+                return "1/2";
+            else if (ChallengeRating == 0.25)
+                return "1/4";
+            else if (ChallengeRating == 0.125)
+                return "1/8";
+            else
+                return ((int)ChallengeRating).ToString();
+        }
         public string Description { get; set; }
         public AbilityModel SpellAbility { get; set; } = null;
         public int? SpellAttackBonus { get; set; } = null;

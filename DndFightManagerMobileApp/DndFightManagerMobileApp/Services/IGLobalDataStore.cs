@@ -1,4 +1,5 @@
 ﻿using DndFightManagerMobileApp.Models;
+using DndFightManagerMobileApp.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,7 +11,7 @@ namespace DndFightManagerMobileApp.Services
     /// </summary>
     public interface IGLobalDataStore
     {
-        IDataStore<AbilityModel> Ability { get; }
+        IAbilityDataStore Ability { get; }
         IDataStore<AlignmentModel> Alignment { get; }
         IDataStore<BeastNoteModel> BeastNote { get; }
         IDataStore<BeastTypeModel> BeastType { get; }

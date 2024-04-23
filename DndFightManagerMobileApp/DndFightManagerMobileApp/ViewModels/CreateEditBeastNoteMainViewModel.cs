@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DndFightManagerMobileApp.Models;
 using DndFightManagerMobileApp.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -16,6 +18,8 @@ namespace DndFightManagerMobileApp.ViewModels
         Left,
         Right
     }
+    
+    
     public partial class CreateEditBeastNoteMainViewModel : BaseViewModel
     {
         #region IncomingParametres
@@ -43,12 +47,12 @@ namespace DndFightManagerMobileApp.ViewModels
         #region ObservableProperties
 
         [ObservableProperty] private string _pageHeader;
-        [ObservableProperty] private string _teamName;
         [ObservableProperty] private string _currentViewName;
         [ObservableProperty] private ContentView _currentView;
 
         [ObservableProperty] private bool _isToLeftVisible;
         [ObservableProperty] private bool _isToRightVisible;
+        [ObservableProperty] private BeastNoteModel _beastNote;
 
         #endregion
 
@@ -90,18 +94,20 @@ namespace DndFightManagerMobileApp.ViewModels
             CurrentViewIndex = 0;
             CurrentView = _crudViews[CurrentViewIndex].v;
             CurrentViewName = _crudViews[CurrentViewIndex].vname;
-            
+            BeastNote = null;
+            _crudViews[CurrentViewIndex].vm.OnNavigateTo(BeastNote);
         }
         private void LocalNavigateTo(LocalNavigation localNavigation)
         {
-            _crudViews[CurrentViewIndex].vm.OnNavigateFrom();
+            if (_crudViews[CurrentViewIndex].vm.OnNavigateFrom() is BeastNoteModel bm)
+                BeastNote = bm;
 
             if (localNavigation == LocalNavigation.Left)
                 CurrentViewIndex--;
             else if (localNavigation == LocalNavigation.Right)
                 CurrentViewIndex++;
 
-            _crudViews[CurrentViewIndex].vm.OnNavigateTo(null);
+            _crudViews[CurrentViewIndex].vm.OnNavigateTo(BeastNote);
             CurrentView = _crudViews[CurrentViewIndex].v;
             CurrentViewName = _crudViews[CurrentViewIndex].vname;
         }
@@ -121,7 +127,7 @@ namespace DndFightManagerMobileApp.ViewModels
         }
         
         [RelayCommand]
-        private void NavigateBackTo() 
+        private void NavigateBackTo()
         {
             Shell.Current.GoToAsync("..");
         }

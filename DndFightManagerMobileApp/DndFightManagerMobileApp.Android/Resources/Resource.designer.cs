@@ -22114,22 +22114,52 @@ namespace DndFightManagerMobileApp.Droid
 			public const int preference_list_divider_material = 2131165332;
 			
 			// aapt resource value: 0x7F070095
-			public const int RenameButton = 2131165333;
+			public const int PressedAddButton = 2131165333;
 			
 			// aapt resource value: 0x7F070096
-			public const int RightScrollButton = 2131165334;
+			public const int PressedBackButton = 2131165334;
 			
 			// aapt resource value: 0x7F070097
-			public const int test_custom_background = 2131165335;
+			public const int PressedBurgerButton = 2131165335;
 			
 			// aapt resource value: 0x7F070098
-			public const int test_level_drawable = 2131165336;
+			public const int PressedCopyButton = 2131165336;
 			
 			// aapt resource value: 0x7F070099
-			public const int tooltip_frame_dark = 2131165337;
+			public const int PressedForwardButton = 2131165337;
 			
 			// aapt resource value: 0x7F07009A
-			public const int tooltip_frame_light = 2131165338;
+			public const int PressedInfoButton = 2131165338;
+			
+			// aapt resource value: 0x7F07009B
+			public const int PressedLeftScrollButton = 2131165339;
+			
+			// aapt resource value: 0x7F07009C
+			public const int PressedMoreButton = 2131165340;
+			
+			// aapt resource value: 0x7F07009D
+			public const int PressedRenameButton = 2131165341;
+			
+			// aapt resource value: 0x7F07009E
+			public const int PressedRightScrollButton = 2131165342;
+			
+			// aapt resource value: 0x7F07009F
+			public const int RenameButton = 2131165343;
+			
+			// aapt resource value: 0x7F0700A0
+			public const int RightScrollButton = 2131165344;
+			
+			// aapt resource value: 0x7F0700A1
+			public const int test_custom_background = 2131165345;
+			
+			// aapt resource value: 0x7F0700A2
+			public const int test_level_drawable = 2131165346;
+			
+			// aapt resource value: 0x7F0700A3
+			public const int tooltip_frame_dark = 2131165347;
+			
+			// aapt resource value: 0x7F0700A4
+			public const int tooltip_frame_light = 2131165348;
 			
 			static Drawable()
 			{
