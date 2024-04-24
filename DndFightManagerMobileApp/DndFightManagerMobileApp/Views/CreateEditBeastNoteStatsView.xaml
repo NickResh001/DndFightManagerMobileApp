@@ -2,6 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
              x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteStatsView">
   <ContentView.Content>
       <StackLayout>
@@ -39,10 +40,13 @@
                                Style="{DynamicResource Header3}"
                                VerticalOptions="Center"
                                HorizontalOptions="Center"/>
+                        
                     </Grid>
 
                     <StackLayout Grid.Row="1" 
-                                 BindableLayout.ItemsSource="{Binding Abilities, Mode=TwoWay}">
+                                 BindableLayout.ItemsSource="{Binding Abilities, Mode=TwoWay}"
+                                 Padding="0"
+                                 Spacing="0">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
 
@@ -63,12 +67,13 @@
                                         <Entry Text="{Binding Path=Value, Mode=TwoWay}"
                                                Keyboard="Numeric"
                                                HorizontalTextAlignment="Center"
-                                               WidthRequest="60">
+                                               WidthRequest="60"
+                                               MaxLength="2">
                                             <Entry.Behaviors>
-                                                <xct:CharactersValidationBehavior
-                                                    CharacterType="Digit"
-                                                    MaximumCharacterCount="2"
-                                                    MinimumCharacterCount="1"/>
+                                                <!--<xct:EventToCommandBehavior
+                                                    EventName="Completed"
+                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CreateEditBeastNoteStatsViewModel}}, Path=OnAbilityChangedCommand}"
+                                                    CommandParameter="{Binding Path=Id}"/>-->
                                             </Entry.Behaviors>
                                         </Entry>
 
@@ -124,15 +129,8 @@
                         <Entry Text="{Binding Path=HitPointDiceField1, Mode=TwoWay}"
                                Keyboard="Numeric"
                                HorizontalTextAlignment="Center"
-                               WidthRequest="60">
-                            <Entry.Behaviors>
-                                <xct:CharactersValidationBehavior
-                                    CharacterType="Digit"
-                                    MaximumCharacterCount="3"
-                                    MinimumCharacterCount="1"
-                                    IsValid="{Binding HitPointDice1isValid}"/>
-                            </Entry.Behaviors>
-                        </Entry>
+                               WidthRequest="60"
+                               MaxLength="3"/>
                         <Label Style="{DynamicResource Header3}"
                                VerticalOptions="Center"
                                Text="к"/>

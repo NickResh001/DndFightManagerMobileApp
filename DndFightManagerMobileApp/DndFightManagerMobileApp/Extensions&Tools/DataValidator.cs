@@ -4,49 +4,191 @@ using System.Text;
 
 namespace DndFightManagerMobileApp.Extensions_Tools
 {
-    public class DataToValidate
+    public enum ValidationGroup
     {
-        public string propertyName;
-        public List<string> mustContain = [];
-        public List<string> mustNotContain = [];
-    
+        OnlyInt,
+        WithoutSpecialChars,
+
+        MustContain,
+        MustNotContain,
+        MinLength,
+        MaxLength,
+    }
+
+    public class ValidationRule
+    {
+        public ValidationGroup validationGroup { get; private set; }
+        private List<string> parametres = [];
+        
+        public ValidationRule(ValidationGroup validationGroup)
+        {
+            this.validationGroup = validationGroup;
+        }
+        public ValidationRule(ValidationGroup validationGroup, string parameter)
+        {
+            this.validationGroup = validationGroup;
+            parametres.Add(parameter);
+        }
+        public ValidationRule(ValidationGroup validationGroup, List<string> parametres)
+        {
+            this.validationGroup = validationGroup;
+            this.parametres.AddRange(parametres);
+        }
+
         public bool Validate(string value)
         {
             bool result = true;
-            foreach (string substring in mustContain)
+            switch (validationGroup)
             {
-                result &= value.Contains(substring);
+                case ValidationGroup.OnlyInt:
+
+                    foreach(char ch in value)
+                    {
+                        result &= char.IsDigit(ch);
+                        if (!result) break;
+                    }
+                    break;
+
+                case ValidationGroup.WithoutSpecialChars:
+
+                    string specs = @"\/:*?<>|""";
+                    foreach (char spec in specs)
+                    {
+                        if (value.Contains(spec.ToString()))
+                        {
+                            result = false; 
+                            break;
+                        }
+                    }
+                    break;
+
+                case ValidationGroup.MustContain:
+
+                    foreach(string str in parametres)
+                    {
+                        result &= value.Contains(str);
+                        if (!result) break;
+                    }
+                    break;
+
+                case ValidationGroup.MustNotContain:
+
+                    foreach (string str in parametres)
+                    {
+                        result &= !value.Contains(str);
+                        if (!result) break;
+                    }
+                    break;
+
+                case ValidationGroup.MinLength:
+
+                    int min = -1;
+                    if (int.TryParse(parametres[0], out min))
+                    {
+                        result &= value.Length >= min;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                    break;
+
+                case ValidationGroup.MaxLength:
+
+                    int max = -1;
+                    if (int.TryParse(parametres[0], out max))
+                    {
+                        result &= value.Length <= max;
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                    break;
+
+                default:
+                    break;
             }
-            foreach (string substring in mustNotContain)
+            return result;
+        }
+    }
+    public class PropertyToValidate
+    {
+        public string propertyName { get; private set; }
+        private List<ValidationRule> rules = [];
+
+        public PropertyToValidate(string propertyName) 
+        { 
+            this.propertyName = propertyName;
+        }
+        public PropertyToValidate(string propertyName, List<ValidationRule> rules)
+        {
+            this.propertyName = propertyName;
+            this.rules = rules;
+        }
+
+        public void AddRule(ValidationRule rule)
+        {
+            for (int i = 0; i < rules.Count; i++)
+            { 
+                if (rules[i].validationGroup == rule.validationGroup) 
+                { 
+                    rules.RemoveAt(i);
+                    rules.Add(rule);
+                    return;
+                }
+            }
+            rules.Add(rule);
+        }
+        public bool Validate(string value)
+        {
+            bool result = true;
+            foreach (ValidationRule rule in rules)
             {
-                result &= !value.Contains(substring);
+                result &= rule.Validate(value);
             }
             return result;
         }
     }
     public class DataValidator
     {
-        private List<DataToValidate> dataList = [];
-
-        public void AddRule(string propertyName, string substring, bool mustContain)
+        private List<PropertyToValidate> propList = [];
+        
+        public DataValidator(List<PropertyToValidate> propertyToValidates)
         {
-            for (int i = 0; i < dataList.Count; i++)
-            {
-                if (dataList[i].propertyName == propertyName)
-                {
-                    if (mustContain)
-                    {
-                        dataList[i].mustContain.Add(substring);
-                    }
-                    else
-                    {
-                        dataList[i].mustNotContain.Add(substring);
-                    }
-                    return;
-                }
-            }
-
+            propList = propertyToValidates;
         }
 
+        public bool Validate(string propertyName, string value)
+        {
+            foreach (var property in propList)
+            {
+                if (property.propertyName == propertyName)
+                { 
+                    return property.Validate(value);
+                }
+            }
+            return false;
+        }
+        public bool ValidateAll(List<string> values)
+        {
+            if (values.Count != propList.Count)
+                return false;
+
+            bool result = true;
+            for (int i = 0; i < propList.Count; i++)
+            {
+                result &= propList[i].Validate(values[i]);
+            }
+            return result;
+        }
+        
+        //public static bool Validate()
+        //{
+
+        //}
+    
     }
+
+
 }
