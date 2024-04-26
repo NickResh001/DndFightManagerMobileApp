@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
-             x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteStatsView">
-  <ContentView.Content>
-      <StackLayout>
-          
+             xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls"
+             x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteStatsView"
+             x:Name="ThisPage">
+    <ContentView.Content>
+        <StackLayout>
+
+            <!-- Блок характеристик -->
             <Frame BackgroundColor="{DynamicResource MainDark}"
                    CornerRadius="5"
                    Padding="0,5"
@@ -70,20 +73,18 @@
                                                WidthRequest="60"
                                                MaxLength="2">
                                             <Entry.Behaviors>
-                                                <!--<xct:EventToCommandBehavior
-                                                    EventName="Completed"
-                                                    Command="{Binding Source={RelativeSource AncestorType={x:Type vm:CreateEditBeastNoteStatsViewModel}}, Path=OnAbilityChangedCommand}"
-                                                    CommandParameter="{Binding Path=Id}"/>-->
+                                                <xct:EventToCommandBehavior
+                                                    EventName="Unfocused"
+                                                    Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.AbilityChangedCommand}"
+                                                    CommandParameter="{Binding Path=Id}"/>
                                             </Entry.Behaviors>
                                         </Entry>
-
                                     </StackLayout>
 
                                     <CheckBox Grid.Column="1"
                                               VerticalOptions="Center"
                                               HorizontalOptions="Center"
                                               IsChecked="{Binding Path=SavingThrowProficiency}"/>
-
                                 </Grid>
 
                             </DataTemplate>
@@ -92,84 +93,32 @@
                     
                 </Grid>
             </Frame>
-            
-            <Frame BackgroundColor="{DynamicResource MainDark}"
-                   CornerRadius="5"
-                   Padding="5"
-                   Margin="0,7">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="50*"/>
-                        <RowDefinition Height="50*"/>
-                    </Grid.RowDefinitions>
 
-                    <Grid Grid.Row="0">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="13*"/>
-                            <ColumnDefinition Width="87*"/>
-                        </Grid.ColumnDefinitions>
+            <!-- Кости хитов -->
+            <ctrl:OneCrudField HeaderText="Кости хитов"
+                               EntryText="{Binding HitPointDices, Mode=TwoWay}"/>
 
-                        <Button Grid.Column="0"
-                                Style="{DynamicResource InfoButton}"
-                                VerticalOptions="Center"
-                                HorizontalOptions="Center"
-                                WidthRequest="{Binding Height, Source={x:Reference ButtonInfo}}"/>
-                        
-                        <Label Style="{DynamicResource Header3}"
-                               Grid.Column="1"
-                               Text="Кости хитов"
-                               VerticalOptions="Center"
-                               HorizontalOptions="Start"/>
-                    </Grid>
+            <!-- КД -->
+            <ctrl:OneCrudField HeaderText="Класс Доспеха"
+                               EntryText="{Binding ArmorClass, Mode=TwoWay}"
+                               IsAutoValueButtonVisible="True"
+                               AutoValueCommand="{Binding AutoArmorClassCommand}"/>
 
-                    <StackLayout Grid.Row="1"
-                                 Orientation="Horizontal"
-                                 VerticalOptions="Center"
-                                 HorizontalOptions="Start">
-                        <Entry Text="{Binding Path=HitPointDiceField1, Mode=TwoWay}"
-                               Keyboard="Numeric"
-                               HorizontalTextAlignment="Center"
-                               WidthRequest="60"
-                               MaxLength="3"/>
-                        <Label Style="{DynamicResource Header3}"
-                               VerticalOptions="Center"
-                               Text="к"/>
-                        <Entry Text="{Binding Path=HitPointDiceField2, Mode=TwoWay}"
-                               Keyboard="Numeric"
-                               HorizontalTextAlignment="Center"
-                               WidthRequest="60">
-                            <Entry.Behaviors>
-                                <xct:CharactersValidationBehavior
-                                    CharacterType="Digit"
-                                    MaximumCharacterCount="3"
-                                    MinimumCharacterCount="1"/>
-                            </Entry.Behaviors>
-                        </Entry>
-                        <Label Style="{DynamicResource Header3}"
-                               VerticalOptions="Center"
-                               Text="+"/>
-                        <Entry Text="{Binding Path=HitPointDiceField3, Mode=TwoWay}"
-                               Keyboard="Numeric"
-                               HorizontalTextAlignment="Center"
-                               WidthRequest="60">
-                            <Entry.Behaviors>
-                                <xct:CharactersValidationBehavior
-                                    CharacterType="Digit"
-                                    MaximumCharacterCount="10"
-                                    MinimumCharacterCount="1"/>
-                            </Entry.Behaviors>
-                        </Entry>
-                    </StackLayout>
+            <!-- Инициатива -->
+            <ctrl:OneCrudField HeaderText="Инициатива"
+                               EntryText="{Binding InitiativeBonus, Mode=TwoWay}"
+                               IsAutoValueButtonVisible="True"
+                               AutoValueCommand="{Binding AutoInitiativeBonusCommand}"/>
 
-                </Grid>
-            </Frame>
             <Frame BackgroundColor="{DynamicResource MainDark}"
                    CornerRadius="5"
                    Padding="0"
                    Margin="0,7,0,12">
                 <Label Text="adadada"
-                       HeightRequest="40"/>
+                       HeightRequest="40"
+                       Style="{DynamicResource CommonBoldText}"/>
             </Frame>
-      </StackLayout>
-  </ContentView.Content>
+
+        </StackLayout>
+    </ContentView.Content>
 </ContentView>

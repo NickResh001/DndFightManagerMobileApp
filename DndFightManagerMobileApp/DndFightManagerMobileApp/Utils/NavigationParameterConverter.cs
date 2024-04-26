@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DndFightManagerMobileApp.Services
+namespace DndFightManagerMobileApp.Utils
 {
     public class NavigationParameterConverter
     {

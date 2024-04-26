@@ -18,7 +18,7 @@ namespace DndFightManagerMobileApp.Services
         IDataStore<ConditionModel> Condition { get; }
         IDataStore<DamageTendencyTypeModel> DamageTendencyType { get; }
         IDataStore<DamageTypeModel> DamageType { get; }
-        IDataStore<HabitatModel> HabitatType { get; }
+        IDataStore<HabitatModel> Habitat { get; }
         IDataStore<SenseModel> Sense { get; }
         IDataStore<SizeModel> Size { get; }
         IDataStore<SkillModel> Skill { get; }

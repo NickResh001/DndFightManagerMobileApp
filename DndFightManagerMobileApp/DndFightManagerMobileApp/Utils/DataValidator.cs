@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DndFightManagerMobileApp.Extensions_Tools
+namespace DndFightManagerMobileApp.Utils
 {
     public enum ValidationGroup
     {

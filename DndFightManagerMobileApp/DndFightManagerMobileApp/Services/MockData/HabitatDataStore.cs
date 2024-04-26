@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DndFightManagerMobileApp.Services.MockData
 {
-    public class HabitatTypeDataStore : BaseMockDataStore<HabitatModel>
+    public class HabitatDataStore : BaseMockDataStore<HabitatModel>
     {
         public DataProvider dataProvider = new DataProvider();
         public override Task<bool> Create(HabitatModel item)

@@ -16,7 +16,8 @@ namespace DndFightManagerMobileApp.Services.MockData
         public IDataStore<ConditionModel> Condition { get; private set; }
         public IDataStore<DamageTendencyTypeModel> DamageTendencyType { get; private set; }
         public IDataStore<DamageTypeModel> DamageType { get; private set; }
-        public IDataStore<HabitatModel> HabitatType { get; private set; }
+        public IDataStore<HabitatModel> Habitat { get; private set; }
+        public IDataStore<LanguageModel> Language { get; private set; }
         public IDataStore<SenseModel> Sense { get; private set; }
         public IDataStore<SizeModel> Size { get; private set; }
         public IDataStore<SkillModel> Skill { get; private set; }
@@ -31,7 +32,8 @@ namespace DndFightManagerMobileApp.Services.MockData
             Condition = new ConditionDataStore();
             DamageTendencyType = new DamageTendencyTypeDataStore();
             DamageType = new DamageTypeDataStore();
-            HabitatType = new HabitatTypeDataStore();
+            Habitat = new HabitatDataStore();
+            Language = new LanguageDataStore();
             Sense = new SenseDataStore();
             Size = new SizeDataStore();
             Skill = new SkillDataStore();
@@ -357,89 +359,181 @@ namespace DndFightManagerMobileApp.Services.MockData
             });
 
             #endregion
-            #region HabitatType
+            #region Habitat
 
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Полярная тундра"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Побережье"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Под водой"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Равнина/луг"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Побережье"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Подземье"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Город"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Деревня"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Руины"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Подземелья"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Лес"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Холмы"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Горы"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Болото"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Пустыня"
             });
-            await HabitatType.Create(new HabitatModel
+            await Habitat.Create(new HabitatModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Тропики"
             });
 
+            #endregion
+            #region Language
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Великаний"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Гномий"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Гоблинский"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Дварфийский"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Общий"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Орочий"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Полуросликов"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Эльфийский"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Бездны"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Глубинная Речь"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Драконий"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Инфернальный"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Небесный"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Первичный"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Подземный"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Сильван"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Воровской жаргон"
+            });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Друидический язык"
+            });
             #endregion
             #region Sense
 
@@ -691,7 +785,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                 var ConditionStore = Condition as ConditionDataStore;
                 var DamageTendencyTypeStore = DamageTendencyType as DamageTendencyTypeDataStore;
                 var DamageTypeStore = DamageType as DamageTypeDataStore;
-                var HabitatTypeStore = HabitatType as HabitatTypeDataStore;
+                var HabitatTypeStore = Habitat as HabitatDataStore;
                 var SenseStore = Sense as SenseDataStore;
                 var SizeStore = Size as SizeDataStore;
                 var SkillStore = Skill as SkillDataStore;
