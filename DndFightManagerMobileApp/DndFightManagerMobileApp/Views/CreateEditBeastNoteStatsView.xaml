@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
-             xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls"
+             xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
              x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteStatsView"
              x:Name="ThisPage">
     <ContentView.Content>
@@ -96,29 +96,39 @@
 
             <!-- Кости хитов -->
             <ctrl:OneCrudField HeaderText="Кости хитов"
-                               EntryText="{Binding HitPointDices, Mode=TwoWay}"/>
+                               EntryText="{Binding HitPointDices, Mode=TwoWay}"
+                               EntryUnfocusedCommand="{Binding OnPropertyChangedCommand}"
+                               EntryUnfocusedCommandParameter="HitPointDices"
+                               Margin="0,7"/>
 
             <!-- КД -->
             <ctrl:OneCrudField HeaderText="Класс Доспеха"
                                EntryText="{Binding ArmorClass, Mode=TwoWay}"
+                               EntryUnfocusedCommand="{Binding OnPropertyChangedCommand}"
+                               EntryUnfocusedCommandParameter="ArmorClass"
+                               AutoValueCommand="{Binding AutoArmorClassCommand}"
                                IsAutoValueButtonVisible="True"
-                               AutoValueCommand="{Binding AutoArmorClassCommand}"/>
+                               Margin="0,7"/>
 
             <!-- Инициатива -->
             <ctrl:OneCrudField HeaderText="Инициатива"
                                EntryText="{Binding InitiativeBonus, Mode=TwoWay}"
+                               EntryUnfocusedCommand="{Binding OnPropertyChangedCommand}"
+                               EntryUnfocusedCommandParameter="InitiativeBonus"
+                               AutoValueCommand="{Binding AutoInitiativeBonusCommand}"
                                IsAutoValueButtonVisible="True"
-                               AutoValueCommand="{Binding AutoInitiativeBonusCommand}"/>
+                               Margin="0,7"/>
+            
+            <!-- Бонус мастерства -->
+            <ctrl:OneCrudField HeaderText="Бонус мастерства"
+                               EntryText="{Binding SpecialBonus, Mode=TwoWay}"
+                               EntryUnfocusedCommand="{Binding OnPropertyChangedCommand}"
+                               EntryUnfocusedCommandParameter="SpecialBonus"
+                               Margin="0,7"/>
 
-            <Frame BackgroundColor="{DynamicResource MainDark}"
-                   CornerRadius="5"
-                   Padding="0"
-                   Margin="0,7,0,12">
-                <Label Text="adadada"
-                       HeightRequest="40"
-                       Style="{DynamicResource CommonBoldText}"/>
-            </Frame>
-
+            <!-- Навыки -->
+            <ctrl:CrudMultiSelect MultiSelectVM="{Binding SkillsMultiSelect}"
+                                  Margin="0,7"/>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

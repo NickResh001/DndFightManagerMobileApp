@@ -1,21 +1,26 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using DndFightManagerMobileApp.Controls.ViewModels;
 using DndFightManagerMobileApp.Models;
+using DndFightManagerMobileApp.Models.ModelHelpers;
+using DndFightManagerMobileApp.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace DndFightManagerMobileApp.ViewModels
 {
     public partial class CreateEditBeastNoteStatsViewModel : BaseViewModelHandNavigation
     {
-        //private DiceRoller diceRoller = new DiceRoller();
+        private DiceRoller diceRoller = new DiceRoller();
 
         #region ObservableProperties
 
@@ -29,7 +34,10 @@ namespace DndFightManagerMobileApp.ViewModels
             get { return _hitPointDices; }
             set
             {
-                if (true/*diceRoller.IsCorrect(value)*/)
+                if (value == null)
+                    return;
+
+                if (diceRoller.IsCorrect(value))
                 {
                     _hitPointDices = value;
                     OnPropertyChanged(nameof(HitPointDices));
@@ -44,13 +52,22 @@ namespace DndFightManagerMobileApp.ViewModels
             get { return _armorClass; }
             set
             {
-                int buffer;
-                if (int.TryParse(value, out buffer))
-                    _armorClass = buffer.ToString();
-                else if (value == string.Empty)
-                    _armorClass = 11.ToString();
-
-                OnPropertyChanged(nameof(ArmorClass));
+                if (value == null)
+                    return;
+                // не даем писать то, что не соответствует regex
+                if (new Regex(@"^\d*$", RegexOptions.Compiled).IsMatch(value))
+                {
+                    int buffer;
+                    if (int.TryParse(value, out buffer))
+                    {
+                        _armorClass = value;
+                        OnPropertyChanged(nameof(ArmorClass));
+                    }
+                }
+                else
+                {
+                    OnPropertyChanged(nameof(ArmorClass));
+                }
             }
         }
         
@@ -61,15 +78,65 @@ namespace DndFightManagerMobileApp.ViewModels
             get { return _initiativeBonus; }
             set
             {
-                int buffer;
-                if (int.TryParse(value, out buffer))
+                if (value == null)
+                    return;
+                // не даем писать то, что не соответствует regex
+                if (new Regex(@"^[+-]?\d*$", RegexOptions.Compiled).IsMatch(value))
                 {
-                    _initiativeBonus = value;
+                    int buffer;
+                    if (int.TryParse(value, out buffer))
+                    {
+                        _initiativeBonus = value;
+                        OnPropertyChanged(nameof(InitiativeBonus));
+                    }
+                }
+                else
+                {
                     OnPropertyChanged(nameof(InitiativeBonus));
                 }
             }
         }
 
+        // SpecialBonus
+        private string _specialBonus;
+        public string SpecialBonus
+        {
+            get { return _specialBonus; }
+            set
+            {
+                if (value == null)
+                    return;
+                // не даем писать то, что не соответствует regex
+                if (new Regex(@"^[+]?\d*$", RegexOptions.Compiled).IsMatch(value))
+                {
+                    int buffer;
+                    if (int.TryParse(value, out buffer))
+                    {
+                        _specialBonus = value;
+                        OnPropertyChanged(nameof(SpecialBonus));
+                    }
+                }
+                else
+                {
+                    OnPropertyChanged(nameof(SpecialBonus));
+                }
+            }
+        }
+
+        // Skills
+        private CrudMultiSelectVM _skillsMultiSelect;
+        public CrudMultiSelectVM SkillsMultiSelect
+        {
+            get { return _skillsMultiSelect; }
+            set
+            {
+                if (value != null || value != _skillsMultiSelect) _skillsMultiSelect = value;
+                OnPropertyChanged(nameof(SkillsMultiSelect));
+            }
+        }
+
+        private ObservableCollection<SkillModel> _allSkills;
+        
         #endregion
 
         #region Commands
@@ -77,28 +144,34 @@ namespace DndFightManagerMobileApp.ViewModels
         public ICommand AutoArmorClassCommand { get; set; }
         public ICommand AutoInitiativeBonusCommand { get; set; }
 
+        public ICommand OnPropertyChangedCommand { get; set; }
         public ICommand AbilityChangedCommand { get; set; }
-        public ICommand HitPointDicesChangedCommand { get; set; }
-        public ICommand InitiativeBonusChangedCommand { get; set; }
-
         #endregion
 
         public CreateEditBeastNoteStatsViewModel()
         {
+            _allSkills = new(dataStore.Skill.GetAll().Result);
+
             AutoArmorClassCommand = new Command(AutoArmorClass);
             AutoInitiativeBonusCommand = new Command(AutoInitiativeBonus);
-
-            AbilityChangedCommand = new Command<string>(AbilityChanged);
-            HitPointDicesChangedCommand = new Command(HitPointDicesChanged);
-            InitiativeBonusChangedCommand = new Command(InitiativeBonusChanged);
+            OnPropertyChangedCommand = new Command<string>(OnPropertyChanged);
+            AbilityChangedCommand = new Command<string>(AbilityChanged);            
         }
         private async void InitializeFields()
         {
             Abilities = await dataStore.Ability.GetDefaultList();
             HitPointDices = "2#6 + 2";
-            ArmorClass = string.Empty;
+            ArmorClass = "11";
             InitiativeBonus = "2";
-            //SpecialBonus = string.Empty;
+            SpecialBonus = "+2";
+
+            SkillsMultiSelect = new CrudMultiSelectVM
+            (
+                header: "Владение навыками",
+                infoCommandParameter: "",
+                allItems: _allSkills.Projection(x => new MultiSelectCRUDHelper(x, "30")),
+                haveValue: true
+            );
         }
 
 
@@ -128,17 +201,6 @@ namespace DndFightManagerMobileApp.ViewModels
             var ability = Abilities.ToList().Find(x => x.Id == id);
             ability.Value = ability.Value;
         }
-
-        private void HitPointDicesChanged()
-        {
-            OnPropertyChanged(nameof(HitPointDices));
-        }
-
-        private void InitiativeBonusChanged()
-        {
-            OnPropertyChanged(nameof(InitiativeBonus));
-        }
-
         #endregion
 
         #region Navigation

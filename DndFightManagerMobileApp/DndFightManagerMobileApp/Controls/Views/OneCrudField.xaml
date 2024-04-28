@@ -2,14 +2,13 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             x:Class="DndFightManagerMobileApp.Controls.OneCrudField"
-             x:Name="OneCrudFieldName">
+             x:Class="DndFightManagerMobileApp.Controls.Views.OneCrudField"
+             x:Name="this">
     <ContentView.Content>
-        <Frame BindingContext="{x:Reference OneCrudFieldName}"
+        <Frame BindingContext="{x:Reference this}"
                BackgroundColor="{DynamicResource MainDark}"
                CornerRadius="5"
-               Padding="5,6"
-               Margin="0,7">
+               Padding="5,6">
             <StackLayout Orientation="Horizontal"
                          Spacing="0">
                 <Button Grid.Column="0"
@@ -17,7 +16,8 @@
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
                         WidthRequest="40"
-                        Command="{Binding InfoCommand}"/>
+                        Command="{Binding InfoCommand}"
+                        CommandParameter="{Binding InfoCommandParameter}"/>
                 <StackLayout Orientation="Vertical"
                              Spacing="0"
                              Margin="6,0"
@@ -37,7 +37,7 @@
                         <Button Grid.Column="1"
                                 Style="{DynamicResource LinkButton}"
                                 Text="авто"
-                                IsVisible="{Binding IsAutoValueButtonVisible}"
+                                IsVisible="{Binding IsAutoValueButtonVisible, Mode=TwoWay}"
                                 WidthRequest="40"
                                 HeightRequest="20"
                                 VerticalOptions="EndAndExpand"
@@ -50,6 +50,12 @@
                            HorizontalTextAlignment="Start"
                            HorizontalOptions="FillAndExpand"
                            MaxLength="50">
+                        <Entry.Behaviors>
+                            <xct:EventToCommandBehavior
+                                EventName="Unfocused"
+                                Command="{Binding EntryUnfocusedCommand}"
+                                CommandParameter="{Binding EntryUnfocusedCommandParameter}"/>
+                        </Entry.Behaviors>
                     </Entry>
 
                 </StackLayout>
