@@ -6,22 +6,8 @@ using System.Threading.Tasks;
 
 namespace DndFightManagerMobileApp.Services.MockData
 {
-    public class LanguageDataStore : BaseMockDataStore<LanguageModel>
+    public class LanguageDataStore : BaseHardDirMockDataStore<LanguageModel>
     {
-        public DataProvider dataProvider = new DataProvider();
-        public override Task<bool> Create(LanguageModel item)
-        {
-            dataProvider.AddKey(item.Title, item.Id);
-            return base.Create(item);
-        }
-        public async Task<LanguageModel> GetByTitle(string title)
-        {
-            string id = dataProvider.GetId(title);
-            if (id == null)
-            {
-                return null;
-            }
-            return await GetById(id);
-        }
+
     }
 }

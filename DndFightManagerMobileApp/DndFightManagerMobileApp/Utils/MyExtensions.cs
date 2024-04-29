@@ -15,6 +15,14 @@ namespace DndFightManagerMobileApp.Utils
             ObservableCollection<T> collection = [.. items];
             return collection;
         }
+        /// <summary>
+        /// Projects one collection into another.
+        /// </summary>
+        /// <typeparam name="T1"></typeparam>
+        /// <typeparam name="TResult"></typeparam>
+        /// <param name="items"></param>
+        /// <param name="func">Func delegate that specifies how elements of one collection are converted to elements of another.</param>
+        /// <returns></returns>
         public static ObservableCollection<TResult> Projection<T1, TResult>(this ObservableCollection<T1> items, Func<T1, TResult> func)
         {
             var newItems = new ObservableCollection<TResult>();

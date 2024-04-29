@@ -1,14 +1,13 @@
 ﻿using DndFightManagerMobileApp.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DndFightManagerMobileApp.Services.Interfaces
 {
-    public interface IAbilityDataStore : IBaseHardoceDirectoryDataStore<AbilityModel>
+    public interface IBaseHardoceDirectoryDataStore<T> : IDataStore<T> where T : HardcodeDirectoryModel
     {
-        public Task<ObservableCollection<AbilityListModel>> GetDefaultList();
+        public Task<T> GetByTitle(string title);
     }
 }

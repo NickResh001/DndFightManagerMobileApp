@@ -19,18 +19,21 @@ namespace DndFightManagerMobileApp.Models.ModelHelpers
             {
                 if (value == null)
                     return;
-                if (new Regex(@"^\d*$", RegexOptions.Compiled).IsMatch(value))
+
+                // Любое число нулей превращается в один ноль
+                if (value == "")
+                {
+                    _value = 0.ToString();
+                    OnPropertyChanged(nameof(Value));
+                }
+                else
                 {
                     int buffer;
                     if (int.TryParse(value, out buffer))
                     {
-                        _value = value;
+                        _value = buffer.ToString();
                         OnPropertyChanged(nameof(Value));
                     }
-                }
-                else
-                {
-                    OnPropertyChanged(nameof(Value));
                 }
             }
         }

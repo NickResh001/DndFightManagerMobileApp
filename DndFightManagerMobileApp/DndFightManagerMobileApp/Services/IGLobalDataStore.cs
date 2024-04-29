@@ -12,17 +12,17 @@ namespace DndFightManagerMobileApp.Services
     public interface IGLobalDataStore
     {
         IAbilityDataStore Ability { get; }
-        IDataStore<AlignmentModel> Alignment { get; }
+        IBaseHardoceDirectoryDataStore<AlignmentModel> Alignment { get; }
         IDataStore<BeastNoteModel> BeastNote { get; }
-        IDataStore<BeastTypeModel> BeastType { get; }
-        IDataStore<ConditionModel> Condition { get; }
-        IDataStore<DamageTendencyTypeModel> DamageTendencyType { get; }
-        IDataStore<DamageTypeModel> DamageType { get; }
-        IDataStore<HabitatModel> Habitat { get; }
-        IDataStore<SenseModel> Sense { get; }
-        IDataStore<SizeModel> Size { get; }
-        IDataStore<SkillModel> Skill { get; }
-        IDataStore<SpeedModel> Speed { get; }
+        IBaseHardoceDirectoryDataStore<BeastTypeModel> BeastType { get; }
+        IBaseHardoceDirectoryDataStore<ConditionModel> Condition { get; }
+        IBaseHardoceDirectoryDataStore<DamageTendencyTypeModel> DamageTendencyType { get; }
+        IBaseHardoceDirectoryDataStore<DamageTypeModel> DamageType { get; }
+        IBaseHardoceDirectoryDataStore<HabitatModel> Habitat { get; }
+        IBaseHardoceDirectoryDataStore<SenseModel> Sense { get; }
+        IBaseHardoceDirectoryDataStore<SizeModel> Size { get; }
+        ISkillDataStore Skill { get; }
+        IBaseHardoceDirectoryDataStore<SpeedModel> Speed { get; }
 
         //IDataStore<BeastModel> Beast { get; }
         //IDataStore<SceneModel> Scene { get; }

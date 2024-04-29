@@ -6,22 +6,8 @@ using System.Threading.Tasks;
 
 namespace DndFightManagerMobileApp.Services.MockData
 {
-    public class BeastTypeDataStore : BaseMockDataStore<BeastTypeModel>
+    public class BeastTypeDataStore : BaseHardDirMockDataStore<BeastTypeModel>
     {
-        public DataProvider dataProvider = new DataProvider();
-        public override Task<bool> Create(BeastTypeModel item)
-        {
-            dataProvider.AddKey(item.Title, item.Id);
-            return base.Create(item);
-        }
-        public async Task<BeastTypeModel> GetByTitle(string title)
-        {
-            string id = dataProvider.GetId(title);
-            if (id == null)
-            {
-                return null;
-            }
-            return await GetById(id);
-        }
+
     }
 }

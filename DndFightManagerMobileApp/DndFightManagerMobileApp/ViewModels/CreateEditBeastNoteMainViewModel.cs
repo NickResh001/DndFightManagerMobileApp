@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DndFightManagerMobileApp.Models;
+using DndFightManagerMobileApp.Utils;
 using DndFightManagerMobileApp.Views;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Web;
 using System.Xml.Linq;
 using Xamarin.Forms;
 
@@ -19,40 +21,34 @@ namespace DndFightManagerMobileApp.ViewModels
         Right
     }
     
-    
-    public partial class CreateEditBeastNoteMainViewModel : BaseViewModel
+    public partial class CreateEditBeastNoteMainViewModel : BaseViewModel, IQueryAttributable
     {
         #region IncomingParametres
 
         private string _beastNoteId;
-        public string BeastNoteId
-        {
-            get { return _beastNoteId; }
-            set
-            {
-                _beastNoteId = value;
-                if (value == string.Empty)
-                {
-                    // this is Creation act
-                }
-                else
-                {
-                    // Getting beastNote by id (this is Edit act)
-                }
-            }
-        }
+        private bool _isEditing;
 
         #endregion
 
         #region ObservableProperties
 
-        [ObservableProperty] private string _pageHeader;
-        [ObservableProperty] private string _currentViewName;
-        [ObservableProperty] private ContentView _currentView;
+        [ObservableProperty] 
+        private string _pageHeader;
 
-        [ObservableProperty] private bool _isToLeftVisible;
-        [ObservableProperty] private bool _isToRightVisible;
-        [ObservableProperty] private BeastNoteModel _beastNote;
+        [ObservableProperty] 
+        private string _currentViewName;
+
+        [ObservableProperty] 
+        private ContentView _currentView;
+
+        [ObservableProperty] 
+        private bool _isToLeftVisible;
+
+        [ObservableProperty] 
+        private bool _isToRightVisible;
+
+        [ObservableProperty] 
+        private BeastNoteModel _beastNote;
 
         #endregion
 
@@ -91,12 +87,11 @@ namespace DndFightManagerMobileApp.ViewModels
                 ];
             PageHeader = "Создание моба";
 
-            CurrentViewIndex = 0;
-            CurrentView = _crudViews[CurrentViewIndex].v;
-            CurrentViewName = _crudViews[CurrentViewIndex].vname;
-            BeastNote = null;
-            _crudViews[CurrentViewIndex].vm.OnNavigateTo(BeastNote);
+
         }
+
+        #region Navigation
+
         private void LocalNavigateTo(LocalNavigation localNavigation)
         {
             if (_crudViews[CurrentViewIndex].vm.OnNavigateFrom() is BeastNoteModel bm)
@@ -131,5 +126,67 @@ namespace DndFightManagerMobileApp.ViewModels
         {
             Shell.Current.GoToAsync("..");
         }
+
+        public void ApplyQueryAttributes(IDictionary<string, string> query)
+        {
+            if (query == null)
+                return;
+
+            string param1 = "beastNoteId";
+            string param2 = "isEditing";
+
+            if (query.ContainsKey(param1))
+            {
+                _beastNoteId = NavigationParameterConverter.
+                    ObjectFromPairKeyValue<string>(HttpUtility.UrlDecode(query[param1]));
+            }
+            else
+                _beastNoteId = "";
+
+            if (query.ContainsKey(param2))
+            {
+                _isEditing = NavigationParameterConverter.
+                    ObjectFromPairKeyValue<bool>(HttpUtility.UrlDecode(query[param2]));
+            }
+            else
+                _isEditing = false;
+
+            if (_isEditing)
+            {
+                BeastNote = dataStore.BeastNote.GetById(_beastNoteId).Result;
+                if (BeastNote == null)
+                    _isEditing = true;
+            }
+
+            if (!_isEditing)
+            {
+                BeastNote = new BeastNoteModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    HitPoitsDice = "2d8+2",
+                    InitiativeBonus = 0,
+                    ArmorClass = 10,
+                    SpecialBonus = 2,
+                    //Image = [],
+                    Title = "",
+                    Alignment = dataStore.Alignment.GetByTitle("Отсутствует").Result,
+                    Size = dataStore.Size.GetByTitle("Средний").Result,
+                    BeastType = dataStore.BeastType.GetByTitle("Гуманоид").Result,
+                    ChallengeRating = 0.25,
+                    Description = "",
+                    CreationDate = DateTime.Now,
+                    LastEditingDate = DateTime.Now,
+                    AbilityList = [.. dataStore.Ability.GetDefaultList().Result],
+                    SkillList = [.. dataStore.Skill.GetDefaultList().Result]
+                };
+            }
+
+            CurrentViewIndex = 0;
+            CurrentView = _crudViews[CurrentViewIndex].v;
+            CurrentViewName = _crudViews[CurrentViewIndex].vname;
+            _crudViews[CurrentViewIndex].vm.OnNavigateTo(BeastNote);
+        }
+
+        #endregion
     }
 }

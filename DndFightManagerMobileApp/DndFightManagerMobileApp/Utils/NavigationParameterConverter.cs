@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DndFightManagerMobileApp.Utils
 {
-    public class NavigationParameterConverter
+    public static class NavigationParameterConverter
     {
         //Work with Newtonsoft's json
 

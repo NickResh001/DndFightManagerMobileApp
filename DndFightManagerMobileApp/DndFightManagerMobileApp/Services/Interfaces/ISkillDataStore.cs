@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace DndFightManagerMobileApp.Services.Interfaces
 {
-    public interface IAbilityDataStore : IBaseHardoceDirectoryDataStore<AbilityModel>
+    public interface ISkillDataStore : IBaseHardoceDirectoryDataStore<SkillModel>
     {
-        public Task<ObservableCollection<AbilityListModel>> GetDefaultList();
+        public Task<ObservableCollection<SkillListModel>> GetDefaultList();
     }
 }

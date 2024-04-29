@@ -57,8 +57,6 @@ namespace DndFightManagerMobileApp.Controls.ViewModels
             get { return _isCollectionExpanded; }
             set
             {
-                if (value == null)
-                    return;
                 _isCollectionExpanded = value;
                 OnPropertyChanged(nameof(IsCollectionExpanded));
             }
@@ -66,6 +64,7 @@ namespace DndFightManagerMobileApp.Controls.ViewModels
 
         #endregion
 
+        [ObservableProperty]
         private ObservableCollection<MultiSelectCRUDHelper> _allItems;
 
         public CrudMultiSelectVM(string header, string infoCommandParameter, 
@@ -86,6 +85,12 @@ namespace DndFightManagerMobileApp.Controls.ViewModels
             ItemsForPicker = ItemsForPicker.Sort((x, y) => string.Compare(x.Title, y.Title));
         }
 
+        [RelayCommand] 
+        private void MyPropertyChanged(string propertyName)
+        {
+            
+        }
+        
         [RelayCommand]
         private void Info(string key) => InfoProvider.Info(key);
 
@@ -96,6 +101,7 @@ namespace DndFightManagerMobileApp.Controls.ViewModels
             if (note != null)
             {
                 ItemsForPicker.Remove(note);
+                note.Selected = true;
                 SelectedItems.Add(note);
             }
         }
@@ -107,6 +113,7 @@ namespace DndFightManagerMobileApp.Controls.ViewModels
             if (note != null)
             {
                 SelectedItems.Remove(note);
+                note.Selected = false;
                 ItemsForPicker.Add(note);
                 SortItemsForPicker();
             }

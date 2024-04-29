@@ -2,6 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DndFightManagerMobileApp.Controls.Views.CrudMultiSelect"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:vm="clr-namespace:DndFightManagerMobileApp.Controls.ViewModels"
              x:Name="this">
 
@@ -87,7 +88,7 @@
                                            HorizontalOptions="Fill"
                                            HorizontalTextAlignment="Center"
                                            Keyboard="Numeric"
-                                           Text="{Binding Value}"
+                                           Text="{Binding Value, Mode=TwoWay}"
                                            IsVisible="{Binding Source={x:Reference this}, Path=MultiSelectVM.HaveValue}"/>
 
                                     <Button Grid.Column="2"

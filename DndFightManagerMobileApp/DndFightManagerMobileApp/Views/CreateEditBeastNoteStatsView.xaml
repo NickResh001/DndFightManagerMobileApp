@@ -5,7 +5,7 @@
              xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
              xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
              x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteStatsView"
-             x:Name="ThisPage">
+             x:Name="this">
     <ContentView.Content>
         <StackLayout>
 
@@ -75,7 +75,7 @@
                                             <Entry.Behaviors>
                                                 <xct:EventToCommandBehavior
                                                     EventName="Unfocused"
-                                                    Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.AbilityChangedCommand}"
+                                                    Command="{Binding Source={x:Reference this}, Path=BindingContext.AbilityChangedCommand}"
                                                     CommandParameter="{Binding Path=Id}"/>
                                             </Entry.Behaviors>
                                         </Entry>
@@ -128,6 +128,14 @@
 
             <!-- Навыки -->
             <ctrl:CrudMultiSelect MultiSelectVM="{Binding SkillsMultiSelect}"
+                                  Margin="0,7"/>
+
+            <!-- Скорости -->
+            <ctrl:CrudMultiSelect MultiSelectVM="{Binding SpeedsMultiSelect}"
+                                  Margin="0,7"/>
+
+            <!-- Чувства -->
+            <ctrl:CrudMultiSelect MultiSelectVM="{Binding SensesMultiSelect}"
                                   Margin="0,7"/>
         </StackLayout>
     </ContentView.Content>

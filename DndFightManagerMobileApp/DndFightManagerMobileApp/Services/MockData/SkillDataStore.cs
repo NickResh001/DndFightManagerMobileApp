@@ -1,27 +1,149 @@
 ﻿using DndFightManagerMobileApp.Models;
+using DndFightManagerMobileApp.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DndFightManagerMobileApp.Services.MockData
 {
-    public class SkillDataStore : BaseMockDataStore<SkillModel>
+    public class SkillDataStore : BaseHardDirMockDataStore<SkillModel>, ISkillDataStore
     {
-        public DataProvider dataProvider = new DataProvider();
-        public override Task<bool> Create(SkillModel item)
+
+        public async Task<ObservableCollection<SkillListModel>> GetDefaultList()
         {
-            dataProvider.AddKey(item.Title, item.Id);
-            return base.Create(item);
-        }
-        public async Task<SkillModel> GetByTitle(string title)
-        {
-            string id = dataProvider.GetId(title);
-            if (id == null)
-            {
-                return null;
-            }
-            return await GetById(id);
+            ObservableCollection<SkillListModel> skillList =
+            [
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Атлетика"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Акробатика"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Ловкость рук"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Скрытность"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Анализ"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("История"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Магия"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Природа"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Религия"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Внимательность"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Выживание"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Медицина"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Проницательность"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Уход за животными"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Выступление"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Запугивание"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Обман"),
+                    Value = 0,
+                    Proficiency = false
+                },
+                new SkillListModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Skill = await GetByTitle("Убеждение"),
+                    Value = 0,
+                    Proficiency = false
+                },
+            ];
+
+            return skillList;
         }
     }
 }

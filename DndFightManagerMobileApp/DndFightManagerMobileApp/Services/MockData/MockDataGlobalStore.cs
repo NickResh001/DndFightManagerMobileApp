@@ -10,18 +10,18 @@ namespace DndFightManagerMobileApp.Services.MockData
     public class MockDataGlobalStore : IGLobalDataStore
     {
         public IAbilityDataStore Ability { get; private set; }
-        public IDataStore<AlignmentModel> Alignment { get; private set; }
+        public IBaseHardoceDirectoryDataStore<AlignmentModel> Alignment { get; private set; }
         public IDataStore<BeastNoteModel> BeastNote { get; private set; }
-        public IDataStore<BeastTypeModel> BeastType { get; private set; }
-        public IDataStore<ConditionModel> Condition { get; private set; }
-        public IDataStore<DamageTendencyTypeModel> DamageTendencyType { get; private set; }
-        public IDataStore<DamageTypeModel> DamageType { get; private set; }
-        public IDataStore<HabitatModel> Habitat { get; private set; }
-        public IDataStore<LanguageModel> Language { get; private set; }
-        public IDataStore<SenseModel> Sense { get; private set; }
-        public IDataStore<SizeModel> Size { get; private set; }
-        public IDataStore<SkillModel> Skill { get; private set; }
-        public IDataStore<SpeedModel> Speed { get; private set; }
+        public IBaseHardoceDirectoryDataStore<BeastTypeModel> BeastType { get; private set; }
+        public IBaseHardoceDirectoryDataStore<ConditionModel> Condition { get; private set; }
+        public IBaseHardoceDirectoryDataStore<DamageTendencyTypeModel> DamageTendencyType { get; private set; }
+        public IBaseHardoceDirectoryDataStore<DamageTypeModel> DamageType { get; private set; }
+        public IBaseHardoceDirectoryDataStore<HabitatModel> Habitat { get; private set; }
+        public IBaseHardoceDirectoryDataStore<LanguageModel> Language { get; private set; }
+        public IBaseHardoceDirectoryDataStore<SenseModel> Sense { get; private set; }
+        public IBaseHardoceDirectoryDataStore<SizeModel> Size { get; private set; }
+        public ISkillDataStore Skill { get; private set; }
+        public IBaseHardoceDirectoryDataStore<SpeedModel> Speed { get; private set; }
 
         public MockDataGlobalStore()
         {
@@ -809,7 +809,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                     SpeedList = 
                     [  
                         new SpeedListModel { Id = Guid.NewGuid().ToString(),
-                            Speed = await SpeedStore.GetByTitle(),
+                            Speed = await SpeedStore.GetByTitle("Обычная"),
                             DistanceInFeet = 40
                         }
                     ],
@@ -905,7 +905,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                         new SpeedListModel
                         {
                             Id = Guid.NewGuid().ToString(),
-                            Speed = await SpeedStore.GetByTitle(),
+                            Speed = await SpeedStore.GetByTitle("Обычная"),
                             DistanceInFeet = 40
                         }
                     ],

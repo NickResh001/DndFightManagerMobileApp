@@ -174,6 +174,10 @@
         <Style TargetType="Label" x:Key="CommonText" BasedOn="{StaticResource BaseCommonLabel}">
             <Setter Property="FontSize" Value="14"/>
         </Style>
+        <Style TargetType="Label" x:Key="SecondaryText" BasedOn="{StaticResource BaseCommonLabel}">
+            <Setter Property="TextColor" Value="#808080"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
         <Style TargetType="Label" x:Key="CommonBoldText" BasedOn="{StaticResource BaseCommonLabel}">
             <Setter Property="FontSize" Value="14"/>
             <Setter Property="FontAttributes" Value="Bold"/>
