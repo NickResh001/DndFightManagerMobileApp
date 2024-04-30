@@ -1,11 +1,29 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
+             xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
              x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteDamageView">
-  <ContentView.Content>
-      <StackLayout>
-          <Label Text="{Binding Header, Mode=TwoWay}" />
-          <Label Text="hahaha"/>
+    <ContentView.Content>
+        <StackLayout>
+
+            <!-- Сопротивление урону -->
+            <ctrl:CrudMultiSelect MultiSelectVM="{Binding DamageResistanceMS}"
+                                  Margin="0,7"/>
+
+            <!-- Уязвимость к урону -->
+            <ctrl:CrudMultiSelect MultiSelectVM="{Binding DamageVulnerabilityMS}"
+                                  Margin="0,7"/>
+            
+            <!-- Иммунитет к урону -->
+            <ctrl:CrudMultiSelect MultiSelectVM="{Binding DamageImmunityMS}"
+                                  Margin="0,7"/>
+
+            <!-- Иммунитет к состояниям -->
+            <ctrl:CrudMultiSelect MultiSelectVM="{Binding ConditionImmunityMS}"
+                                  Margin="0,7"/>
+            
         </StackLayout>
-  </ContentView.Content>
+    </ContentView.Content>
 </ContentView>

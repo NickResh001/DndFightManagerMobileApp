@@ -14,7 +14,14 @@
             <StackLayout Spacing="0">
 
                 <Grid HeightRequest="40">
-                    <StackLayout Orientation="Horizontal"
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackLayout Grid.Column="0"
+                                 Orientation="Horizontal"
                                  Spacing="6"
                                  VerticalOptions="Center"
                                  HorizontalOptions="Start">
@@ -28,10 +35,18 @@
                                 CommandParameter="AaBb"/>
                         <Label Text="{Binding Header}"
                                Style="{DynamicResource Header3}"
-                               VerticalOptions="CenterAndExpand"/>
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="StartAndExpand"
+                               LineBreakMode="TailTruncation"/>
+                        <Label Text="(нет)"
+                               LineBreakMode="TailTruncation"
+                               IsVisible="{Binding IsEmptyMessangeVisible}"
+                               Style="{DynamicResource SecondaryText}"
+                               VerticalOptions="CenterAndExpand"
+                               HorizontalOptions="End"/>
                     </StackLayout>
 
-                    <CheckBox Grid.Column="0"
+                    <CheckBox Grid.Column="1"
                               VerticalOptions="Center"
                               HorizontalOptions="End"
                               WidthRequest="40"
@@ -69,15 +84,15 @@
                             <DataTemplate>
                                 <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="70*"/>
-                                        <ColumnDefinition Width="30*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
                                     
                                     <Label Grid.Column="0"
                                            Text="{Binding Title}"
                                            Style="{DynamicResource CommonText}"
-                                           HorizontalOptions="End"
+                                           HorizontalOptions="Start"
                                            VerticalOptions="Center"
                                            FontSize="18"
                                            HorizontalTextAlignment="End"
@@ -85,10 +100,11 @@
 
                                     <Entry Grid.Column="1"
                                            VerticalOptions="Center"
-                                           HorizontalOptions="Fill"
+                                           HorizontalOptions="End"
                                            HorizontalTextAlignment="Center"
                                            Keyboard="Numeric"
                                            Text="{Binding Value, Mode=TwoWay}"
+                                           WidthRequest="60"
                                            IsVisible="{Binding Source={x:Reference this}, Path=MultiSelectVM.HaveValue}"/>
 
                                     <Button Grid.Column="2"

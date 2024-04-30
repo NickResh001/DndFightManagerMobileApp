@@ -165,83 +165,6 @@ namespace DndFightManagerMobileApp.ViewModels
             OnPropertyChangedCommand = new Command<string>(OnPropertyChanged);
             AbilityChangedCommand = new Command<string>(AbilityChanged);            
         }
-        private void InitializeFields()
-        {
-            Abilities = _beastNote.AbilityList.ToObservableCollection();
-            HitPointDices = _beastNote.HitPoitsDice;
-            ArmorClass = _beastNote.ArmorClass.ToString();
-            InitiativeBonus = _beastNote.InitiativeBonus.ToString();
-            SpecialBonus = _beastNote.SpecialBonus.ToString();
-
-            ObservableCollection<MultiSelectCRUDHelper> skillItems = [];
-            foreach (var skill in _allSkills)
-            {
-                bool selected = false;
-                foreach (var skillList in _beastNote.SkillList)
-                {
-                    if (skillList.Skill.Id == skill.Id)
-                    {
-                        selected = skillList.Proficiency;
-                        break;
-                    }
-                }
-                skillItems.Add(new MultiSelectCRUDHelper(skill, "", selected));
-            }
-            SkillsMultiSelect = new CrudMultiSelectVM
-            (
-                header: "Владение навыками",
-                infoCommandParameter: "",
-                allItems: skillItems
-            );
-
-            ObservableCollection<MultiSelectCRUDHelper> speedItems = [];
-            foreach (var speed in _allSpeeds)
-            {
-                bool selected = false;
-                string value = "";
-                foreach (var speedList in _beastNote.SpeedList)
-                {
-                    if (speed.Id == speedList.Speed.Id)
-                    {
-                        selected = true;
-                        value = speedList.DistanceInFeet.ToString();
-                        break;
-                    }
-                }
-                speedItems.Add(new MultiSelectCRUDHelper(speed, value, selected));
-            }
-            SpeedsMultiSelect = new CrudMultiSelectVM
-            (
-                header: "Скорости",
-                infoCommandParameter: "",
-                allItems: speedItems,
-                haveValue: true
-            );
-
-            ObservableCollection<MultiSelectCRUDHelper> senseItems = [];
-            foreach (var sense in _allSenses)
-            {
-                bool selected = false;
-                string value = "";
-                foreach (var senseList in _beastNote.SenseList)
-                {
-                    if (sense.Id == senseList.Sense.Id)
-                    {
-                        selected = true;
-                        value = senseList.DistanceInFeet.ToString();
-                        break;
-                    }
-                }
-                senseItems.Add(new MultiSelectCRUDHelper(sense, value, selected));
-            }
-            SensesMultiSelect = new CrudMultiSelectVM
-            (
-                header: "Чувства",
-                infoCommandParameter: "",
-                allItems: senseItems,
-                haveValue: true
-            );
-        }
 
 
         private void AutoArmorClass()
@@ -278,7 +201,81 @@ namespace DndFightManagerMobileApp.ViewModels
             if (parameter is BeastNoteModel incomeBeast)
             {
                 _beastNote = incomeBeast;
-                InitializeFields();
+
+                Abilities = _beastNote.AbilityList.ToObservableCollection();
+                HitPointDices = _beastNote.HitPoitsDice;
+                ArmorClass = _beastNote.ArmorClass.ToString();
+                InitiativeBonus = _beastNote.InitiativeBonus.ToString();
+                SpecialBonus = _beastNote.SpecialBonus.ToString();
+
+                ObservableCollection<MultiSelectCRUDHelper> skillItems = [];
+                foreach (var skill in _allSkills)
+                {
+                    bool selected = false;
+                    foreach (var skillList in _beastNote.SkillList)
+                    {
+                        if (skillList.Skill.Id == skill.Id)
+                        {
+                            selected = skillList.Proficiency;
+                            break;
+                        }
+                    }
+                    skillItems.Add(new MultiSelectCRUDHelper(skill, "", selected));
+                }
+                SkillsMultiSelect = new CrudMultiSelectVM
+                (
+                    header: "Владение навыками",
+                    infoCommandParameter: "",
+                    allItems: skillItems
+                );
+
+                ObservableCollection<MultiSelectCRUDHelper> speedItems = [];
+                foreach (var speed in _allSpeeds)
+                {
+                    bool selected = false;
+                    string value = "";
+                    foreach (var speedList in _beastNote.SpeedList)
+                    {
+                        if (speed.Id == speedList.Speed.Id)
+                        {
+                            selected = true;
+                            value = speedList.DistanceInFeet.ToString();
+                            break;
+                        }
+                    }
+                    speedItems.Add(new MultiSelectCRUDHelper(speed, value, selected));
+                }
+                SpeedsMultiSelect = new CrudMultiSelectVM
+                (
+                    header: "Скорости",
+                    infoCommandParameter: "",
+                    allItems: speedItems,
+                    haveValue: true
+                );
+
+                ObservableCollection<MultiSelectCRUDHelper> senseItems = [];
+                foreach (var sense in _allSenses)
+                {
+                    bool selected = false;
+                    string value = "";
+                    foreach (var senseList in _beastNote.SenseList)
+                    {
+                        if (sense.Id == senseList.Sense.Id)
+                        {
+                            selected = true;
+                            value = senseList.DistanceInFeet.ToString();
+                            break;
+                        }
+                    }
+                    senseItems.Add(new MultiSelectCRUDHelper(sense, value, selected));
+                }
+                SensesMultiSelect = new CrudMultiSelectVM
+                (
+                    header: "Чувства",
+                    infoCommandParameter: "",
+                    allItems: senseItems,
+                    haveValue: true
+                );
             }
         }
         public override object OnNavigateFrom()

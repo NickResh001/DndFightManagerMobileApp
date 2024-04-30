@@ -28,6 +28,8 @@ namespace DndFightManagerMobileApp.Controls.ViewModels
         [ObservableProperty]
         private bool _haveValue;
 
+        [ObservableProperty]
+        private bool _isEmptyMessangeVisible;
         #endregion
 
         #region IndependentBindings
@@ -67,28 +69,37 @@ namespace DndFightManagerMobileApp.Controls.ViewModels
         [ObservableProperty]
         private ObservableCollection<MultiSelectCRUDHelper> _allItems;
 
-        public CrudMultiSelectVM(string header, string infoCommandParameter, 
-            ObservableCollection<MultiSelectCRUDHelper> allItems, bool haveValue = false)
+        private Command RefreshCommand { get; set; }
+
+        public CrudMultiSelectVM(
+            string header, 
+            string infoCommandParameter, 
+            ObservableCollection<MultiSelectCRUDHelper> allItems,
+            Command refreshCommand = null,
+            bool haveValue = false)
         {
             Header = header;
             InfoCommandParameter = infoCommandParameter;
-            _allItems = allItems == null? new() : allItems;
+            _allItems = allItems ?? [];
             _haveValue = haveValue;
+            this.RefreshCommand = refreshCommand;
 
             SelectedItems = new(_allItems.Where(x => x.Selected)); 
             ItemsForPicker = new(_allItems.Where(x => !x.Selected));
 
             SortItemsForPicker();
+            ChangeEmtyMessangeVisibility();
         }
-        private void SortItemsForPicker()
+        public void SortItemsForPicker()
         {
             ItemsForPicker = ItemsForPicker.Sort((x, y) => string.Compare(x.Title, y.Title));
         }
-
-        [RelayCommand] 
-        private void MyPropertyChanged(string propertyName)
+        public void ChangeEmtyMessangeVisibility()
         {
-            
+            if ((SelectedItems == null || SelectedItems.Count == 0) && !IsEmptyMessangeVisible)
+                IsEmptyMessangeVisible = true;
+            else if (IsEmptyMessangeVisible)
+                IsEmptyMessangeVisible = false;
         }
         
         [RelayCommand]
@@ -103,6 +114,9 @@ namespace DndFightManagerMobileApp.Controls.ViewModels
                 ItemsForPicker.Remove(note);
                 note.Selected = true;
                 SelectedItems.Add(note);
+                if (RefreshCommand != null)
+                    RefreshCommand.Execute(null);
+                ChangeEmtyMessangeVisibility();
             }
         }
 
@@ -114,8 +128,11 @@ namespace DndFightManagerMobileApp.Controls.ViewModels
             {
                 SelectedItems.Remove(note);
                 note.Selected = false;
-                ItemsForPicker.Add(note);
+                //ItemsForPicker.Add(note);
+                if (RefreshCommand != null)
+                    RefreshCommand.Execute(id);
                 SortItemsForPicker();
+                ChangeEmtyMessangeVisibility();
             }
         }
 
