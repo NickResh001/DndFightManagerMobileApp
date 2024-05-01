@@ -26,6 +26,12 @@ namespace DndFightManagerMobileApp.Controls.Views
             typeof(OneCrudField),
             string.Empty);
 
+        public static readonly BindableProperty EntryMaxLengthProperty = BindableProperty.Create(
+            nameof(EntryMaxLength),
+            typeof(int),
+            typeof(OneCrudField),
+            50);
+
         public static readonly BindableProperty InfoCommandProperty = BindableProperty.Create(
             nameof(InfoCommand),
             typeof(Command),
@@ -71,6 +77,11 @@ namespace DndFightManagerMobileApp.Controls.Views
         {
             get => (string)GetValue(EntryTextProperty);
             set => SetValue(EntryTextProperty, value);
+        }
+        public int EntryMaxLength
+        {
+            get => (int)GetValue(EntryMaxLengthProperty);
+            set => SetValue(EntryMaxLengthProperty, value);
         }
         public Command InfoCommand
         {

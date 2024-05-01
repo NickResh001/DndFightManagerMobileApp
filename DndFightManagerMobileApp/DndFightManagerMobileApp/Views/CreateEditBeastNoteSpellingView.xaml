@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
+             xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
+             x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteSpellingView">
+    <ContentView.Content>
+        <StackLayout>
+
+            <!-- Не использует заклинания -->
+            <Frame BackgroundColor="{DynamicResource MainDark}"
+                   CornerRadius="5"
+                   Padding="5,6"
+                   Margin="0,12,0,7">
+
+                <Grid HeightRequest="40">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="90*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackLayout Grid.Column="0"
+                                 Orientation="Horizontal"
+                                 Spacing="6"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Start">
+                        <Button Grid.Column="0"
+                                Style="{DynamicResource InfoButton}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                WidthRequest="40"
+                                HeightRequest="30"/>
+                        <Label Text="Не использует заклинания"
+                               Style="{DynamicResource Header3}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"
+                               LineBreakMode="TailTruncation"/>
+                    </StackLayout>
+
+                    <CheckBox Grid.Column="1"
+                              VerticalOptions="Center"
+                              HorizontalOptions="End"
+                              WidthRequest="40"
+                              HeightRequest="30"
+                              IsChecked="{Binding IsNotUsesSpelling, Mode=TwoWay}"/>
+                </Grid>
+            </Frame>
+
+            <!-- Характеристика заклинателя -->
+            <Frame BackgroundColor="{DynamicResource MainDark}"
+                   CornerRadius="5"
+                   Padding="5,6">
+                <StackLayout Orientation="Horizontal"
+                             Spacing="0">
+                    <Button Grid.Column="0"
+                            Style="{DynamicResource InfoButton}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            WidthRequest="40"
+                            Command="{Binding InfoCommand}"
+                            CommandParameter="{Binding InfoCommandParameter}"/>
+                    <StackLayout Orientation="Vertical"
+                                 Spacing="0"
+                                 Margin="6,0"
+                                 HorizontalOptions="FillAndExpand">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0"
+                                   Style="{DynamicResource Header3}"
+                                   Margin="0,6,0,0"
+                                   Text="Характеристика заклинателя"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"/>
+                        </Grid>
+
+                        <Picker Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                                ItemsSource="{Binding AllSpellAbilities}"
+                                SelectedItem="{Binding SelectedSpellAbility}"
+                                ItemDisplayBinding="{Binding Path=Ability.Title}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start"/>
+
+                    </StackLayout>
+                </StackLayout>
+
+            </Frame>
+
+            <!-- Сложность спасброска -->
+            <ctrl:OneCrudField HeaderText="Сложность спасброска"
+                               EntryMaxLength="2"
+                               EntryText="{Binding SaveThrowDifficulty, Mode=TwoWay}"
+                               EntryUnfocusedCommand="{Binding OnPropertyChangedCommand}"
+                               EntryUnfocusedCommandParameter="SaveThrowDifficulty"
+                               Margin="0,7"
+                               AutoValueCommand="{Binding AutoSaveThrowDifficultyCommand}"
+                               IsAutoValueButtonVisible="True"/>
+
+            <!-- Сложность спасброска -->
+            <ctrl:OneCrudField HeaderText="Бонус атаки заклинанием"
+                               EntryMaxLength="2"
+                               EntryText="{Binding SpellAttackBonus, Mode=TwoWay}"
+                               EntryUnfocusedCommand="{Binding OnPropertyChangedCommand}"
+                               EntryUnfocusedCommandParameter="SpellAttackBonus"
+                               Margin="0,7"
+                               AutoValueCommand="{Binding AutoSpellAttackBonusCommand}"
+                               IsAutoValueButtonVisible="True"/>
+
+            <!-- Ячейки заклинаний -->
+            <ctrl:CrudMultiSelect MultiSelectVM="{Binding SpellSlotsMS}"
+                                  Margin="0,7,0,12"/>
+
+
+        </StackLayout>        
+    </ContentView.Content>
+</ContentView>

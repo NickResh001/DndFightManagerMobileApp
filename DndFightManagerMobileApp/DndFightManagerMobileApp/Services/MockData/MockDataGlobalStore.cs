@@ -114,7 +114,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                 Id = Guid.NewGuid().ToString(),
                 Goodness = 0,
                 Law = 0,
-                Title = "Отсутствует"
+                Title = "Без мировоззрения"
             });
 
             #endregion
@@ -799,7 +799,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                     SpecialBonus = 2,
                     //Image = [],
                     Title = "Волк",
-                    Alignment = await AlignmentStore.GetByTitle("Отсутствует"),
+                    Alignment = await AlignmentStore.GetByTitle("Без мировоззрения"),
                     Size = await SizeStore.GetByTitle("Средний"),
                     BeastType = await BestTypeStore.GetByTitle("Зверь"),
                     ChallengeRating = 0.25,
@@ -893,7 +893,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                     SpecialBonus = 2,
                     //Image = [],
                     Title = "Волчара",
-                    Alignment = await AlignmentStore.GetByTitle("Отсутствует"),
+                    Alignment = await AlignmentStore.GetByTitle("Без мировоззрения"),
                     Size = await SizeStore.GetByTitle("Средний"),
                     BeastType = await BestTypeStore.GetByTitle("Зверь"),
                     ChallengeRating = 0.25,
@@ -990,7 +990,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                     SpecialBonus = 2,
                     //Image = [],
                     Title = "Волк",
-                    Alignment = await AlignmentStore.GetByTitle("Отсутствует"),
+                    Alignment = await AlignmentStore.GetByTitle("Без мировоззрения"),
                     Size = await SizeStore.GetByTitle("Средний"),
                     BeastType = await BestTypeStore.GetByTitle("Зверь"),
                     ChallengeRating = 0.25,

@@ -97,6 +97,7 @@
             <!-- Кости хитов -->
             <ctrl:OneCrudField HeaderText="Кости хитов"
                                EntryText="{Binding HitPointDices, Mode=TwoWay}"
+                               EntryMaxLength="50"
                                EntryUnfocusedCommand="{Binding OnPropertyChangedCommand}"
                                EntryUnfocusedCommandParameter="HitPointDices"
                                Margin="0,7"/>
@@ -104,6 +105,7 @@
             <!-- КД -->
             <ctrl:OneCrudField HeaderText="Класс Доспеха"
                                EntryText="{Binding ArmorClass, Mode=TwoWay}"
+                               EntryMaxLength="2"
                                EntryUnfocusedCommand="{Binding OnPropertyChangedCommand}"
                                EntryUnfocusedCommandParameter="ArmorClass"
                                AutoValueCommand="{Binding AutoArmorClassCommand}"
@@ -113,6 +115,7 @@
             <!-- Инициатива -->
             <ctrl:OneCrudField HeaderText="Инициатива"
                                EntryText="{Binding InitiativeBonus, Mode=TwoWay}"
+                               EntryMaxLength="3"
                                EntryUnfocusedCommand="{Binding OnPropertyChangedCommand}"
                                EntryUnfocusedCommandParameter="InitiativeBonus"
                                AutoValueCommand="{Binding AutoInitiativeBonusCommand}"
@@ -121,6 +124,7 @@
             
             <!-- Бонус мастерства -->
             <ctrl:OneCrudField HeaderText="Бонус мастерства"
+                               EntryMaxLength="2"
                                EntryText="{Binding SpecialBonus, Mode=TwoWay}"
                                EntryUnfocusedCommand="{Binding OnPropertyChangedCommand}"
                                EntryUnfocusedCommandParameter="SpecialBonus"

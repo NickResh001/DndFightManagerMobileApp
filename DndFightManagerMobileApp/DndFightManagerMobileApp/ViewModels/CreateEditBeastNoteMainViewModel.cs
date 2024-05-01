@@ -83,6 +83,11 @@ namespace DndFightManagerMobileApp.ViewModels
                         v: new CreateEditBeastNoteDamageView(),
                         vm: CreateEditBeastNoteDamageView._vm,
                         vname: "Урон и состояния"
+                    ),
+                    (
+                        v: new CreateEditBeastNoteSpellingView(),
+                        vm: CreateEditBeastNoteSpellingView._vm,
+                        vname: "Заклинания"
                     )
                 ];
             PageHeader = "Создание моба";
@@ -163,13 +168,13 @@ namespace DndFightManagerMobileApp.ViewModels
                 BeastNote = new BeastNoteModel
                 {
                     Id = Guid.NewGuid().ToString(),
-                    HitPoitsDice = "2d8+2",
+                    HitPoitsDice = "2d6+2",
                     InitiativeBonus = 0,
                     ArmorClass = 10,
                     SpecialBonus = 2,
                     //Image = [],
                     Title = "",
-                    Alignment = dataStore.Alignment.GetByTitle("Отсутствует").Result,
+                    Alignment = dataStore.Alignment.GetByTitle("Без мировоззрения").Result,
                     Size = dataStore.Size.GetByTitle("Средний").Result,
                     BeastType = dataStore.BeastType.GetByTitle("Гуманоид").Result,
                     ChallengeRating = 0.25,

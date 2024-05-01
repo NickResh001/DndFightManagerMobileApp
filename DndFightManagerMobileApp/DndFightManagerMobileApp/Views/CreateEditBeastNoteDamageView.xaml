@@ -10,7 +10,7 @@
 
             <!-- Сопротивление урону -->
             <ctrl:CrudMultiSelect MultiSelectVM="{Binding DamageResistanceMS}"
-                                  Margin="0,7"/>
+                                  Margin="0,12,0,7"/>
 
             <!-- Уязвимость к урону -->
             <ctrl:CrudMultiSelect MultiSelectVM="{Binding DamageVulnerabilityMS}"

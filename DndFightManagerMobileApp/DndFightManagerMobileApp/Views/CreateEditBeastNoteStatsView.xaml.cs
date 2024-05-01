@@ -16,7 +16,7 @@ namespace DndFightManagerMobileApp.Views
 		public static BaseViewModelHandNavigation _vm = new CreateEditBeastNoteStatsViewModel();
         public CreateEditBeastNoteStatsView ()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 			BindingContext = _vm;
 		}
 	}

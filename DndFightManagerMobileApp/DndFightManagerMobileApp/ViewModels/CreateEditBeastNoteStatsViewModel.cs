@@ -150,7 +150,6 @@ namespace DndFightManagerMobileApp.ViewModels
         public ICommand AutoArmorClassCommand { get; set; }
         public ICommand AutoInitiativeBonusCommand { get; set; }
 
-        public ICommand OnPropertyChangedCommand { get; set; }
         public ICommand AbilityChangedCommand { get; set; }
         #endregion
 
@@ -162,7 +161,6 @@ namespace DndFightManagerMobileApp.ViewModels
 
             AutoArmorClassCommand = new Command(AutoArmorClass);
             AutoInitiativeBonusCommand = new Command(AutoInitiativeBonus);
-            OnPropertyChangedCommand = new Command<string>(OnPropertyChanged);
             AbilityChangedCommand = new Command<string>(AbilityChanged);            
         }
 
