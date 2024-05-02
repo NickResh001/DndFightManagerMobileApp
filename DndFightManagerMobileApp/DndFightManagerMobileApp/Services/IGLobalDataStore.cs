@@ -19,6 +19,7 @@ namespace DndFightManagerMobileApp.Services
         IBaseHardoceDirectoryDataStore<DamageTendencyTypeModel> DamageTendencyType { get; }
         IBaseHardoceDirectoryDataStore<DamageTypeModel> DamageType { get; }
         IBaseHardoceDirectoryDataStore<HabitatModel> Habitat { get; }
+        IBaseHardoceDirectoryDataStore<LanguageModel> Language { get; }
         IBaseHardoceDirectoryDataStore<SenseModel> Sense { get; }
         IBaseHardoceDirectoryDataStore<SizeModel> Size { get; }
         ISkillDataStore Skill { get; }

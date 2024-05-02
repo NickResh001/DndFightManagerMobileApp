@@ -88,6 +88,11 @@ namespace DndFightManagerMobileApp.ViewModels
                         v: new CreateEditBeastNoteSpellingView(),
                         vm: CreateEditBeastNoteSpellingView._vm,
                         vname: "Заклинания"
+                    ),
+                    (
+                        v: new CreateEditBeastNoteCommonView(),
+                        vm: CreateEditBeastNoteCommonView._vm,
+                        vname: "Общая информация"
                     )
                 ];
             PageHeader = "Создание моба";

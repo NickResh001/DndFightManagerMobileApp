@@ -51,70 +51,70 @@ namespace DndFightManagerMobileApp.Services.MockData
                 Id = Guid.NewGuid().ToString(),
                 Goodness = -1,
                 Law = -1,
-                Title = "Хаотично-Злой"
+                Title = $"{AlignmentModel.GetLaw(-1)}-{AlignmentModel.GetGoodness(-1)}"
             });
             await Alignment.Create(new AlignmentModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Goodness = 0,
                 Law = -1,
-                Title = "Хаотично-Нейтральный"
+                Title = $"{AlignmentModel.GetLaw(-1)}-{AlignmentModel.GetGoodness(0)}"
             });
             await Alignment.Create(new AlignmentModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Goodness = 1,
                 Law = -1,
-                Title = "Хаотично-Добрый"
+                Title = $"{AlignmentModel.GetLaw(-1)}-{AlignmentModel.GetGoodness(1)}"
             });
             await Alignment.Create(new AlignmentModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Goodness = -1,
                 Law = 0,
-                Title = "Нейтрально-Злой"
+                Title = $"{AlignmentModel.GetLaw(0)}-{AlignmentModel.GetGoodness(-1)}"
             });
             await Alignment.Create(new AlignmentModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Goodness = 0,
                 Law = 0,
-                Title = "Нейтрально-Нейтральный"
+                Title = $"{AlignmentModel.GetLaw(0)}-{AlignmentModel.GetGoodness(0)}"
             });
             await Alignment.Create(new AlignmentModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Goodness = 1,
                 Law = 0,
-                Title = "Нейтрально-Добрый"
+                Title = $"{AlignmentModel.GetLaw(0)}-{AlignmentModel.GetGoodness(1)}"
             });
             await Alignment.Create(new AlignmentModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Goodness = -1,
                 Law = 1,
-                Title = "Законно-Злой"
+                Title = $"{AlignmentModel.GetLaw(1)}-{AlignmentModel.GetGoodness(-1)}"
             });
             await Alignment.Create(new AlignmentModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Goodness = 0,
                 Law = 1,
-                Title = "Законно-Нейтральный"
+                Title = $"{AlignmentModel.GetLaw(1)}-{AlignmentModel.GetGoodness(0)}"
             });
             await Alignment.Create(new AlignmentModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Goodness = 1,
                 Law = 1,
-                Title = "Законно-Добрый"
+                Title = $"{AlignmentModel.GetLaw(1)}-{AlignmentModel.GetGoodness(1)}"
             });
             await Alignment.Create(new AlignmentModel
             {
                 Id = Guid.NewGuid().ToString(),
                 Goodness = 0,
                 Law = 0,
-                Title = "Без мировоззрения"
+                Title = AlignmentModel.GetDefaultTitle()
             });
 
             #endregion
@@ -158,7 +158,7 @@ namespace DndFightManagerMobileApp.Services.MockData
             await BeastType.Create(new BeastTypeModel
             {
                 Id = Guid.NewGuid().ToString(),
-                Title = "Исчадия"
+                Title = "Исчадие"
             });
             await BeastType.Create(new BeastTypeModel
             {
@@ -380,11 +380,6 @@ namespace DndFightManagerMobileApp.Services.MockData
             {
                 Id = Guid.NewGuid().ToString(),
                 Title = "Равнина/луг"
-            });
-            await Habitat.Create(new HabitatModel
-            {
-                Id = Guid.NewGuid().ToString(),
-                Title = "Побережье"
             });
             await Habitat.Create(new HabitatModel
             {

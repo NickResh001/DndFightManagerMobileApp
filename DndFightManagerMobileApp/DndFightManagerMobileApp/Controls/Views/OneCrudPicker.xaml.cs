@@ -34,9 +34,9 @@ namespace DndFightManagerMobileApp.Controls.Views
 
         public static readonly BindableProperty ItemsForPickerProperty = BindableProperty.Create(
             nameof(ItemsForPicker),
-            typeof(ObservableCollection<object>),
+            typeof(object),
             typeof(OneCrudPicker),
-            new ObservableCollection<object> { });
+            null);
 
         public static readonly BindableProperty PickerSelectedItemProperty = BindableProperty.Create(
             nameof(PickerSelectedItem),
@@ -48,16 +48,16 @@ namespace DndFightManagerMobileApp.Controls.Views
             nameof(PickerSelectedItemTitle),
             typeof(string),
             typeof(OneCrudPicker),
-            string.Empty);
+            null);
 
         public string HeaderText
         {
             get => (string)GetValue(HeaderTextProperty);
             set => SetValue(HeaderTextProperty, value);
         }
-        public ObservableCollection<object> ItemsForPicker
+        public object ItemsForPicker
         {
-            get => (ObservableCollection<object>)GetValue(ItemsForPickerProperty);
+            get => (object)GetValue(ItemsForPickerProperty);
             set => SetValue(ItemsForPickerProperty, value);
         }
         public object PickerSelectedItem

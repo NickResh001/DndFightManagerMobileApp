@@ -37,9 +37,9 @@
                     </Grid>
 
                     <Picker Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
-                            ItemsSource="{Binding ItemsForPicker, Mode=TwoWay}"
-                            SelectedItem="{Binding PickerSelectedItem, Mode=TwoWay}"
-                            ItemDisplayBinding="{Binding PickerSelectedItemTitle, Mode=TwoWay}"
+                            ItemsSource="{Binding ItemsForPicker}"
+                            SelectedItem="{Binding PickerSelectedItem}"
+                            ItemDisplayBinding="{Binding PickerSelectedItemTitle}"
                             VerticalOptions="Center"
                             HorizontalOptions="FillAndExpand"
                             HorizontalTextAlignment="Center"

@@ -52,6 +52,7 @@ namespace DndFightManagerMobileApp.Models
         public List<SpellSlotModel> SpellSlots { get; set; } = [];
         public List<ThingModel> Things { get; set; } = [];
         public List<HabitatListModel> HabitatList { get; set; } = [];
+        public List<LanguageListModel> LanguageList { get; set; } = [];
         public List<SenseListModel> SenseList { get; set; } = [];
         public List<ConditionImmunitiesListModel> ConditionImmunitiesList { get; set; } = [];
 

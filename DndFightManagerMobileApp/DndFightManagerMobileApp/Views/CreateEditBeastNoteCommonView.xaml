@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
+             xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
+             x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteCommonView">
+    <ContentView.Content>
+        <StackLayout>
+          
+            <!-- Название моба -->
+            <ctrl:OneCrudField HeaderText="Название моба"
+                               EntryMaxLength="100"
+                               EntryText="{Binding BeastTitle, Mode=TwoWay}"
+                               EntryUnfocusedCommand="{Binding OnPropertyChangedCommand}"
+                               EntryUnfocusedCommandParameter="BeastTitle"
+                               Margin="0,12,0,7"/>
+            
+            <!-- Мировоззрение -->
+            <Frame BackgroundColor="{DynamicResource MainDark}"
+                   CornerRadius="5"
+                   Padding="5,6"
+                   Margin="0,7">
+                <StackLayout Orientation="Horizontal"
+                             Spacing="0">
+                    <Button Grid.Column="0"
+                            Style="{DynamicResource InfoButton}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            WidthRequest="40"
+                            Command="{Binding InfoCommand}"
+                            CommandParameter="{Binding InfoCommandParameter}"/>
+                    <StackLayout Orientation="Vertical"
+                                 Spacing="0"
+                                 Margin="6,0"
+                                 HorizontalOptions="FillAndExpand">
+
+                        <Label Style="{DynamicResource Header3}"
+                               Margin="0,6,0,0"
+                               Text="Мировоззрение"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"/>
+
+                        <Picker ItemsSource="{Binding AllAlignments}"
+                                SelectedItem="{Binding SelectedAlignment}"
+                                ItemDisplayBinding="{Binding Title}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start"/>
+
+                    </StackLayout>
+                </StackLayout>
+
+            </Frame>
+
+            <!-- Размер -->
+            <Frame BackgroundColor="{DynamicResource MainDark}"
+                   CornerRadius="5"
+                   Padding="5,6"
+                   Margin="0,7">
+                <StackLayout Orientation="Horizontal"
+                             Spacing="0">
+                    <Button Grid.Column="0"
+                            Style="{DynamicResource InfoButton}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            WidthRequest="40"
+                            Command="{Binding InfoCommand}"
+                            CommandParameter="{Binding InfoCommandParameter}"/>
+                    <StackLayout Orientation="Vertical"
+                                 Spacing="0"
+                                 Margin="6,0"
+                                 HorizontalOptions="FillAndExpand">
+
+                        <Label Style="{DynamicResource Header3}"
+                               Margin="0,6,0,0"
+                               Text="Размер"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"/>
+
+                        <Picker ItemsSource="{Binding AllSizes}"
+                                SelectedItem="{Binding SelectedSize}"
+                                ItemDisplayBinding="{Binding Title}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start"/>
+
+                    </StackLayout>
+                </StackLayout>
+
+            </Frame>
+
+            <!-- Тип -->
+            <Frame BackgroundColor="{DynamicResource MainDark}"
+                   CornerRadius="5"
+                   Padding="5,6"
+                   Margin="0,7">
+                <StackLayout Orientation="Horizontal"
+                             Spacing="0">
+                    <Button Grid.Column="0"
+                            Style="{DynamicResource InfoButton}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            WidthRequest="40"
+                            Command="{Binding InfoCommand}"
+                            CommandParameter="{Binding InfoCommandParameter}"/>
+                    <StackLayout Orientation="Vertical"
+                                 Spacing="0"
+                                 Margin="6,0"
+                                 HorizontalOptions="FillAndExpand">
+
+                        <Label Style="{DynamicResource Header3}"
+                               Margin="0,6,0,0"
+                               Text="Тип"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"/>
+
+                        <Picker ItemsSource="{Binding AllBeastTypes}"
+                                SelectedItem="{Binding SelectedBeastType}"
+                                ItemDisplayBinding="{Binding Title}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="FillAndExpand"
+                                HorizontalTextAlignment="Start"/>
+
+                    </StackLayout>
+                </StackLayout>
+
+            </Frame>
+
+            <!-- Владение языками -->
+            <ctrl:CrudMultiSelect MultiSelectVM="{Binding LanguagesMS}"
+                                  Margin="0,7,0,12"/>
+
+            <!-- Места обитания -->
+            <ctrl:CrudMultiSelect MultiSelectVM="{Binding HabitatsMS}"
+                                  Margin="0,7,0,12"/>
+            
+            <!-- Описание монстра -->
+            <Frame BackgroundColor="{DynamicResource MainDark}"
+                   CornerRadius="5"
+                   Padding="5,6"
+                   Margin="0,7,0,12">
+                <StackLayout Orientation="Vertical"
+                             Spacing="0">
+
+                    <StackLayout Orientation="Horizontal"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Start"
+                                 Padding="0"
+                                 Margin="0">
+                        
+                        <Button Style="{DynamicResource InfoButton}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                WidthRequest="40"
+                                HeightRequest="40"
+                                Command="{Binding InfoCommand}"
+                                CommandParameter="{Binding InfoCommandParameter}"/>
+                        <Label Style="{DynamicResource Header3}"
+                               Text="Описание монстра"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"/>
+                        
+                    </StackLayout>
+
+                    <Frame HorizontalOptions="Fill"
+                           Padding="2"
+                           Margin="2"
+                           BackgroundColor="{DynamicResource MainMedium}">
+                        <Editor VerticalOptions="Fill"
+                                HorizontalOptions="Fill"
+                                IsSpellCheckEnabled="True"
+                                IsTextPredictionEnabled="True"
+                                TextTransform="None"
+                                Text="{Binding BeastDescription, Mode=TwoWay}"
+                                HeightRequest="400"
+                                MaxLength="4000"
+                                BackgroundColor="{DynamicResource MainDark}"/>
+                    </Frame>
+                    
+                </StackLayout>
+
+            </Frame>
+
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>
