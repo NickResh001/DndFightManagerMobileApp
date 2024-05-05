@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
+             xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
+             x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteResultView"
+             BackgroundColor="{DynamicResource MainDark}">
+    <ContentView.Content>
+        <StackLayout>
+
+            <!-- Название -->
+            <Label Text="Балханот"
+                   Style="{DynamicResource Header1}"
+                   HorizontalOptions="Center"
+                   Margin="0,5"/>
+
+            <!-- Размер, тип, мировоззрение -->
+            <!-- Картинка -->
+            
+            <!-- КД -->
+            <!-- Хиты -->
+            <!-- Скорости -->
+            
+            <!-- Характеристики -->
+
+            <!-- ??? Спасброски -->
+            <!-- ??? Навыки -->
+            <!-- ??? Уязвимость урону -->
+            <!-- ??? Сопротивление к урону -->
+            <!-- ??? Иммунитет к урону -->
+            <!-- ??? Иммунитет к состояниям -->
+            <!-- Чувства -->
+            <!-- Языки -->
+            <!-- ПО -->
+            <!-- Бонус мастерства -->
+
+            <!-- ??? Ячейки -->
+
+            <!-- ??? Пассивные действия -->
+            <!-- ??? Действия реакцией -->
+            <!-- ??? Основные действия -->
+            <!-- ??? Бонусные действия -->
+            <!-- ??? Дополнительные действия -->
+            <!-- ??? Легендарные действия -->
+            <!-- ??? Действия логова -->
+
+            <!-- Места обитания -->
+            <!-- Описание -->
+
+
+        </StackLayout>
+    </ContentView.Content>      
+</ContentView>

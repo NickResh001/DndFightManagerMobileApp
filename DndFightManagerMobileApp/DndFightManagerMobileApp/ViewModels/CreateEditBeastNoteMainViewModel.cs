@@ -33,7 +33,7 @@ namespace DndFightManagerMobileApp.ViewModels
         #region ObservableProperties
 
         [ObservableProperty] 
-        private string _pageHeader;
+        private string _saveButtonText;
 
         [ObservableProperty] 
         private string _currentViewName;
@@ -93,11 +93,13 @@ namespace DndFightManagerMobileApp.ViewModels
                         v: new CreateEditBeastNoteCommonView(),
                         vm: CreateEditBeastNoteCommonView._vm,
                         vname: "Общая информация"
-                    )
+                    ),
+                    (
+                        v: new CreateEditBeastNoteResultView(),
+                        vm: CreateEditBeastNoteResultView._vm,
+                        vname: "Просмотр результата"
+                    ),
                 ];
-            PageHeader = "Создание моба";
-
-
         }
 
         #region Navigation
@@ -163,6 +165,7 @@ namespace DndFightManagerMobileApp.ViewModels
 
             if (_isEditing)
             {
+                SaveButtonText = "Подтвердить\nизменения";
                 BeastNote = dataStore.BeastNote.GetById(_beastNoteId).Result;
                 if (BeastNote == null)
                     _isEditing = true;
@@ -170,6 +173,7 @@ namespace DndFightManagerMobileApp.ViewModels
 
             if (!_isEditing)
             {
+                SaveButtonText = "Создать моба";
                 BeastNote = new BeastNoteModel
                 {
                     Id = Guid.NewGuid().ToString(),
@@ -195,6 +199,37 @@ namespace DndFightManagerMobileApp.ViewModels
             CurrentView = _crudViews[CurrentViewIndex].v;
             CurrentViewName = _crudViews[CurrentViewIndex].vname;
             _crudViews[CurrentViewIndex].vm.OnNavigateTo(BeastNote);
+        }
+
+        [RelayCommand]
+        private void SaveAndNavigateBackTo()
+        {
+            if (_isEditing)
+            {
+                if (_crudViews[CurrentViewIndex].vm.OnNavigateFrom() is BeastNoteModel beast)
+                {
+                    if (dataStore.BeastNote.Update(beast).Result)
+                    {
+                        bool isNeedRefresh = true;
+                        string parameter = NavigationParameterConverter.
+                            ObjectToPairKeyValue(isNeedRefresh, nameof(isNeedRefresh));
+                        Shell.Current.GoToAsync($"..?{parameter}");
+                    }
+                }
+            }
+            else
+            {
+                if (_crudViews[CurrentViewIndex].vm.OnNavigateFrom() is BeastNoteModel beast)
+                {
+                    if (dataStore.BeastNote.Create(beast).Result)
+                    {
+                        bool isNeedRefresh = true;
+                        string parameter = NavigationParameterConverter.
+                            ObjectToPairKeyValue(isNeedRefresh, nameof(isNeedRefresh));
+                        Shell.Current.GoToAsync($"..?{parameter}");
+                    }
+                }
+            }
         }
 
         #endregion

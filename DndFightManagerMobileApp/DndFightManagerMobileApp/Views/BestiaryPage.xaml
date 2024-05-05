@@ -45,56 +45,77 @@
 
                                 <Frame CornerRadius="10"
                                        BackgroundColor="{DynamicResource MainDark}"
-                                       Padding="4,8"
-                                       Margin="0,4"
-                                       xct:TouchEffect.LongPressCommand="{Binding Source={x:Reference this}, Path=BindingContext.UpdateBeastNoteCommand}"
-                                       xct:TouchEffect.LongPressCommandParameter="{Binding Id}"
-                                       xct:TouchEffect.LongPressDuration="1000">
-                                
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Command="{Binding Source={x:Reference this}, Path=BindingContext.DeleteBeastNoteCommand}"
-                                                              CommandParameter="{Binding Id}"
-                                                              />
-                                    </Frame.GestureRecognizers>
-                                
-                                    <Grid>
+                                       Padding="0"
+                                       Margin="0,4">
+
+                                    <Grid BackgroundColor="Transparent"
+                                          Padding="4,8">
+                                        
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="70*"/>
                                             <ColumnDefinition Width="10*"/>
-                                            <ColumnDefinition Width="60*"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <Label Grid.Column="0"
-                                               Text="{Binding ChallengeRatingString}"
-                                               Style="{DynamicResource Header3}"
-                                               VerticalOptions="Center"
-                                               HorizontalOptions="Center"/>
+                                        <Grid Grid.Column="0">
 
-                                        <Rectangle Grid.Column="0"
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={x:Reference this}, Path=BindingContext.UpdateBeastNoteCommand}"
+                                                    CommandParameter="{Binding Id}"/>
+                                            </Grid.GestureRecognizers>
+                                            
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="10*"/>
+                                                <ColumnDefinition Width="60*"/>
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <Label Grid.Column="0"
+                                                   Text="{Binding ChallengeRatingString}"
+                                                   Style="{DynamicResource Header3}"
+                                                   VerticalOptions="Center"
+                                                   HorizontalOptions="Center"/>
+
+                                            <Rectangle Grid.Column="0"
+                                                       BackgroundColor="{DynamicResource MainMedium}"
+                                                       VerticalOptions="Fill"
+                                                       HorizontalOptions="End"
+                                                       WidthRequest="2"/>
+
+                                            <StackLayout Grid.Column="1"
+                                                         Orientation="Vertical"
+                                                         VerticalOptions="CenterAndExpand"
+                                                         HorizontalOptions="Fill"
+                                                         Spacing="0">
+
+                                                <Label Grid.Row="0"
+                                                       Text="{Binding Title}"
+                                                       Style="{DynamicResource Header3}"
+                                                       FontAttributes="Bold"
+                                                       VerticalOptions="End"
+                                                       HorizontalOptions="Start"/>
+
+                                                <Label Grid.Row="1"
+                                                       Text="{Binding BeastType}"
+                                                       Style="{DynamicResource SecondaryText}"
+                                                       FontSize="12"
+                                                       VerticalOptions="Start"
+                                                       HorizontalOptions="Start"/>
+                                            </StackLayout>
+                                            
+                                        </Grid>
+
+                                        <Rectangle Grid.Column="1"
                                                    BackgroundColor="{DynamicResource MainMedium}"
                                                    VerticalOptions="Fill"
-                                                   HorizontalOptions="End"
+                                                   HorizontalOptions="Start"
                                                    WidthRequest="2"/>
 
-                                        <StackLayout Grid.Column="1"
-                                                     Orientation="Vertical"
-                                                     VerticalOptions="CenterAndExpand"
-                                                     HorizontalOptions="StartAndExpand"
-                                                     Spacing="0">
-                                            <Label Grid.Row="0"
-                                                   Text="{Binding Title}"
-                                                   Style="{DynamicResource Header3}"
-                                                   FontAttributes="Bold"
-                                                   VerticalOptions="End"
-                                                   HorizontalOptions="Start"/>
-
-                                            <Label Grid.Row="1"
-                                                   Text="{Binding BeastType}"
-                                                   Style="{DynamicResource SecondaryText}"
-                                                   FontSize="12"
-                                                   VerticalOptions="Start"
-                                                   HorizontalOptions="Start"/>
-                                        </StackLayout>
-
+                                        <Button Grid.Column="1"
+                                                Style="{DynamicResource MoreButton}"
+                                                Command="{Binding Source={x:Reference this}, Path=BindingContext.OpenMoreActionsMenuCommand}"
+                                                CommandParameter="{Binding Id}"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Center"/>
 
                                     </Grid>
                                 </Frame>
@@ -104,7 +125,94 @@
                     </StackLayout>
                 </ScrollView>
             </Grid>
-            
+
+            <Grid Grid.Row="0" Grid.RowSpan="2" BackgroundColor="Transparent" 
+                  IsVisible="{Binding IsMoreActionsMenuActive}"
+                  RowSpacing="0">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"
+                      BackgroundColor="Transparent"
+                      VerticalOptions="Fill"
+                      HorizontalOptions="Fill">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseMoreActionsMenuCommand}"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+                    
+                <Frame Grid.Row="1"
+                       BackgroundColor="{DynamicResource MainDark}"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="End"
+                       HasShadow="False"
+                       CornerRadius="20"
+                       Margin="0,0,0,-20"
+                       Padding="20,20,20,40">
+
+                    <StackLayout>
+
+                        <Grid>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80*"/>
+                                <ColumnDefinition Width="20*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackLayout Grid.Column="0"
+                                         Spacing="0">
+                                <Label Text="{Binding ChoosenBeastNote.Title}"
+                                       Style="{DynamicResource Header2}"
+                                       FontAttributes="Bold"/>
+                                <Label Text="{Binding ChoosenBeastNote.BeastType}"
+                                       Style="{DynamicResource SecondaryText}"
+                                       FontSize="16"/>
+                            </StackLayout>
+
+                            <Label Grid.Column="1"
+                                   Style="{DynamicResource Header2}"
+                                   Text="{Binding ChoosenBeastNote.ChallengeRatingString}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"/>
+
+                        </Grid>
+
+                        <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                   HeightRequest="2"
+                                   VerticalOptions="Start"
+                                   Margin="0,10,0,0"/>
+                        
+                        <StackLayout Spacing="0">
+                            <Button Style="{DynamicResource LinkButton}"
+                                    HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0,0"
+                                    Text="Просмотреть"
+                                    Command="{Binding WatchBeastNoteCommand}"
+                                    CommandParameter="{Binding ChoosenBeastNote.Id}"/>
+                            <Button Style="{DynamicResource LinkButton}"
+                                    HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0,0"
+                                    Text="Скопировать"
+                                    Command="{Binding CopyBeastNoteCommand}"
+                                    CommandParameter="{Binding ChoosenBeastNote.Id}"/>
+                            <Button Style="{DynamicResource LinkButton}"
+                                    HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0,0"
+                                    Text="Редактировать"
+                                    Command="{Binding UpdateBeastNoteCommand}"
+                                    CommandParameter="{Binding ChoosenBeastNote.Id}"/>
+                            <Button Style="{DynamicResource LinkButton}"
+                                    HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0,0"
+                                    Text="Удалить"
+                                    Command="{Binding DeleteBeastNoteCommand}"
+                                    CommandParameter="{Binding ChoosenBeastNote.Id}"/>
+                        </StackLayout>
+                    </StackLayout>
+                    
+                    
+
+                </Frame>
+            </Grid>
             
         </Grid>
     </ContentPage.Content>

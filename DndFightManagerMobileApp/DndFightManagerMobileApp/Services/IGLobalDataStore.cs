@@ -25,6 +25,12 @@ namespace DndFightManagerMobileApp.Services
         ISkillDataStore Skill { get; }
         IBaseHardoceDirectoryDataStore<SpeedModel> Speed { get; }
 
+        IDataStore<ActionModel> Action { get; }
+        IDataStore <ActionThrowModel> ActionThrow { get; }
+        IBaseHardoceDirectoryDataStore<TimeMeasureModel> TimeMeasure { get; }
+        IBaseHardoceDirectoryDataStore<ActionResourceModel> ActionResource { get; }
+        IBaseHardoceDirectoryDataStore<CooldownTypeModel> CooldownType { get; }
+
         //IDataStore<BeastModel> Beast { get; }
         //IDataStore<SceneModel> Scene { get; }
         //IDataStore<SceneSaveModel> SceneSave { get; }

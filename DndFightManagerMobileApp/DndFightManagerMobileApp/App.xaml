@@ -165,6 +165,26 @@
                 </VisualStateGroupList>
             </Setter>
         </Style>
+        <Style TargetType="Button" x:Key="MoreButton" BasedOn="{StaticResource BaseCommonButton}">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="BorderColor" Value="Transparent"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="MoreButton.png"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="PressedMoreButton.png"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
 
         <!-- Text & Input -->
 

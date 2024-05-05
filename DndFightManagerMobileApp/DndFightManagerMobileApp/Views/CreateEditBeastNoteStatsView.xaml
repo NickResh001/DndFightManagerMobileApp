@@ -5,7 +5,8 @@
              xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
              xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
              x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteStatsView"
-             x:Name="this">
+             x:Name="this"
+             Padding="12,0">
     <ContentView.Content>
         <StackLayout>
 

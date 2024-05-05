@@ -23,6 +23,12 @@ namespace DndFightManagerMobileApp.Services.MockData
         public ISkillDataStore Skill { get; private set; }
         public IBaseHardoceDirectoryDataStore<SpeedModel> Speed { get; private set; }
 
+        public IDataStore<ActionModel> Action { get; private set; }
+        public IDataStore<ActionThrowModel> ActionThrow { get; private set; }
+        public IBaseHardoceDirectoryDataStore<TimeMeasureModel> TimeMeasure { get; private set; }
+        public IBaseHardoceDirectoryDataStore<ActionResourceModel> ActionResource { get; private set; }
+        public IBaseHardoceDirectoryDataStore<CooldownTypeModel> CooldownType { get; private set; }
+
         public MockDataGlobalStore()
         {
             Ability = new AbilityDataStore();
@@ -38,6 +44,12 @@ namespace DndFightManagerMobileApp.Services.MockData
             Size = new SizeDataStore();
             Skill = new SkillDataStore();
             Speed = new SpeedDataStore();
+
+            Action = new BaseMockDataStore<ActionModel>();
+            ActionThrow = new BaseMockDataStore<ActionThrowModel>();
+            TimeMeasure = new BaseHardDirMockDataStore<TimeMeasureModel>();
+            ActionResource = new BaseHardDirMockDataStore<ActionResourceModel>();
+            CooldownType = new BaseHardDirMockDataStore<CooldownTypeModel>();
 
             InitializeData();
         }
@@ -771,7 +783,104 @@ namespace DndFightManagerMobileApp.Services.MockData
             });
 
             #endregion
+            #region TimeMeasure
 
+            await TimeMeasure.Create(new TimeMeasureModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Минута"
+            });
+            await TimeMeasure.Create(new TimeMeasureModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Час"
+            });
+            await TimeMeasure.Create(new TimeMeasureModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Сутки"
+            });
+            await TimeMeasure.Create(new TimeMeasureModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Неделя"
+            });
+            await TimeMeasure.Create(new TimeMeasureModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Раунд"
+            });
+            await TimeMeasure.Create(new TimeMeasureModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Ход"
+            });
+
+            #endregion
+            #region ActionResource
+
+            await ActionResource.Create(new ActionResourceModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Основное"
+            });
+            await ActionResource.Create(new ActionResourceModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Бонусное"
+            });
+            await ActionResource.Create(new ActionResourceModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Свободное"
+            });
+            await ActionResource.Create(new ActionResourceModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Пассивное"
+            });
+            await ActionResource.Create(new ActionResourceModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Реакцией"
+            });
+            await ActionResource.Create(new ActionResourceModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Легендарное"
+            });
+            await ActionResource.Create(new ActionResourceModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Логова"
+            });
+
+            #endregion
+            #region CooldownType
+
+            await CooldownType.Create(new CooldownTypeModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Нет"
+            });
+            await CooldownType.Create(new CooldownTypeModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Ячейки заклинаний"
+            });
+            await CooldownType.Create(new CooldownTypeModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Перезарядка"
+            });
+            await CooldownType.Create(new CooldownTypeModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Время"
+            });
+
+            #endregion
+            
             #region BeastNote
             {
                 var AbilityStore = Ability as AbilityDataStore;
