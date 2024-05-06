@@ -19,6 +19,7 @@ namespace DndFightManagerMobileApp
 
             Routing.RegisterRoute(nameof(BestiaryPage), typeof(BestiaryPage));
             Routing.RegisterRoute(nameof(CreateEditBeastNoteMainPage), typeof(CreateEditBeastNoteMainPage));
+            Routing.RegisterRoute(nameof(CreateEditBeastNoteActionsCRUDPage), typeof(CreateEditBeastNoteActionsCRUDPage));
         }
     }
 }

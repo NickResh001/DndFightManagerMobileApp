@@ -54,9 +54,8 @@ namespace DndFightManagerMobileApp.ViewModels
         [RelayCommand]
         private async Task CreateBeastNote()
         {
-            string beastNoteId = NavParamConv.ObjectToPairKeyValue("", nameof(beastNoteId));
-            string isEditing = NavParamConv.ObjectToPairKeyValue(false, nameof(isEditing));
-            await NavigateToCRUD($"{beastNoteId}&{isEditing}");
+            string navigationCondition = NavParamConv.ObjectToPairKeyValue(NavigationCondition.Create, nameof(navigationCondition));
+            await NavigateToCRUD($"{navigationCondition}");
         }
 
         [RelayCommand]
@@ -90,9 +89,9 @@ namespace DndFightManagerMobileApp.ViewModels
         private async Task UpdateBeastNote(string id)
         {
             string beastNoteId = NavParamConv.ObjectToPairKeyValue(id, nameof(beastNoteId));
-            string isEditing = NavParamConv.ObjectToPairKeyValue(true, nameof(isEditing));
+            string navigationCondition = NavParamConv.ObjectToPairKeyValue(NavigationCondition.Edit, nameof(navigationCondition));
             CloseMoreActionsMenu();
-            await NavigateToCRUD($"{beastNoteId}&{isEditing}");
+            await NavigateToCRUD($"{beastNoteId}&{navigationCondition}");
         }
 
         [RelayCommand]

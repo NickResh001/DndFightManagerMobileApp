@@ -55,6 +55,7 @@ namespace DndFightManagerMobileApp.Models
         public List<LanguageListModel> LanguageList { get; set; } = [];
         public List<SenseListModel> SenseList { get; set; } = [];
         public List<ConditionImmunitiesListModel> ConditionImmunitiesList { get; set; } = [];
+        public List<ActionModel> Actions { get; set; } = [];
 
     }
 }

@@ -12,6 +12,7 @@ using System.Text;
 using System.Web;
 using System.Xml.Linq;
 using Xamarin.Forms;
+using NPConv = DndFightManagerMobileApp.Utils.NavigationParameterConverter;
 
 namespace DndFightManagerMobileApp.ViewModels
 {
@@ -20,14 +21,39 @@ namespace DndFightManagerMobileApp.ViewModels
         Left,
         Right
     }
+
+    public enum NavigationCondition
+    {
+        Nothing,
+        Create,
+        Edit,
+        Returning,
+        Refreshing
+    }
     
     public partial class CreateEditBeastNoteMainViewModel : BaseViewModel, IQueryAttributable
     {
         #region IncomingParametres
 
         private string _beastNoteId;
-        private bool _isEditing;
 
+        private NavigationCondition _navigationCondition;
+
+        ActionModel _action;
+
+        private int _currentViewIndex;
+        public int CurrentViewIndex
+        {
+            get { return _currentViewIndex; }
+            set
+            {
+                _currentViewIndex = value;
+                IsToLeftVisible = value == 0 ? false : true;
+                IsToRightVisible = value == _crudViews.Count - 1 ? false : true;
+            }
+        }
+
+        public bool _isActionChanged;
         #endregion
 
         #region ObservableProperties
@@ -56,18 +82,6 @@ namespace DndFightManagerMobileApp.ViewModels
 
         private List<(ContentView v, BaseViewModelHandNavigation vm, string vname)> _crudViews;
 
-        private int _currentViewIndex;
-        public int CurrentViewIndex
-        {
-            get { return _currentViewIndex; }
-            set
-            {
-                _currentViewIndex = value;
-                IsToLeftVisible = value == 0 ? false : true;
-                IsToRightVisible = value == _crudViews.Count - 1 ? false : true;
-            }
-        }
-
         #endregion
 
         public CreateEditBeastNoteMainViewModel()
@@ -95,12 +109,57 @@ namespace DndFightManagerMobileApp.ViewModels
                         vname: "Общая информация"
                     ),
                     (
+                        v: new CreateEditBeastNoteActionsView(),
+                        vm: CreateEditBeastNoteActionsView._vm,
+                        vname: "Действия"
+                    ),
+                    (
                         v: new CreateEditBeastNoteResultView(),
                         vm: CreateEditBeastNoteResultView._vm,
                         vname: "Просмотр результата"
                     ),
                 ];
         }
+        private void ArrivalFromBestiaryToCreate()
+        {
+            _navigationCondition = NavigationCondition.Create;
+            SaveButtonText = "Создать моба";
+            BeastNote = new BeastNoteModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                HitPoitsDice = "2d6+2",
+                InitiativeBonus = 0,
+                ArmorClass = 10,
+                SpecialBonus = 2,
+                //Image = [],
+                Title = "",
+                Alignment = dataStore.Alignment.GetByTitle("Без мировоззрения").Result,
+                Size = dataStore.Size.GetByTitle("Средний").Result,
+                BeastType = dataStore.BeastType.GetByTitle("Гуманоид").Result,
+                ChallengeRating = 0.25,
+                Description = "",
+                CreationDate = DateTime.Now,
+                LastEditingDate = DateTime.Now,
+                AbilityList = [.. dataStore.Ability.GetDefaultList().Result],
+                SkillList = [.. dataStore.Skill.GetDefaultList().Result]
+            };
+        }
+        private void ArrivalFromBestiaryToEdit()
+        {
+            _navigationCondition = NavigationCondition.Edit;
+            SaveButtonText = "Подтвердить\nизменения";
+            BeastNote = dataStore.BeastNote.GetById(_beastNoteId).Result;
+            if (BeastNote == null)
+            {
+                _navigationCondition = NavigationCondition.Create;
+                ArrivalFromBestiaryToCreate();
+            }
+        }
+        private void ArrivalFromActionCRUD()
+        {
+            BeastNote.Actions.Add(_action);
+        }
+
 
         #region Navigation
 
@@ -144,58 +203,45 @@ namespace DndFightManagerMobileApp.ViewModels
             if (query == null)
                 return;
 
-            string param1 = "beastNoteId";
-            string param2 = "isEditing";
+            string beastNoteIdParam =           "beastNoteId";
+            string navigationConditionParam =   "navigationCondition";
+            string currentViewIndexParam =      "currentViewIndex";
+            string actionParam =                "action";
 
-            if (query.ContainsKey(param1))
-            {
-                _beastNoteId = NavigationParameterConverter.
-                    ObjectFromPairKeyValue<string>(HttpUtility.UrlDecode(query[param1]));
-            }
-            else
-                _beastNoteId = "";
-
-            if (query.ContainsKey(param2))
-            {
-                _isEditing = NavigationParameterConverter.
-                    ObjectFromPairKeyValue<bool>(HttpUtility.UrlDecode(query[param2]));
-            }
-            else
-                _isEditing = false;
-
-            if (_isEditing)
-            {
-                SaveButtonText = "Подтвердить\nизменения";
-                BeastNote = dataStore.BeastNote.GetById(_beastNoteId).Result;
-                if (BeastNote == null)
-                    _isEditing = true;
-            }
-
-            if (!_isEditing)
-            {
-                SaveButtonText = "Создать моба";
-                BeastNote = new BeastNoteModel
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    HitPoitsDice = "2d6+2",
-                    InitiativeBonus = 0,
-                    ArmorClass = 10,
-                    SpecialBonus = 2,
-                    //Image = [],
-                    Title = "",
-                    Alignment = dataStore.Alignment.GetByTitle("Без мировоззрения").Result,
-                    Size = dataStore.Size.GetByTitle("Средний").Result,
-                    BeastType = dataStore.BeastType.GetByTitle("Гуманоид").Result,
-                    ChallengeRating = 0.25,
-                    Description = "",
-                    CreationDate = DateTime.Now,
-                    LastEditingDate = DateTime.Now,
-                    AbilityList = [.. dataStore.Ability.GetDefaultList().Result],
-                    SkillList = [.. dataStore.Skill.GetDefaultList().Result]
-                };
-            }
-
+            _beastNoteId = "";
+            var navigationCondition = NavigationCondition.Nothing;
             CurrentViewIndex = 0;
+            _action = null;
+            _isActionChanged = false;
+            
+            if (query.ContainsKey(beastNoteIdParam)) 
+                _beastNoteId = NPConv.ObjectFromUrl<string>(query[beastNoteIdParam]);
+
+            if (query.ContainsKey(navigationConditionParam))
+                navigationCondition = NPConv.ObjectFromUrl<NavigationCondition>(query[navigationConditionParam]);
+
+            if (query.ContainsKey(currentViewIndexParam))
+                CurrentViewIndex = NPConv.ObjectFromUrl<int>(query[currentViewIndexParam]);
+
+            if (query.ContainsKey(actionParam))
+                _action = NPConv.ObjectFromUrl<ActionModel>(query[actionParam]);
+
+            switch (navigationCondition)
+            {
+                case NavigationCondition.Create:
+                    ArrivalFromBestiaryToCreate();
+                    break;
+                case NavigationCondition.Edit:
+                    ArrivalFromBestiaryToEdit();
+                    break;
+                case NavigationCondition.Returning:
+                    ArrivalFromActionCRUD();
+                    break;
+                default: 
+                    break;
+            }            
+
+            // настройка текущего crud-view
             CurrentView = _crudViews[CurrentViewIndex].v;
             CurrentViewName = _crudViews[CurrentViewIndex].vname;
             _crudViews[CurrentViewIndex].vm.OnNavigateTo(BeastNote);
@@ -204,31 +250,30 @@ namespace DndFightManagerMobileApp.ViewModels
         [RelayCommand]
         private void SaveAndNavigateBackTo()
         {
-            if (_isEditing)
+            if (_crudViews[CurrentViewIndex].vm.OnNavigateFrom() is BeastNoteModel beast)
             {
-                if (_crudViews[CurrentViewIndex].vm.OnNavigateFrom() is BeastNoteModel beast)
+                bool success;
+                if (_navigationCondition == NavigationCondition.Edit)
+                    success = dataStore.BeastNote.Update(beast).Result;
+                else if (_navigationCondition == NavigationCondition.Create)
+                    success = dataStore.BeastNote.Create(beast).Result;
+                else
+                    success = false;
+
+                if (success)
                 {
-                    if (dataStore.BeastNote.Update(beast).Result)
-                    {
-                        bool isNeedRefresh = true;
-                        string parameter = NavigationParameterConverter.
-                            ObjectToPairKeyValue(isNeedRefresh, nameof(isNeedRefresh));
-                        Shell.Current.GoToAsync($"..?{parameter}");
-                    }
+                    bool isNeedRefresh = true;
+                    string parameter = NPConv.ObjectToPairKeyValue(isNeedRefresh, nameof(isNeedRefresh));
+                    Shell.Current.GoToAsync($"..?{parameter}");
+                }
+                else
+                {
+                    throw new Exception("Ошибка записи");
                 }
             }
             else
             {
-                if (_crudViews[CurrentViewIndex].vm.OnNavigateFrom() is BeastNoteModel beast)
-                {
-                    if (dataStore.BeastNote.Create(beast).Result)
-                    {
-                        bool isNeedRefresh = true;
-                        string parameter = NavigationParameterConverter.
-                            ObjectToPairKeyValue(isNeedRefresh, nameof(isNeedRefresh));
-                        Shell.Current.GoToAsync($"..?{parameter}");
-                    }
-                }
+                throw new Exception("Из крада передался сломанный моб");
             }
         }
 

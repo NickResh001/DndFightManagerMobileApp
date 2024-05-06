@@ -895,6 +895,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                 var SkillStore = Skill as SkillDataStore;
                 var SpeedStore = Speed as SpeedDataStore;
 
+
                 await BeastNote.Create(new BeastNoteModel
                 {
                     Id = Guid.NewGuid().ToString(),
@@ -987,6 +988,46 @@ namespace DndFightManagerMobileApp.Services.MockData
                             Habitat = await HabitatTypeStore.GetByTitle("Холмы"),
                         }
                     ],
+                    Actions = [
+                        new ActionModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Острый слух и тонкий нюх",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Пассивное"),
+                            Description = "Волк совершает с преимуществом проверки Мудрости (Внимательность), полагающиеся на слух и обоняние.",
+                        },
+                        new ActionModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Тактика стаи",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Пассивное"),
+                            Description = "Волк совершает с преимуществом броски атаки по существу, если в пределах 5 футов от этого существа находится как минимум один дееспособный союзник волка.",
+                        },
+                        new ActionModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Укус",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Основное"),
+                            Description = "Рукопашная атака оружием: d20+4 к попаданию, досягаемость 5 фт., одна цель. Попадание: 7 (2к4 + 2) колющего урона. Если цель — существо, она должна преуспеть в спасброске Силы со Сл 11, иначе будет сбита с ног.",
+                            ActionThrows = [
+                                new ActionThrowModel
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Title = "Бросок на попадание",
+                                    Throw = "к20+4"
+                                },
+                                new ActionThrowModel
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Title = "Колющий урон",
+                                    Throw = "2к4+2"
+                                },
+                            ]                        
+                        }
+                    ]
                 });
 
                 await BeastNote.Create(new BeastNoteModel
@@ -1083,6 +1124,31 @@ namespace DndFightManagerMobileApp.Services.MockData
                             Habitat = await HabitatTypeStore.GetByTitle("Холмы"),
                         }
                     ],
+                    Actions = [
+
+                        new ActionModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Укус",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Основное"),
+                            Description = "Рукопашная атака оружием: d20+4 к попаданию, досягаемость 5 фт., одна цель. Попадание: 7 (2к4 + 2) колющего урона. Если цель — существо, она должна преуспеть в спасброске Силы со Сл 11, иначе будет сбита с ног.",
+                            ActionThrows = [
+                                new ActionThrowModel
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Title = "Бросок на попадание",
+                                    Throw = "к20+4"
+                                },
+                                new ActionThrowModel
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Title = "Колющий урон",
+                                    Throw = "2к8+2"
+                                },
+                            ]
+                        }
+                    ]
                 });
 
                 /*await BeastNote.Create(new BeastNoteModel

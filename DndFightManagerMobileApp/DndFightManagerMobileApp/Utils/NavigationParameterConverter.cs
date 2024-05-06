@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Web;
 
 namespace DndFightManagerMobileApp.Utils
 {
@@ -22,5 +23,11 @@ namespace DndFightManagerMobileApp.Utils
                 throw new ArgumentNullException("Пустой параметр");
             return JsonConvert.DeserializeObject<T>(parameter);
         }
+
+        public static T ObjectFromUrl<T>(string url)
+        {
+            return ObjectFromPairKeyValue<T>(HttpUtility.UrlDecode(url));
+        }
+
     }
 }

@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
+             xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
+             x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteActionsView"
+             Padding="12,0">
+    <ContentView.Content>
+        <StackLayout>
+
+            <Frame BackgroundColor="{DynamicResource MainDark}"
+                   CornerRadius="5"
+                   Padding="5"
+                   Margin="0,12,0,7">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="70*"/>
+                            <ColumnDefinition Width="15*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Button Grid.Column="2"
+                                Style="{DynamicResource AddButton}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Center"
+                                Command="{Binding CreateActionCommand}"/>
+
+                    </Grid>
+
+                    <StackLayout Grid.Row="1"
+                                 BindableLayout.ItemsSource="{Binding AllActions, Mode=TwoWay}"
+                                 Spacing="0"
+                                 Padding="0">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+
+                                <StackLayout Orientation="Vertical"
+                                             Spacing="0"
+                                             Padding="0"
+                                             Margin="0">
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               HeightRequest="1"
+                                               Margin="0,2"
+                                               VerticalOptions="Start"
+                                               HorizontalOptions="Fill"/>
+                                    <Frame BackgroundColor="{DynamicResource MainDark}"
+                                           Padding="0">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="15*"/>
+                                                <ColumnDefinition Width="70*"/>
+                                                <ColumnDefinition Width="15*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Frame Grid.Column="0"
+                                                   BackgroundColor="{DynamicResource MainDark}"
+                                                   BorderColor="{DynamicResource MainMedium}"
+                                                   VerticalOptions="FillAndExpand"
+                                                   HorizontalOptions="FillAndExpand"
+                                                   Margin="2"
+                                                   Padding="0"
+                                                   CornerRadius="10">
+                                                <Label Text="{Binding ShortActionResourceTitle}"
+                                                       Style="{DynamicResource CommonBoldText}"
+                                                       HorizontalOptions="Center"
+                                                       VerticalOptions="Center"/>
+                                            </Frame>
+
+                                            <Label Grid.Column="1"
+                                                   Style="{DynamicResource Header3}"
+                                                   Text="{Binding Title}"
+                                                   HorizontalOptions="StartAndExpand"
+                                                   VerticalOptions="Center"/>
+
+                                            <Rectangle Grid.Column="1"
+                                                       BackgroundColor="{DynamicResource MainMedium}"
+                                                       VerticalOptions="Fill"
+                                                       HorizontalOptions="End"
+                                                       WidthRequest="0"
+                                                       Margin="0,5"/>
+
+                                            <Button Grid.Column="2"
+                                                    Style="{DynamicResource MoreButton}"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Center"/>
+
+                                        </Grid>
+                                    </Frame>                                     
+                                </StackLayout>
+                                
+                           
+                                
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                    
+                </Grid>
+                
+            </Frame>
+
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

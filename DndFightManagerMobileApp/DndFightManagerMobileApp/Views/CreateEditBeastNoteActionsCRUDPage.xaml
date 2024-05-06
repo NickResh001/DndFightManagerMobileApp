@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
+             xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
+             x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteActionsCRUDPage"
+             BackgroundColor="Red">
+    <ContentPage.Content>
+        <Grid RowSpacing="0"
+              Padding="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="80*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  HorizontalOptions="Fill"
+                  VerticalOptions="Fill"
+                  BackgroundColor="{DynamicResource MainDark}">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15*"/>
+                    <ColumnDefinition Width="70*"/>
+                    <ColumnDefinition Width="15*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                        Style="{DynamicResource BackButton}"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Command="{Binding NavigateBackToCommand}"/>
+
+                <Label Grid.Column="1"
+                       Text="Действие"
+                       Style="{DynamicResource Header1}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  BackgroundColor="{DynamicResource MainMedium}"
+                  VerticalOptions="Fill"
+                  HorizontalOptions="Fill"
+                  Margin="0"
+                  Padding="0,2">
+                <ScrollView Padding="12,0">
+                    <StackLayout>
+
+                        <!-- Название -->
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Margin="0,12,0,7"
+                               Padding="15,0">
+                            <StackLayout Orientation="Horizontal"
+                                         VerticalOptions="Fill"
+                                         HorizontalOptions="Fill">
+                                <Label Text="Название"
+                                       Style="{DynamicResource Header3}"
+                                       VerticalOptions="Center"/>
+                                <Entry VerticalOptions="Center"
+                                       HorizontalOptions="FillAndExpand"/>
+                            </StackLayout>
+                        </Frame>
+                    
+                        <!-- Откат - 4 варианта -->
+                        <!-- 1: Нет -->
+                        <!-- 2: Время (3 раз 2 дней) -->
+                        <!-- 3: Перезарядка (от 5 до 6 на кубе к6) -->
+                        <!-- 4: Ячейка (номер ячейки) -->
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Margin="0,7"
+                               Padding="0,0,15,0">
+                            <StackLayout Orientation="Vertical"
+                                         VerticalOptions="Fill"
+                                         HorizontalOptions="Fill">
+
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="4">
+                                    
+                                    <Button Grid.Column="0"
+                                            Style="{DynamicResource InfoButton}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="40"
+                                            HeightRequest="30"
+                                            Command="{Binding InfoCommand}"
+                                            CommandParameter="AaBb"/>
+
+                                    <Label Text="Откат"
+                                           Style="{DynamicResource Header3}"
+                                           VerticalOptions="Center"/>
+
+                                    <Picker ItemsSource="{Binding AllCooldownTypes}"
+                                            SelectedItem="{Binding SelectedCooldown, Mode=TwoWay}"
+                                            ItemDisplayBinding="{Binding Title}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="FillAndExpand"
+                                            HorizontalTextAlignment="Center"/>
+
+                                </StackLayout>
+
+                                <!-- 2: Время (3 раз 2 дней) -->
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="4"
+                                             IsVisible="{Binding IsTimeSeqActive}">
+
+                                    <Label Text="Время"
+                                           Margin="15,10"
+                                           Style="{DynamicResource Header3}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+
+                                </StackLayout>
+
+                                <!-- 3: Перезарядка (от 5 до 6 на кубе к6) -->
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="0"
+                                             IsVisible="{Binding IsRechargeSeqActive}">
+
+                                    <Label Text="От"
+                                           Margin="15,0,0,0"
+                                           Style="{DynamicResource Header3}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+
+                                    <Entry Text="{Binding LowerRangeLimit, Mode=TwoWay}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"
+                                           Keyboard="Numeric"
+                                           MaxLength="3"
+                                           WidthRequest="40"
+                                           HorizontalTextAlignment="Center">
+                                        <Entry.Behaviors>
+                                            <xct:EventToCommandBehavior
+                                                EventName="Unfocused"
+                                                Command="{Binding OnPropertyChangedCommand}"
+                                                CommandParameter="LowerRangeLimit"/>
+                                        </Entry.Behaviors>
+                                    </Entry>
+                                    
+                                    <Label Text="до"
+                                           Style="{DynamicResource Header3}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+
+                                    <Entry Text="{Binding UpperRangeLimit, Mode=TwoWay}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"
+                                           Keyboard="Numeric"
+                                           MaxLength="3"
+                                           WidthRequest="40"
+                                           HorizontalTextAlignment="Center">
+                                        <Entry.Behaviors>
+                                            <xct:EventToCommandBehavior
+                                                EventName="Unfocused"
+                                                Command="{Binding OnPropertyChangedCommand}"
+                                                CommandParameter="UpperRangeLimit"/>
+                                        </Entry.Behaviors>
+                                    </Entry>
+                                    
+                                    <Label Text="на кубе размера"
+                                           Style="{DynamicResource Header3}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+
+                                    <Entry Text="{Binding DiceSize, Mode=TwoWay}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"
+                                           Keyboard="Numeric"
+                                           MaxLength="3"
+                                           WidthRequest="40"
+                                           HorizontalTextAlignment="Start">
+                                        <Entry.Behaviors>
+                                            <xct:EventToCommandBehavior
+                                                EventName="Unfocused"
+                                                Command="{Binding OnPropertyChangedCommand}"
+                                                CommandParameter="DiceSize"/>
+                                        </Entry.Behaviors>
+                                    </Entry>
+
+                                </StackLayout>
+
+                                <!-- 4: Ячейка (номер ячейки) -->
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="4"
+                                             IsVisible="{Binding IsSpellSlotSeqActive}">
+
+                                    <Label Text="Величина ячейки"
+                                           Margin="15,10"
+                                           Style="{DynamicResource Header3}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+
+                                    <Picker ItemsSource="{Binding AllowedSpellSlots}"
+                                            SelectedItem="{Binding SelectedSpellSlot}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="FillAndExpand"
+                                            HorizontalTextAlignment="Center"/>
+
+                                </StackLayout>
+
+                            </StackLayout>
+                        </Frame>
+
+
+
+                        <!-- Ресурс - 3 варианта -->
+                        <!-- 1: Без дополнений (осн, бон, своб, пас, лег) -->
+                        <!-- 2: С условием (реак) -->
+                        <!-- 3: С доп инициативой (лог) -->
+                    
+                        <!-- Содержание - 2 варианта -->
+                        <!-- 1: Обычное -->
+                        <!-- 2: Мультидействие -->
+
+                        <!-- Набор бросков (только обычное действие) -->
+
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+            
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
