@@ -5,7 +5,8 @@
              xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
              xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
              x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteActionsCRUDPage"
-             BackgroundColor="Red">
+             BackgroundColor="Red"
+             x:Name="this">
     <ContentPage.Content>
         <Grid RowSpacing="0"
               Padding="0">
@@ -56,11 +57,15 @@
                             <StackLayout Orientation="Horizontal"
                                          VerticalOptions="Fill"
                                          HorizontalOptions="Fill">
+                                
                                 <Label Text="Название"
                                        Style="{DynamicResource Header3}"
                                        VerticalOptions="Center"/>
-                                <Entry VerticalOptions="Center"
-                                       HorizontalOptions="FillAndExpand"/>
+                                <Entry Text="{Binding ActionTitle}"
+                                       MaxLength="100"
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalOptions="Center"/>
+                                
                             </StackLayout>
                         </Frame>
                     
@@ -79,7 +84,7 @@
 
                                 <StackLayout Orientation="Horizontal"
                                              Spacing="4">
-                                    
+
                                     <Button Grid.Column="0"
                                             Style="{DynamicResource InfoButton}"
                                             VerticalOptions="Center"
@@ -107,11 +112,48 @@
                                              Spacing="4"
                                              IsVisible="{Binding IsTimeSeqActive}">
 
-                                    <Label Text="Время"
-                                           Margin="15,10"
+                                    <Entry Text="{Binding HowManyTimes, Mode=TwoWay}"
+                                           VerticalOptions="Center"
+                                           Margin="15,0,0,0"
+                                           HorizontalOptions="Center"
+                                           Keyboard="Numeric"
+                                           MaxLength="2"
+                                           WidthRequest="40"
+                                           HorizontalTextAlignment="Center">
+                                        <Entry.Behaviors>
+                                            <xct:EventToCommandBehavior
+                                                EventName="Unfocused"
+                                                Command="{Binding OnPropertyChangedCommand}"
+                                                CommandParameter="HowManyTimes"/>
+                                        </Entry.Behaviors>
+                                    </Entry>
+
+                                    <Label Text="раз(а) в"
                                            Style="{DynamicResource Header3}"
                                            VerticalOptions="Center"
                                            HorizontalOptions="Center"/>
+
+                                    <Entry Text="{Binding MeasureMultiply, Mode=TwoWay}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"
+                                           Keyboard="Numeric"
+                                           MaxLength="2"
+                                           WidthRequest="40"
+                                           HorizontalTextAlignment="Center">
+                                        <Entry.Behaviors>
+                                            <xct:EventToCommandBehavior
+                                                EventName="Unfocused"
+                                                Command="{Binding OnPropertyChangedCommand}"
+                                                CommandParameter="MeasureMultiply"/>
+                                        </Entry.Behaviors>
+                                    </Entry>
+
+                                    <Picker ItemsSource="{Binding AllTimeMeasures}"
+                                            SelectedItem="{Binding SelectedTimeMeasure, Mode=TwoWay}"
+                                            ItemDisplayBinding="{Binding Title}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Fill"
+                                            HorizontalTextAlignment="Center"/>
 
                                 </StackLayout>
 
@@ -140,7 +182,7 @@
                                                 CommandParameter="LowerRangeLimit"/>
                                         </Entry.Behaviors>
                                     </Entry>
-                                    
+
                                     <Label Text="до"
                                            Style="{DynamicResource Header3}"
                                            VerticalOptions="Center"
@@ -160,7 +202,7 @@
                                                 CommandParameter="UpperRangeLimit"/>
                                         </Entry.Behaviors>
                                     </Entry>
-                                    
+
                                     <Label Text="на кубе размера"
                                            Style="{DynamicResource Header3}"
                                            VerticalOptions="Center"
@@ -205,18 +247,226 @@
                             </StackLayout>
                         </Frame>
 
-
-
                         <!-- Ресурс - 3 варианта -->
                         <!-- 1: Без дополнений (осн, бон, своб, пас, лег) -->
                         <!-- 2: С условием (реак) -->
                         <!-- 3: С доп инициативой (лог) -->
-                    
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Margin="0,7"
+                               Padding="0,0,15,0">
+                            <StackLayout Orientation="Vertical"
+                                         VerticalOptions="Fill"
+                                         HorizontalOptions="Fill">
+
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="4">
+
+                                    <Button Grid.Column="0"
+                                            Style="{DynamicResource InfoButton}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="40"
+                                            HeightRequest="30"
+                                            Command="{Binding InfoCommand}"
+                                            CommandParameter="AaBb"/>
+
+                                    <Label Text="Ресурс"
+                                           Style="{DynamicResource Header3}"
+                                           VerticalOptions="Center"/>
+
+                                    <Picker ItemsSource="{Binding AllActionResources}"
+                                            SelectedItem="{Binding SelectedActionResource, Mode=TwoWay}"
+                                            ItemDisplayBinding="{Binding Title}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="FillAndExpand"
+                                            HorizontalTextAlignment="Center"/>
+
+                                </StackLayout>
+
+                                <!-- 2: Реакция -->
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="4"
+                                             IsVisible="{Binding IsReactionActionResource}">
+                                    
+                                    <Label Text="Условие"
+                                           Style="{DynamicResource Header3}"
+                                           VerticalOptions="Center"
+                                           Margin="15,0,0,0"
+                                           HorizontalOptions="Center"/>
+
+                                    <Entry Text="{Binding ReactionCondition, Mode=TwoWay}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="FillAndExpand"
+                                           MaxLength="500"
+                                           WidthRequest="40"
+                                           HorizontalTextAlignment="Start"/>
+
+                                </StackLayout>
+
+                                <!-- 2: Логова -->
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="4"
+                                             IsVisible="{Binding IsLairActionResource}">
+
+                                    <Label Text="Инициатива логова"
+                                           Style="{DynamicResource Header3}"
+                                           VerticalOptions="Center"
+                                           Margin="15,0,0,0"
+                                           HorizontalOptions="Center"/>
+
+                                    <Entry Text="{Binding LairInitiative, Mode=TwoWay}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"
+                                           Keyboard="Numeric"
+                                           MaxLength="2"
+                                           WidthRequest="40"
+                                           HorizontalTextAlignment="Center">
+                                        <Entry.Behaviors>
+                                            <xct:EventToCommandBehavior
+                                                EventName="Unfocused"
+                                                Command="{Binding OnPropertyChangedCommand}"
+                                                CommandParameter="LairInitiative"/>
+                                        </Entry.Behaviors>
+                                    </Entry>
+
+                                </StackLayout>
+
+                            </StackLayout>
+                        </Frame>
+
                         <!-- Содержание - 2 варианта -->
                         <!-- 1: Обычное -->
                         <!-- 2: Мультидействие -->
 
-                        <!-- Набор бросков (только обычное действие) -->
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Margin="0,7"
+                               Padding="0,0,0,0">
+                            <StackLayout Orientation="Vertical"
+                                         VerticalOptions="Fill"
+                                         HorizontalOptions="Fill">
+
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="4"
+                                             Margin="0,0,15,0">
+
+                                    <Button Grid.Column="0"
+                                            Style="{DynamicResource InfoButton}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="40"
+                                            HeightRequest="30"
+                                            Command="{Binding InfoCommand}"
+                                            CommandParameter="AaBb"/>
+
+                                    <Label Text="Тип действия"
+                                           Style="{DynamicResource Header3}"
+                                           VerticalOptions="Center"/>
+
+                                    <Picker ItemsSource="{Binding AllActionTypes}"
+                                            SelectedItem="{Binding SelectedActionType, Mode=TwoWay}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="FillAndExpand"
+                                            HorizontalTextAlignment="Center"/>
+
+                                </StackLayout>
+
+                                <!-- 2: Действие -->
+                                <StackLayout Orientation="Vertical"
+                                             HorizontalOptions="FillAndExpand"
+                                             Spacing="4"
+                                             IsVisible="{Binding IsCommonActionType}">
+
+                                    <Label Text="Описание действия"
+                                           Style="{DynamicResource Header3}"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+
+                                    <Frame HorizontalOptions="FillAndExpand"
+                                           Padding="2"
+                                           Margin="6"
+                                           BackgroundColor="{DynamicResource MainMedium}">
+                                        <Editor VerticalOptions="Fill"
+                                                HorizontalOptions="Fill"
+                                                IsSpellCheckEnabled="True"
+                                                IsTextPredictionEnabled="True"
+                                                TextTransform="None"
+                                                Text="{Binding ActionDescription, Mode=TwoWay}"
+                                                HeightRequest="250"
+                                                MaxLength="1000"
+                                                BackgroundColor="{DynamicResource MainDark}">
+                                            <Editor.Behaviors>
+                                                <xct:EventToCommandBehavior
+                                                    EventName="Unfocused"
+                                                    Command="{Binding Source={x:Reference this}, Path=BindingContext.MaintainActionThrowsCommand}"/>
+                                            </Editor.Behaviors>
+                                        </Editor>
+                                    </Frame>
+
+                                    <StackLayout Orientation="Vertical"
+                                                 IsVisible="{Binding IsActionThrowExist}">
+                                        
+                                        <Label Text="Названия бросков"
+                                               Style="{DynamicResource Header3}"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"/>
+
+                                        <StackLayout BindableLayout.ItemsSource="{Binding ActionThrows, Mode=TwoWay}"
+                                                     Margin="0,20,0,0"
+                                                     Spacing="0">
+                                            
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+
+                                                    <Grid Margin="15,0">
+
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="30*"/>
+                                                            <ColumnDefinition Width="70*"/>
+                                                        </Grid.ColumnDefinitions>
+
+                                                        <ScrollView Grid.Column="0"
+                                                                    Orientation="Horizontal"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalOptions="Center">
+                                                            <Label Text="{Binding Throw, Mode=TwoWay}"
+                                                                   Style="{DynamicResource Header3}"
+                                                                   VerticalOptions="Center"
+                                                                   HorizontalOptions="Center"/>
+                                                        </ScrollView>
+
+                                                        <Entry Grid.Column="1"
+                                                               Text="{Binding Title, Mode=TwoWay}"
+                                                               MaxLength="100"
+                                                               HorizontalOptions="Fill"
+                                                               VerticalOptions="Center"/>
+
+                                                    </Grid>
+
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </StackLayout>
+                                        
+                                    </StackLayout>
+
+                                </StackLayout>
+
+                                <!-- 2: Мультидействие -->
+                                <StackLayout Orientation="Vertical"
+                                             Spacing="4"
+                                             IsVisible="{Binding IsMultiActionType}">
+
+                                    <ctrl:CrudMultiSelect MultiSelectVM="{Binding MultiActionMS}"/>
+
+                                </StackLayout>
+
+                            </StackLayout>
+                        </Frame>
+
+
+
+                        <!-- Названия бросков (только обычное действие) -->
 
                     </StackLayout>
                 </ScrollView>

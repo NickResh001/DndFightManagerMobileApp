@@ -128,9 +128,10 @@ namespace DndFightManagerMobileApp.Controls.ViewModels
             {
                 SelectedItems.Remove(note);
                 note.Selected = false;
-                //ItemsForPicker.Add(note);
                 if (RefreshCommand != null)
                     RefreshCommand.Execute(id);
+                else
+                    ItemsForPicker.Add(note);
                 SortItemsForPicker();
                 ChangeEmtyMessangeVisibility();
             }

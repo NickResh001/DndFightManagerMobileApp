@@ -82,25 +82,25 @@
                                  Spacing="0">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
-                                <Grid>
+                                <Grid> 
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="35*"/>
+                                        <ColumnDefinition Width="10*"/>
+                                        <ColumnDefinition Width="15*"/>
                                     </Grid.ColumnDefinitions>
-                                    
-                                    <Label Grid.Column="0"
-                                           Text="{Binding Title}"
-                                           Style="{DynamicResource CommonText}"
+
+                                    <Label Text="{Binding Title}"
+                                           Grid.Column="0"
                                            HorizontalOptions="Start"
                                            VerticalOptions="Center"
+                                           Style="{DynamicResource CommonText}"
                                            FontSize="18"
-                                           HorizontalTextAlignment="End"
+                                           HorizontalTextAlignment="Start"
                                            LineBreakMode="TailTruncation"/>
 
                                     <Entry Grid.Column="1"
                                            VerticalOptions="Center"
-                                           HorizontalOptions="End"
+                                           HorizontalOptions="FillAndExpand"
                                            HorizontalTextAlignment="Center"
                                            Keyboard="Numeric"
                                            Text="{Binding Value, Mode=TwoWay}"

@@ -34,8 +34,9 @@ namespace DndFightManagerMobileApp.Models
         public int? Lair_InitiativeBonus { get; set; }
 
         // Some multiaction
-        public List<ActionModel> ChildActions { get; set; } = [];
-        public ActionModel ParentMultiaction { get; set; } = null;
+        public List<MultiActionList> ChildActions { get; set; } = [];
+        
+        //public ActionModel ParentMultiaction { get; set; } = null;
 
         // ==============================================================================
 
