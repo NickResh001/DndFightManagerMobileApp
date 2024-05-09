@@ -48,7 +48,8 @@
                            Margin="0,15"
                            />
 
-                <Button Grid.Column="2"
+                <Button Grid.Column="2" 
+                        IsVisible="false"
                         VerticalOptions="Center"
                         HorizontalOptions="Center"
                         Style="{DynamicResource AddButton}"

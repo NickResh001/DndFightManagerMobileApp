@@ -6,6 +6,7 @@ using Xamarin.Forms;
 using DndFightManagerMobileApp.Views;
 using CommunityToolkit.Mvvm.Input;
 using System.Threading.Tasks;
+using DndFightManagerMobileApp.Utils;
 
 namespace DndFightManagerMobileApp.ViewModels
 {
@@ -13,7 +14,7 @@ namespace DndFightManagerMobileApp.ViewModels
     {
         public MainMenuViewModel()
         {
-            
+
         }
 
         [RelayCommand]

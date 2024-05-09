@@ -31,6 +31,31 @@ namespace DndFightManagerMobileApp.ViewModels
         { 
             
         }
+        private void MoreMenusClosing()
+        {
+            foreach (var action in AllActions)
+            {
+                action.IsMoreMenuOpened = false;
+            }
+        }
+
+        [RelayCommand]
+        private void MoreMenuOpenClose(string id)
+        {
+            foreach (var action in AllActions)
+            {
+                if (action.Id == id)
+                    action.IsMoreMenuOpened = !action.IsMoreMenuOpened;
+                else
+                    action.IsMoreMenuOpened = false;
+            }
+        }
+
+        [RelayCommand]
+        private void DeleteAction(string id)
+        {
+            AllActions.Remove(AllActions.FirstOrDefault(x => x.Id == id));
+        }
 
         #region Navigation
 
@@ -41,7 +66,20 @@ namespace DndFightManagerMobileApp.ViewModels
             string spellSlots = NPConv.ObjectToPairKeyValue(_beastNote.SpellSlots, nameof(spellSlots));
             string actions = NPConv.ObjectToPairKeyValue(_beastNote.Actions, nameof(actions));
 
+            MoreMenusClosing();
             await Shell.Current.GoToAsync($"{nameof(CreateEditBeastNoteActionsCRUDPage)}?{navigationCondition}&{spellSlots}&{actions}");
+        }
+
+        [RelayCommand]
+        private async Task UpdateAction(string id)
+        {
+            string navigationCondition = NPConv.ObjectToPairKeyValue(NavigationCondition.Edit, nameof(navigationCondition));
+            string spellSlots = NPConv.ObjectToPairKeyValue(_beastNote.SpellSlots, nameof(spellSlots));
+            string actions = NPConv.ObjectToPairKeyValue(_beastNote.Actions, nameof(actions));
+            string actionId = NPConv.ObjectToPairKeyValue(id, nameof(actionId));
+
+            MoreMenusClosing();
+            await Shell.Current.GoToAsync($"{nameof(CreateEditBeastNoteActionsCRUDPage)}?{navigationCondition}&{spellSlots}&{actions}&{actionId}");
         }
 
         public override void OnNavigateTo(object parameter)
@@ -49,15 +87,14 @@ namespace DndFightManagerMobileApp.ViewModels
             if (parameter is BeastNoteModel incomeBeast)
             {
                 _beastNote = incomeBeast;
-
                 AllActions = [.. _beastNote.Actions];
             }
         }
 
         public override object OnNavigateFrom()
         {
+            MoreMenusClosing();
             _beastNote.Actions = [.. AllActions];
-
             return _beastNote;
         }
 

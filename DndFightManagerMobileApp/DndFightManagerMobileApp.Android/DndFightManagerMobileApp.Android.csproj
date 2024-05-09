@@ -103,9 +103,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\AddButton.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\BackButton.png" />
   </ItemGroup>
   <ItemGroup>
@@ -127,13 +124,10 @@
     <AndroidResource Include="Resources\drawable\MoreButton.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\RenameButton.png" />
+    <AndroidResource Include="Resources\drawable\EditButton.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\RightScrollButton.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\PressedAddButton.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\PressedBurgerButton.png" />
@@ -154,10 +148,34 @@
     <AndroidResource Include="Resources\drawable\PressedMoreButton.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\PressedRenameButton.png" />
+    <AndroidResource Include="Resources\drawable\PressedEditButton.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\PressedRightScrollButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\PressedDuplicateButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\DuplicateButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\PressedDeleteButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\DeleteButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\AddButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\PressedAddButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\PressedCloseButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\CloseButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

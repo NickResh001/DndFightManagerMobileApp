@@ -5,6 +5,7 @@
              xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
              xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
              x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteActionsView"
+             x:Name="this"
              Padding="12,0">
     <ContentView.Content>
         <StackLayout>
@@ -44,7 +45,7 @@
                             <DataTemplate>
 
                                 <StackLayout Orientation="Vertical"
-                                             Spacing="0"
+                                             Spacing="6"
                                              Padding="0"
                                              Margin="0">
                                     <Rectangle BackgroundColor="{DynamicResource MainMedium}"
@@ -52,8 +53,11 @@
                                                Margin="0,2"
                                                VerticalOptions="Start"
                                                HorizontalOptions="Fill"/>
-                                    <Frame BackgroundColor="{DynamicResource MainDark}"
-                                           Padding="0">
+                                    
+                                    <Frame BackgroundColor="Transparent"
+                                           Padding="0"
+                                           HeightRequest="40"
+                                           IsVisible="{Binding IsMoreMenuClosed}">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="15*"/>
@@ -85,19 +89,77 @@
                                                        BackgroundColor="{DynamicResource MainMedium}"
                                                        VerticalOptions="Fill"
                                                        HorizontalOptions="End"
-                                                       WidthRequest="0"
+                                                       WidthRequest="1"
                                                        Margin="0,5"/>
 
                                             <Button Grid.Column="2"
                                                     Style="{DynamicResource MoreButton}"
                                                     VerticalOptions="Center"
-                                                    HorizontalOptions="Center"/>
+                                                    HorizontalOptions="Center"
+                                                    Command="{Binding Source={x:Reference this}, Path=BindingContext.MoreMenuOpenCloseCommand}"
+                                                    CommandParameter="{Binding Id}"/>
 
                                         </Grid>
-                                    </Frame>                                     
+                                    </Frame>
+
+                                    <Frame BackgroundColor="Transparent"
+                                           Padding="0"
+                                           HeightRequest="40"
+                                           IsVisible="{Binding IsMoreMenuOpened}">
+
+                                        <Grid>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="85*"/>
+                                                <ColumnDefinition Width="15*"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackLayout Grid.Column="0"
+                                                         Orientation="Horizontal"
+                                                         HorizontalOptions="End"
+                                                         Spacing="10">
+
+                                                <Button Style="{DynamicResource EditButton}"
+                                                        VerticalOptions="Center"
+                                                        HeightRequest="40"
+                                                        WidthRequest="40"
+                                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.UpdateActionCommand}"
+                                                        CommandParameter="{Binding Id}"/>
+
+                                                <!--<Button Style="{DynamicResource DuplicateButton}"
+                                                        VerticalOptions="Center"
+                                                        HeightRequest="40"
+                                                        WidthRequest="40"/>-->
+
+                                                <Button Style="{DynamicResource DeleteButton}"
+                                                        VerticalOptions="Center"
+                                                        HeightRequest="40"
+                                                        WidthRequest="40"
+                                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.DeleteActionCommand}"
+                                                        CommandParameter="{Binding Id}"/>
+
+                                                <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                                           WidthRequest="1"
+                                                           VerticalOptions="FillAndExpand"
+                                                           HorizontalOptions="Center"
+                                                           Margin="0,5"/>
+
+                                            </StackLayout>
+
+                                            <Button Grid.Column="1"
+                                                    Style="{DynamicResource CloseButton}"
+                                                    VerticalOptions="Center"
+                                                    HorizontalOptions="Center"
+                                                    HeightRequest="40"
+                                                    WidthRequest="40"
+                                                    Command="{Binding Source={x:Reference this}, Path=BindingContext.MoreMenuOpenCloseCommand}"
+                                                    CommandParameter="{Binding Id}"/>
+
+                                        </Grid>
+
+                                    </Frame>
+
                                 </StackLayout>
-                                
-                           
                                 
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>

@@ -992,32 +992,52 @@ namespace DndFightManagerMobileApp.Services.MockData
                         new ActionModel
                         {
                             Id = Guid.NewGuid().ToString(),
-                            Title = "Острый слух и тонкий нюх",
+                            Title = @"Острый слух и тонкий нюх",
                             CooldownType = await CooldownType.GetByTitle("Нет"),
                             ActionResource = await ActionResource.GetByTitle("Пассивное"),
-                            Description = "Волк совершает с преимуществом проверки Мудрости (Внимательность), полагающиеся на слух и обоняние.",
+                            Description = @"Волк совершает с преимуществом проверки Мудрости (Внимательность), полагающиеся на слух и обоняние.",
+
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
                         },
                         new ActionModel
                         {
                             Id = Guid.NewGuid().ToString(),
-                            Title = "Тактика стаи",
+                            Title = @"Тактика стаи",
                             CooldownType = await CooldownType.GetByTitle("Нет"),
                             ActionResource = await ActionResource.GetByTitle("Пассивное"),
-                            Description = "Волк совершает с преимуществом броски атаки по существу, если в пределах 5 футов от этого существа находится как минимум один дееспособный союзник волка.",
+                            Description = @"Волк совершает с преимуществом броски атаки по существу, если в пределах 5 футов от этого существа находится как минимум один дееспособный союзник волка.",
+
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
                         },
                         new ActionModel
                         {
                             Id = Guid.NewGuid().ToString(),
-                            Title = "Укус",
+                            Title = @"Укус",
                             CooldownType = await CooldownType.GetByTitle("Нет"),
                             ActionResource = await ActionResource.GetByTitle("Основное"),
-                            Description = "Рукопашная атака оружием: d20+4 к попаданию, досягаемость 5 фт., одна цель. Попадание: 7 (2к4 + 2) колющего урона. Если цель — существо, она должна преуспеть в спасброске Силы со Сл 11, иначе будет сбита с ног.",
+                            Description = @"Рукопашная атака оружием: d20+4 к попаданию, досягаемость 5 фт., одна цель. Попадание: 7 (2к4+2) колющего урона. Если цель — существо, она должна преуспеть в спасброске Силы со Сл 11, иначе будет сбита с ног.",
                             ActionThrows = [
                                 new ActionThrowModel
                                 {
                                     Id = Guid.NewGuid().ToString(),
                                     Title = "Бросок на попадание",
-                                    Throw = "к20+4"
+                                    Throw = "d20+4"
                                 },
                                 new ActionThrowModel
                                 {
@@ -1025,7 +1045,16 @@ namespace DndFightManagerMobileApp.Services.MockData
                                     Title = "Колющий урон",
                                     Throw = "2к4+2"
                                 },
-                            ]                        
+                            ],
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
                         }
                     ]
                 });

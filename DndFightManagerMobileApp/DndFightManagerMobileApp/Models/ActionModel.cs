@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace DndFightManagerMobileApp.Models
 {
@@ -68,5 +66,26 @@ namespace DndFightManagerMobileApp.Models
             }
         }
 
+
+        private bool _isMoreMenuOpened = false;
+        public bool IsMoreMenuOpened
+        {
+            get { return _isMoreMenuOpened; }
+            set
+            {
+                _isMoreMenuOpened = value;
+                OnPropertyChanged(nameof(IsMoreMenuOpened));
+                OnPropertyChanged(nameof(IsMoreMenuClosed));
+            }
+        }
+        public bool IsMoreMenuClosed
+        {
+            get 
+            { 
+                return !IsMoreMenuOpened; 
+            }
+        }
+        public bool IsMultiaction { get; set; } = false;
+        
     }
 }

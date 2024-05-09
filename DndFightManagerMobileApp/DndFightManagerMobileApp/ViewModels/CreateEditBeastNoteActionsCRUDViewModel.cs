@@ -4,11 +4,13 @@ using DndFightManagerMobileApp.Controls.ViewModels;
 using DndFightManagerMobileApp.Models;
 using DndFightManagerMobileApp.Models.ModelHelpers;
 using DndFightManagerMobileApp.Utils;
+using DndFightManagerMobileApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using NPConv = DndFightManagerMobileApp.Utils.NavigationParameterConverter;
 
@@ -358,6 +360,9 @@ namespace DndFightManagerMobileApp.ViewModels
                     return;
 
                 _selectedActionType = value;
+
+                _action.IsMultiaction = value == "Мультидействие";
+
                 OnPropertyChanged(nameof(SelectedActionType));
                 OnPropertyChanged(nameof(IsCommonActionType));
                 OnPropertyChanged(nameof(IsMultiActionType));
@@ -418,12 +423,12 @@ namespace DndFightManagerMobileApp.ViewModels
         #endregion
 
         private ActionModel _action;
+        private List<ActionModel> _multiactionChilds;
 
         public CreateEditBeastNoteActionsCRUDViewModel()
         {
             AllTimeMeasures = new(dataStore.TimeMeasure.GetAll().Result);
             AllActionResources = new(dataStore.ActionResource.GetAll().Result);
-
         }
         private async void ArrivalToCreate()
         {
@@ -483,13 +488,13 @@ namespace DndFightManagerMobileApp.ViewModels
             DiceSize = _action.Cooldown2_DiceSize.ToString();
 
             // Откат: Время
-            SelectedTimeMeasure = _action.Cooldown3_TimeMeasure;
+            SelectedTimeMeasure = AllTimeMeasures.FirstOrDefault(x => x.Id == _action.Cooldown3_TimeMeasure.Id);
             SelectedTimeMeasure ??= AllTimeMeasures[0];
             HowManyTimes = _action.Cooldown3_HowManyTimes.ToString();
             MeasureMultiply = _action.Cooldown3_MeasureMultiply.ToString();
 
             // Ресурс
-            SelectedActionResource = _action.ActionResource;
+            SelectedActionResource = AllActionResources.FirstOrDefault(x => x.Id == _action.ActionResource.Id);
             SelectedActionResource ??= AllActionResources[0];
 
             // Ресурс: Реакция
@@ -514,16 +519,21 @@ namespace DndFightManagerMobileApp.ViewModels
 
             // Тип действия: мультидействие
 
+            _multiactionChilds = new(_actions.Where(x => !x.IsMultiaction));
+            _multiactionChilds.Remove(_multiactionChilds.FirstOrDefault(x => x.Id == _action.Id));
+
             ObservableCollection<MultiSelectCRUDHelper> actionsMS = [];
-            foreach (var justAction in _actions)
+            foreach (var justAction in _multiactionChilds)
             {
                 bool selected = false;
+                int repetitionNumber = 1;
 
                 foreach (var childAction in _action.ChildActions)
                 {
-                    if(childAction.Id == justAction.Id)
+                    if (childAction.ChildAction.Id == justAction.Id)
                     {
-                        selected = true; 
+                        selected = true;
+                        repetitionNumber = childAction.RepititionNumber;
                         break;
                     }
                 }
@@ -533,7 +543,7 @@ namespace DndFightManagerMobileApp.ViewModels
                     Id = Guid.NewGuid().ToString(),
                     ChildAction = justAction,
                     SequenceNumber = actionsMS.Count,
-                    RepititionNumber = 1
+                    RepititionNumber = repetitionNumber
                 };
 
                 actionsMS.Add(new MultiSelectCRUDHelper(multiaction, multiaction.RepititionNumber.ToString(), selected));
@@ -549,10 +559,14 @@ namespace DndFightManagerMobileApp.ViewModels
         }
         private void AssembleAction()
         {
+            _action.IsMoreMenuOpened = false;
             _action.Title = ActionTitle;
             _action.CooldownType = SelectedCooldown;
 
-            _action.Cooldown1_SpellSlotLevel = int.Parse(SelectedSpellSlot);
+            if (_spellSlots != null && _spellSlots.Count != 0)
+            {
+                _action.Cooldown1_SpellSlotLevel = int.Parse(SelectedSpellSlot);
+            }
             _action.Cooldown2_LowerRangeLimit = int.Parse(LowerRangeLimit);
             _action.Cooldown2_UpperRangeLimit = int.Parse(UpperRangeLimit);
             _action.Cooldown2_DiceSize = int.Parse(DiceSize);
@@ -576,6 +590,7 @@ namespace DndFightManagerMobileApp.ViewModels
                     childActions.Add(multiAction);
                 }
             }
+
             _action.ChildActions = childActions;
         }
 
@@ -584,14 +599,16 @@ namespace DndFightManagerMobileApp.ViewModels
         {
             // пока тесты
 
-            var matches = new Regex(@"\s*[\d\s-+\\*\\^\\(\\)кd#]{2,}\s*").Matches(ActionDescription);
+            var matches = new Regex(@"\s*[\d-+\\*\\^\\(\\)кd#]{2,}\s*").Matches(ActionDescription);
 
             List<string> strThrows = [];
             foreach (Match match in matches)
             {
                 if (diceRoller.IsCorrect(match.Value))
                 {
-                    string buffer = match.Value.Replace(" ", "");
+                    string buffer = match.Value;
+                    buffer = buffer.Replace(" (", "");
+                    buffer = buffer.Replace(") ", "");
                     strThrows.Add(buffer);
                 }
             }
@@ -622,21 +639,22 @@ namespace DndFightManagerMobileApp.ViewModels
         #region Navigation
 
         [RelayCommand]
-        private void SaveAndNavigateBackTo()
+        private async Task SaveAndNavigateBackTo()
         {
             AssembleAction();
             string action = NPConv.ObjectToPairKeyValue(_action, nameof(action));
             string currentViewIndex = NPConv.ObjectToPairKeyValue(4, nameof(currentViewIndex));
-            string navigationCondition = NPConv.ObjectToPairKeyValue(NavigationCondition.Returning, nameof(navigationCondition));
-            Shell.Current.GoToAsync($"..?{currentViewIndex}&{navigationCondition}&{action}");
+            string navigationCondition = NPConv.ObjectToPairKeyValue(NavigationCondition.Returning, nameof(navigationCondition)); 
+
+            await Shell.Current.GoToAsync($"..?{currentViewIndex}&{navigationCondition}&{action}");
         }
 
         [RelayCommand]
-        private void NavigateBackTo()
+        private async Task NavigateBackTo()
         {
             string currentViewIndex = NPConv.ObjectToPairKeyValue(4, nameof(currentViewIndex));
             string navigationCondition = NPConv.ObjectToPairKeyValue(NavigationCondition.Nothing, nameof(navigationCondition));
-            Shell.Current.GoToAsync($"..?{currentViewIndex}&{navigationCondition}");
+            await Shell.Current.GoToAsync($"..?{currentViewIndex}&{navigationCondition}");
         }
 
         public void ApplyQueryAttributes(IDictionary<string, string> query)
@@ -673,6 +691,7 @@ namespace DndFightManagerMobileApp.ViewModels
                 ArrivalToEdit();
 
             ArrivalInitialize();
+            MaintainActionThrows();
         }
 
         #endregion

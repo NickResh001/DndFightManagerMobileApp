@@ -157,7 +157,13 @@ namespace DndFightManagerMobileApp.ViewModels
         }
         private void ArrivalFromActionCRUD()
         {
+            var oldAction = BeastNote.Actions.FirstOrDefault(x => x.Id == _action.Id);
+            if (oldAction != null)
+            {
+                BeastNote.Actions.Remove(oldAction);
+            }
             BeastNote.Actions.Add(_action);
+
         }
 
 

@@ -191,11 +191,11 @@
                                     Text="Просмотреть"
                                     Command="{Binding WatchBeastNoteCommand}"
                                     CommandParameter="{Binding ChoosenBeastNote.Id}"/>
-                            <Button Style="{DynamicResource LinkButton}"
+                            <!--<Button Style="{DynamicResource LinkButton}"
                                     HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0,0"
                                     Text="Скопировать"
                                     Command="{Binding CopyBeastNoteCommand}"
-                                    CommandParameter="{Binding ChoosenBeastNote.Id}"/>
+                                    CommandParameter="{Binding ChoosenBeastNote.Id}"/>-->
                             <Button Style="{DynamicResource LinkButton}"
                                     HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Padding="0,0"
                                     Text="Редактировать"

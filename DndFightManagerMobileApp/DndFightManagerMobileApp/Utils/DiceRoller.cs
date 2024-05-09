@@ -11,7 +11,8 @@ namespace DndFightManagerMobileApp.Utils
         ExtraCharacters = 1,
         FormulaErrors = 2,
         UndifinedError = 3,
-        EmptyInputString = 4
+        EmptyInputString = 4,
+        NotDiceFormula = 5
     };
 
     public class DiceThrowInfo
@@ -111,9 +112,26 @@ namespace DndFightManagerMobileApp.Utils
         /// <returns>Возвращает true, если строка является корректным арифметическим выражением. В противном случае значение false</returns>
         private dts CheckCorrection(string formula)
         {
+            string testString = formula;
+            // обяазательно содержит 1 цифру и один оператор к/d/#
+            if (!testString.Contains("d"))
+                return dts.NotDiceFormula;
+            
+            string digits = "123456789";
+            bool success = false;
+            foreach (char digit in digits)
+            {
+                if (testString.Contains(digit.ToString()))
+                {
+                    success = true; 
+                    break;
+                }
+            }
+            if (!success)
+                return dts.NotDiceFormula;
+
             // проверка на содержание символов
             string symbols = "1234567890()" + new string(_operations);
-            string testString = formula;
             foreach (char symbol in symbols)
             {
                 testString = testString.Replace(symbol.ToString(), string.Empty);
@@ -290,6 +308,8 @@ namespace DndFightManagerMobileApp.Utils
             result = operands.Pop();
             return result;
         }
+
+
 
         public DiceThrowInfo Throw(string input, bool advantage, bool disadvantage)
         {
