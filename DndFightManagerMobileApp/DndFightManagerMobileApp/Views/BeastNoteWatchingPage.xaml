@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DndFightManagerMobileApp.Views.BeastNoteWatchingPage">
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0"
+                  BackgroundColor="{DynamicResource MainDark}">
+                <Button Style="{DynamicResource BackButton}"
+                        HeightRequest="40"
+                        WidthRequest="40"
+                        Margin="12,6"
+                        HorizontalOptions="Start"
+                        Command="{Binding NavigateBackToCommand}"/>
+            </Grid>
+            
+            <Grid Grid.Row="1"
+                  Padding="0,0">
+                <ScrollView BackgroundColor="{DynamicResource MainMedium}">
+                    <ContentView Content="{Binding InnerView}"
+                                 VerticalOptions="FillAndExpand"
+                                 HorizontalOptions="FillAndExpand"/>
+                </ScrollView>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

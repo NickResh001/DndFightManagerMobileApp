@@ -77,13 +77,9 @@ namespace DndFightManagerMobileApp.ViewModels
         [RelayCommand]
         private async Task WatchBeastNote(string id)
         {
+            string beastNoteId = NavParamConv.ObjectToPairKeyValue(id, nameof(beastNoteId));
             CloseMoreActionsMenu();
-        }
-
-        [RelayCommand]
-        private void CopyBeastNote(string id)
-        {
-            CloseMoreActionsMenu();
+            await Shell.Current.GoToAsync($"{nameof(BeastNoteWatchingPage)}?{beastNoteId}");
         }
 
         [RelayCommand]
