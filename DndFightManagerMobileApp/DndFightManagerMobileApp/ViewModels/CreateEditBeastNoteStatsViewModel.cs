@@ -308,7 +308,7 @@ namespace DndFightManagerMobileApp.ViewModels
                 bool skillProficiency = helper.Selected;
                 if (abilityList != null)
                 {
-                    skillValue = abilityList.Value;
+                    skillValue = abilityList.Modifier;
                     if (skillProficiency)
                         skillValue += _beastNote.SpecialBonus;
                 }

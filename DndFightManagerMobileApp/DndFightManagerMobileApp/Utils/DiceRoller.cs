@@ -346,6 +346,31 @@ namespace DndFightManagerMobileApp.Utils
 
             return diceThrowInfo;
         }
+        public DiceThrowInfo GetAverageThrowResult(string input)
+        {
+            DiceThrowInfo diceThrowInfo = new(input, false, false);
+
+            string formula = Editing(input);
+
+            diceThrowInfo.straightFormula = formula;
+            if (diceThrowInfo.straightFormula == null || diceThrowInfo.straightFormula == "")
+            {
+                diceThrowInfo.status = dts.EmptyInputString;
+                return diceThrowInfo;
+            }
+
+            diceThrowInfo.status = CheckCorrection(formula);
+
+            if (diceThrowInfo.status == dts.Success)
+            {
+                string formulaMax = PostfixNotation(formula.Replace("d", "*"));
+                string formulaMin = PostfixNotation(formula.Replace("d", "+0*"));
+
+                diceThrowInfo.results.Add((CalculateThrow(formulaMax) + CalculateThrow(formulaMin)) / 2);
+            }
+
+            return diceThrowInfo;
+        }
         public bool IsCorrect(string formula)
         {
             return CheckCorrection(Editing(formula)) == dts.Success;

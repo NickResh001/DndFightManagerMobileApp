@@ -5,49 +5,649 @@
              xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
              xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
              x:Class="DndFightManagerMobileApp.Views.CreateEditBeastNoteResultView"
+             Padding="12,0"
              BackgroundColor="{DynamicResource MainDark}">
     <ContentView.Content>
-        <StackLayout>
+        <StackLayout Spacing="10"
+                     Padding="0,14">
 
             <!-- Название -->
-            <Label Text="Балханот"
+            <Label Text="{Binding Title}"
                    Style="{DynamicResource Header1}"
-                   HorizontalOptions="Center"
-                   Margin="0,5"/>
+                   HorizontalOptions="Center"/>
 
             <!-- Размер, тип, мировоззрение -->
+            <Label Text="{Binding SizeTypeAndAlignment}"
+                   HorizontalOptions="Start"
+                   Style="{DynamicResource Header3}"/>
+
+            <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                       HeightRequest="2"
+                       HorizontalOptions="Fill"/>
+
             <!-- Картинка -->
-            
+            <Frame BackgroundColor="{DynamicResource MainLight}"
+                   HeightRequest="200"/>
+
+            <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                       HeightRequest="2"
+                       HorizontalOptions="Fill"/>
+
             <!-- КД -->
+            <Grid RowSpacing="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0"
+                       Text="Класс доспеха: "
+                       Style="{DynamicResource Header3}"
+                       FontAttributes="Bold"/>
+                <Label Grid.Column="1" Grid.Row="0"
+                       Text="{Binding ArmorClass}"
+                       Style="{DynamicResource Header3}"/>
+
+            </Grid>
             <!-- Хиты -->
+            <Grid RowSpacing="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <Label Grid.Column="0" Grid.Row="0"
+                       Text="Хиты: "
+                       Style="{DynamicResource Header3}"
+                       FontAttributes="Bold"/>
+                <Label Grid.Column="1" Grid.Row="0"
+                       Text="{Binding HitPoints}"
+                       Style="{DynamicResource Header3}"/>
+
+            </Grid>
             <!-- Скорости -->
-            
+            <Grid RowSpacing="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0"
+                       Text="Скорость: "
+                       Style="{DynamicResource Header3}"
+                       FontAttributes="Bold"/>
+                <Label Grid.Column="1" Grid.Row="0"
+                       Text="{Binding Speeds}"
+                       Style="{DynamicResource Header3}"/>
+
+            </Grid>
+
+            <!-- Чувства -->
+            <Grid RowSpacing="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0"
+                       Text="Чувства: "
+                       Style="{DynamicResource Header3}"
+                       FontAttributes="Bold"/>
+                <Label Grid.Column="1" Grid.Row="0"
+                       Text="{Binding Senses}"
+                       Style="{DynamicResource Header3}"/>
+
+            </Grid>
+            <!-- Языки -->
+            <Grid RowSpacing="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0"
+                       Text="Языки: "
+                       Style="{DynamicResource Header3}"
+                       FontAttributes="Bold"/>
+                <Label Grid.Column="1" Grid.Row="0"
+                       Text="{Binding Languages}"
+                       Style="{DynamicResource Header3}"/>
+
+            </Grid>
+            <!-- Бонус мастерства -->
+            <Grid RowSpacing="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0"
+                       Text="Бонус мастерства: "
+                       Style="{DynamicResource Header3}"
+                       FontAttributes="Bold"/>
+                <Label Grid.Column="1" Grid.Row="0"
+                       Text="{Binding SpecialBonus}"
+                       Style="{DynamicResource Header3}"/>
+
+            </Grid>
+            <!-- ПО -->
+            <Grid RowSpacing="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Column="0" Grid.Row="0"
+                       Text="Показатель опасности: "
+                       Style="{DynamicResource Header3}"
+                       FontAttributes="Bold"/>
+                <Label Grid.Column="1" Grid.Row="0"
+                       Text="{Binding ChallengeRating}"
+                       Style="{DynamicResource Header3}"/>
+
+            </Grid>
+
+            <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                       HeightRequest="2"
+                       HorizontalOptions="Fill"/>
             <!-- Характеристики -->
+            <StackLayout Orientation="Vertical"
+                         BindableLayout.ItemsSource="{Binding Abilities}"
+                         Spacing="10">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="{DynamicResource MainMedium}"
+                               CornerRadius="10"
+                               Padding="0">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="60*"/>
+                                    <ColumnDefinition Width="30*"/>
+                                    <ColumnDefinition Width="30*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0"
+                                             Orientation="Horizontal">
+                                    <Frame BackgroundColor="{DynamicResource MainMedium}"
+                                           CornerRadius="10"
+                                           Padding="10"
+                                           WidthRequest="50"
+                                           BorderColor="{DynamicResource MainDark}">
+                                        <Label Text="{Binding ShortTitle}"
+                                               Style="{DynamicResource Header3}"
+                                               TextTransform="Uppercase"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Center"
+                                               FontAttributes="Bold"/>
+                                    </Frame>
+
+                                    <Label Text=":"
+                                           VerticalOptions="Center"
+                                           Style="{DynamicResource Header3}"
+                                           FontAttributes="Bold"/>
+                                    <Label Text="{Binding Value}"
+                                           VerticalOptions="Center"
+                                           Style="{DynamicResource Header3}"
+                                           FontAttributes="Bold"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1"
+                                             Orientation="Horizontal"
+                                             VerticalOptions="Center">
+                                    <Label Text="Мод:"
+                                           Style="{DynamicResource Header3}"
+                                           FontAttributes="Bold"/>
+                                    <Label Text="{Binding Modifier}"
+                                           Style="{DynamicResource Header3}"
+                                           FontAttributes="Bold"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="2"
+                                             Orientation="Horizontal"
+                                             VerticalOptions="Center">
+                                    <Label Text="Пас:"
+                                           Style="{DynamicResource Header3}"
+                                           FontAttributes="Bold"/>
+                                    <Label Text="{Binding Passive}"
+                                           Style="{DynamicResource Header3}"
+                                           FontAttributes="Bold"/>
+                                </StackLayout>
+
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+            
+            <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                       IsVisible="{Binding IsVariableSequenceVisible}"
+                       HeightRequest="2"
+                       HorizontalOptions="Fill"/>
 
             <!-- ??? Спасброски -->
+            <Label Text="{Binding Savethrows}"
+                   Style="{DynamicResource Header3}"
+                   IsVisible="{Binding IsSavethrowsVisible}"/>
+
             <!-- ??? Навыки -->
+            <Label Text="{Binding Skills}"
+                   Style="{DynamicResource Header3}"
+                   IsVisible="{Binding IsSkillsVisible}"/>
+                           
             <!-- ??? Уязвимость урону -->
+            <Label Text="{Binding DamageVulnerability}"
+                   Style="{DynamicResource Header3}"
+                   IsVisible="{Binding IsDamageVulnerabilityVisible}"/>
+                           
             <!-- ??? Сопротивление к урону -->
+            <Label Text="{Binding DamageResistance}"
+                   Style="{DynamicResource Header3}"
+                   IsVisible="{Binding IsDamageResistanceVisible}"/>
+                           
             <!-- ??? Иммунитет к урону -->
+            <Label Text="{Binding DamageImmunity}"
+                   Style="{DynamicResource Header3}"
+                   IsVisible="{Binding IsDamageImmunityVisible}"/>
+
             <!-- ??? Иммунитет к состояниям -->
-            <!-- Чувства -->
-            <!-- Языки -->
-            <!-- ПО -->
-            <!-- Бонус мастерства -->
+            <Label Text="{Binding ConditionImmunity}"
+                   Style="{DynamicResource Header3}"
+                   IsVisible="{Binding IsConditionImmunityVisible}"/>
 
             <!-- ??? Ячейки -->
+            <StackLayout Orientation="Vertical"
+                         Spacing="10"
+                         IsVisible="{Binding IsSpellSLotsVisible}">
+                <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                           HeightRequest="2"
+                           HorizontalOptions="Fill"/>
+                <Label Text="Ячейки заклинаний: "
+                       Style="{DynamicResource Header3}"
+                       FontAttributes="Bold"/>
+
+                <StackLayout Orientation="Horizontal"
+                             Spacing="12">
+                    
+                    <StackLayout Orientation="Vertical"
+                                 Spacing="4">
+
+                        <Label Text="Уровень"
+                               Style="{DynamicResource Header3}"
+                               FontAttributes="Bold,Italic"/>
+
+                        <Label Text="Количество"                  
+                               Style="{DynamicResource Header3}"
+                               FontAttributes="Bold,Italic"/>
+
+                    </StackLayout>
+
+                    <StackLayout Orientation="Horizontal"
+                                 BindableLayout.ItemsSource="{Binding SpellSLots}"
+                                 Spacing="4">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Horizontal"
+                                             Spacing="4">
+                                    <StackLayout Orientation="Vertical"
+                                                 Spacing="4">
+
+                                        <Label Text="{Binding Level}"
+                                               Style="{DynamicResource Header3}"
+                                               HorizontalOptions="Center"
+                                               FontAttributes="Bold,Italic"/>
+
+                                        <Label Text="{Binding Count}"   
+                                               HorizontalOptions="Center"            
+                                               Style="{DynamicResource Header3}"/>
+
+                                    </StackLayout>
+
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               VerticalOptions="Fill"
+                                               WidthRequest="1"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+
+                </StackLayout>
+                
+                
+                
+            </StackLayout>
 
             <!-- ??? Пассивные действия -->
+            <StackLayout Orientation="Vertical"
+                         Spacing="10"
+                         IsVisible="{Binding IsPassiveActionsVisible}">
+                <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                           HeightRequest="2"
+                           HorizontalOptions="Fill"/>
+                <StackLayout Orientation="Vertical"
+                             BindableLayout.ItemsSource="{Binding PassiveActions}"
+                             Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical"
+                                         Spacing="4">
+
+                                <Label Text="{Binding Title}"
+                                       Style="{DynamicResource Header3}"
+                                       FontAttributes="Bold,Italic"/>
+
+                                <Label Text="{Binding Description}"                                   
+                                       Style="{DynamicResource CommonText}"/>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>               
+            </StackLayout>
+
             <!-- ??? Действия реакцией -->
+            <StackLayout Orientation="Vertical"
+                         Spacing="10"
+                         IsVisible="{Binding IsReactionActionsVisible}">
+
+                <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                           HeightRequest="2"
+                           HorizontalOptions="Fill"/>
+                <Label Text="Действия реакцией"
+                       Style="{DynamicResource Header1}"
+                       HorizontalTextAlignment="Start"/>
+                <StackLayout Orientation="Vertical"
+                             BindableLayout.ItemsSource="{Binding ReactionActions}"
+                             Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical"
+                                         Spacing="4">
+
+                                <Label Text="{Binding Title}"
+                                       Style="{DynamicResource Header3}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding AdditionalInfo}"
+                                       Style="{DynamicResource Header3}"
+                                       IsVisible="{Binding IsHaveAdditionalInfo}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding Recharge}"
+                                       Style="{DynamicResource Header3}"
+                                       IsVisible="{Binding IsHaveRecharge}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding Description}"
+                                       Style="{DynamicResource CommonText}"/>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+            </StackLayout>
+
             <!-- ??? Основные действия -->
+            <StackLayout Orientation="Vertical"
+                         Spacing="10"
+                         IsVisible="{Binding IsMainActionsVisible}">
+
+                <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                           HeightRequest="2"
+                           HorizontalOptions="Fill"/>
+                <Label Text="Основные действия"
+                       Style="{DynamicResource Header1}"
+                       HorizontalTextAlignment="Start"/>
+                <StackLayout Orientation="Vertical"
+                             BindableLayout.ItemsSource="{Binding MainActions}"
+                             Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical"
+                                         Spacing="4">
+
+                                <Label Text="{Binding Title}"
+                                       Style="{DynamicResource Header3}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding Recharge}"
+                                       Style="{DynamicResource Header3}"
+                                       IsVisible="{Binding IsHaveRecharge}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding Description}"
+                                       Style="{DynamicResource CommonText}"/>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                       
+            </StackLayout>
+            
             <!-- ??? Бонусные действия -->
-            <!-- ??? Дополнительные действия -->
+            <StackLayout Orientation="Vertical"
+                         Spacing="10"
+                         IsVisible="{Binding IsBonusActionsVisible}">
+
+                <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                           HeightRequest="2"
+                           HorizontalOptions="Fill"/>
+                <Label Text="Бонусные действия"
+                       Style="{DynamicResource Header1}"
+                       HorizontalTextAlignment="Start"/>
+                <StackLayout Orientation="Vertical"
+                             BindableLayout.ItemsSource="{Binding BonusActions}"
+                             Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical"
+                                         Spacing="4">
+
+                                <Label Text="{Binding Title}"
+                                       Style="{DynamicResource Header3}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding Recharge}"
+                                       Style="{DynamicResource Header3}"
+                                       IsVisible="{Binding IsHaveRecharge}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding Description}"
+                                       Style="{DynamicResource CommonText}"/>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+                       
+            </StackLayout>
+            
+            <!-- ??? Свободные действия -->
+            <StackLayout Orientation="Vertical"
+                         Spacing="10"
+                         IsVisible="{Binding IsFreeActionsVisible}">
+
+                <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                           HeightRequest="2"
+                           HorizontalOptions="Fill"/>
+                <Label Text="Свободные действия"
+                       Style="{DynamicResource Header1}"
+                       HorizontalTextAlignment="Start"/>
+                <StackLayout Orientation="Vertical"
+                             BindableLayout.ItemsSource="{Binding FreeActions}"
+                             Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical"
+                                         Spacing="4">
+
+                                <Label Text="{Binding Title}"
+                                       Style="{DynamicResource Header3}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding Recharge}"
+                                       Style="{DynamicResource Header3}"
+                                       IsVisible="{Binding IsHaveRecharge}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding Description}"
+                                       Style="{DynamicResource CommonText}"/>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+            </StackLayout>
+
             <!-- ??? Легендарные действия -->
+            <StackLayout Orientation="Vertical"
+                         Spacing="10"
+                         IsVisible="{Binding IsLegendaryActionsVisible}">
+
+                <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                           HeightRequest="2"
+                           HorizontalOptions="Fill"/>
+                <Label Text="Легендарные действия"
+                       Style="{DynamicResource Header1}"
+                       HorizontalTextAlignment="Start"/>
+                <StackLayout Orientation="Vertical"
+                             BindableLayout.ItemsSource="{Binding LegendaryActions}"
+                             Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical"
+                                         Spacing="4">
+
+                                <Label Text="{Binding Title}"
+                                       Style="{DynamicResource Header3}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding Recharge}"
+                                       Style="{DynamicResource Header3}"
+                                       IsVisible="{Binding IsHaveRecharge}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding Description}"
+                                       Style="{DynamicResource CommonText}"/>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+            </StackLayout>
+
             <!-- ??? Действия логова -->
+            <StackLayout Orientation="Vertical"
+                         Spacing="10"
+                         IsVisible="{Binding IsLairActionsVisible}">
+
+                <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                           HeightRequest="2"
+                           HorizontalOptions="Fill"/>
+                <Label Text="Действия логова"
+                       Style="{DynamicResource Header1}"
+                       HorizontalTextAlignment="Start"/>
+                <Label Text="{Binding LairInitiative}"
+                       Style="{DynamicResource Header2}"
+                       FontAttributes="Bold,Italic"/>
+                <StackLayout Orientation="Vertical"
+                             BindableLayout.ItemsSource="{Binding LairActions}"
+                             Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Vertical"
+                                         Spacing="4">
+
+                                <Label Text="{Binding Title}"
+                                       Style="{DynamicResource Header3}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding Recharge}"
+                                       Style="{DynamicResource Header3}"
+                                       IsVisible="{Binding IsHaveRecharge}"
+                                       FontAttributes="Bold,Italic"/>
+                                <Label Text="{Binding Description}"
+                                       Style="{DynamicResource CommonText}"/>
+
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+            </StackLayout>
 
             <!-- Места обитания -->
-            <!-- Описание -->
+            <StackLayout Orientation="Vertical"
+                         Spacing="10"
+                         IsVisible="{Binding IsHabitatsVisible}">
 
+                <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                           HeightRequest="2"
+                           HorizontalOptions="Fill"/>
+                <Label Text="Места обитания"
+                       Style="{DynamicResource Header1}"
+                       HorizontalTextAlignment="Start"/>
+                <Label Text="{Binding Habitats}"
+                       Style="{DynamicResource Header3}"
+                       HorizontalTextAlignment="Start"/>
+
+            </StackLayout>
+            
+            <!-- Описание -->
+            <StackLayout Orientation="Vertical"
+                         Spacing="10">
+
+                <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                           HeightRequest="2"
+                           HorizontalOptions="Fill"/>
+                <Label Text="Описание"
+                       Style="{DynamicResource Header1}"
+                       HorizontalTextAlignment="Start"/>
+                <Label Text="{Binding Description}"
+                       Style="{DynamicResource CommonText}"
+                       HorizontalTextAlignment="Start"/>
+
+            </StackLayout>
 
         </StackLayout>
     </ContentView.Content>      

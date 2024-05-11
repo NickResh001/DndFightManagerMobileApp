@@ -21,7 +21,49 @@ namespace DndFightManagerMobileApp.Models
         }
         public bool SavingThrowProficiency { get; set; } = false;
 
-        public int Modifier => ((Value % 2 == 0 ? Value : Value - 1) - 10) / 2;
+        public int Modifier 
+        { 
+            get
+            {
+                int result = Value;
+                if (result % 2 != 0)
+                    result--;
 
+                return (result - 10) / 2;
+            } 
+        }
+        public int Passive
+        {
+            get
+            {
+                return 10 + Modifier;
+            }
+        }
+        public string ShortTitle
+        {
+            get
+            {
+                if (Ability != null)
+                {
+                    switch (Ability.Title)
+                    {
+                        case "Сила":
+                            return "Сил";
+                        case "Ловкость":
+                            return "Лов";
+                        case "Телосложение":
+                            return "Тел";
+                        case "Интеллект":
+                            return "Инт";
+                        case "Мудрость":
+                            return "Мдр";
+                        case "Харизма":
+                            return "Хар";
+                    }
+                }
+                return "Ошбк";
+            }
+        }
+        
     }
 }

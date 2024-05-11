@@ -9,5 +9,6 @@ namespace DndFightManagerMobileApp.Models
         public SkillModel Skill { get; set; }
         public int Value { get; set; }
         public bool Proficiency { get; set; } = true;
+
     }
 }
