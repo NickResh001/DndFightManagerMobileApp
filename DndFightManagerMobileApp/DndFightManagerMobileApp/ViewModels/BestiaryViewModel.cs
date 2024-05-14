@@ -120,7 +120,7 @@ namespace DndFightManagerMobileApp.ViewModels
 
             if (query.ContainsKey(param1))
             {
-                _isNeedRefresh = NavParamConv.ObjectFromPairKeyValue<bool>(HttpUtility.UrlDecode(query[param1]));
+                _isNeedRefresh = NavParamConv.ObjectFromUriValue<bool>(HttpUtility.UrlDecode(query[param1]));
             }
             else
                 _isNeedRefresh = false;

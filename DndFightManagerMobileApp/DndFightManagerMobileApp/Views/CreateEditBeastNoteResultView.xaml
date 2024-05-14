@@ -26,13 +26,17 @@
                        HorizontalOptions="Fill"/>
 
             <!-- Картинка -->
-            <Frame BackgroundColor="{DynamicResource MainLight}"
-                   HeightRequest="200"/>
-
-            <Rectangle BackgroundColor="{DynamicResource MainMedium}"
-                       HeightRequest="2"
-                       HorizontalOptions="Fill"/>
-
+            <StackLayout Spacing="10"
+                         IsVisible="false">
+                
+                <Frame BackgroundColor="{DynamicResource MainLight}"
+                       HeightRequest="200"/>
+                <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                           HeightRequest="2"
+                           HorizontalOptions="Fill"/>
+                
+            </StackLayout>
+            
             <!-- КД -->
             <Grid RowSpacing="0">
 
@@ -589,7 +593,8 @@
                        Style="{DynamicResource Header1}"
                        HorizontalTextAlignment="Start"/>
                 <Label Text="{Binding LairInitiative}"
-                       Style="{DynamicResource Header2}"
+                       Style="{DynamicResource Header3}"
+                       Margin="0,-5,0,0"
                        FontAttributes="Bold,Italic"/>
                 <StackLayout Orientation="Vertical"
                              BindableLayout.ItemsSource="{Binding LairActions}"

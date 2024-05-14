@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
+using NPConv = DndFightManagerMobileApp.Utils.NavigationParameterConverter;
+
 namespace DndFightManagerMobileApp.Services.MockData
 {
     public class MockDataGlobalStore : IGLobalDataStore
@@ -1297,6 +1299,22 @@ namespace DndFightManagerMobileApp.Services.MockData
 
 
             #endregion
+
+            InitializeBeastNoteWithJsonInput();
+        }
+    
+        private async void InitializeBeastNoteWithJsonInput()
+        {
+            List<string> jsons = [];
+            {
+                //jsons.Add("");
+            }
+
+            foreach (string json in jsons)
+            {
+                var beastNote = NPConv.ObjectFromUriValue<BeastNoteModel>(json);
+                await BeastNote.Create(beastNote);
+            }
         }
     }
 }

@@ -345,6 +345,9 @@
         <Style TargetType="CheckBox">
             <Setter Property="Color" Value="{StaticResource PressedLight}"/>
         </Style>
+        <Style TargetType="CheckBox" x:Key="ExpanderCheckbox">
+            <Setter Property="Color" Value="Transparent"/>
+        </Style>
 
     </Application.Resources>
 </Application>

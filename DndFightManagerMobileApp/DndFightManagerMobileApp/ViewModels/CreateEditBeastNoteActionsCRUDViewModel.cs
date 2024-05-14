@@ -26,6 +26,7 @@ namespace DndFightManagerMobileApp.ViewModels
         private List<SpellSlotModel> _spellSlots;
         private List<ActionModel> _actions;
         private string _actionId;
+        private int _incomingLairInitiative;
 
         #endregion
 
@@ -447,7 +448,7 @@ namespace DndFightManagerMobileApp.ViewModels
                 Cooldown3_MeasureMultiply = 1,
                 Cooldown3_HowManyTimes = 1,
                 Reaction_Condition = "",
-                Lair_InitiativeBonus = 20,
+                Lair_InitiativeBonus = 25,
             };
             _actionId = _action.Id;
         }
@@ -458,6 +459,7 @@ namespace DndFightManagerMobileApp.ViewModels
         private void ArrivalInitialize()
         {
             ActionTitle = _action.Title;
+            LairInitiative = _incomingLairInitiative.ToString();
 
             // Откат
             AllCooldownTypes = new(dataStore.CooldownType.GetAll().Result);
@@ -662,15 +664,17 @@ namespace DndFightManagerMobileApp.ViewModels
             if (query == null)
                 return;
 
-            string navigationConditionParam =   "navigationCondition";
-            string spellSlotsParam =            "spellSlots";
-            string actionsParam =               "actions";
-            string actionIdParam =              "actionId";
+            string navigationConditionParam =       "navigationCondition";
+            string spellSlotsParam =                "spellSlots";
+            string actionsParam =                   "actions";
+            string actionIdParam =                  "actionId";
+            string incomingLairInitiativeParam =    "incomingLairInitiative";
 
             _navigationCondition = NavigationCondition.Nothing;
             _spellSlots = [];
             _actions = [];
             _actionId = "";
+            _incomingLairInitiative = 20;
 
             if (query.ContainsKey(navigationConditionParam))
                 _navigationCondition = NPConv.ObjectFromUrl<NavigationCondition>(query[navigationConditionParam]);
@@ -684,6 +688,8 @@ namespace DndFightManagerMobileApp.ViewModels
             if (query.ContainsKey(actionIdParam))
                 _actionId = NPConv.ObjectFromUrl<string>(query[actionIdParam]);
 
+            if (query.ContainsKey(incomingLairInitiativeParam))
+                _incomingLairInitiative = NPConv.ObjectFromUrl<int>(query[incomingLairInitiativeParam]);
 
             if (_navigationCondition == NavigationCondition.Create)
                 ArrivalToCreate();

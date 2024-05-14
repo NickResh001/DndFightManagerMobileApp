@@ -29,7 +29,7 @@ namespace DndFightManagerMobileApp.Models
         public string Reaction_Condition { get; set; }
 
         // Action resource - Lair
-        public int? Lair_InitiativeBonus { get; set; }
+        public int? Lair_InitiativeBonus { get; set; } = 20;
 
         // Some multiaction
         public List<MultiActionList> ChildActions { get; set; } = [];

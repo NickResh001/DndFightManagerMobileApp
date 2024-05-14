@@ -31,6 +31,7 @@ namespace DndFightManagerMobileApp.Models
         public AbilityModel SpellAbility { get; set; } = null;
         public int? SpellAttackBonus { get; set; } = null;
         public int? SpellSaveThrowDifficulty { get; set; } = null;
+        public int LairInitiative { get; set; } = 20;
 
         //public string Author { get; set; }
 

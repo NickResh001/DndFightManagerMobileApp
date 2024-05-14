@@ -548,7 +548,10 @@ namespace DndFightManagerMobileApp.ViewModels
                 });
 
                 LairActions = [.. lairActions];
-                LairInitiative = _beastNote.Actions[0].Lair_InitiativeBonus.ToString();
+                if (LairActions != null && LairActions.Count > 0)
+                    LairInitiative = "Инициатива логова: " + _beastNote.Actions[0].Lair_InitiativeBonus.ToString();
+                else
+                    LairInitiative = "";
                 OnPropertyChanged(nameof(IsLairActionsVisible));
             }
             #endregion
@@ -589,7 +592,7 @@ namespace DndFightManagerMobileApp.ViewModels
 
         public override object OnNavigateFrom()
         {
-            return base.OnNavigateFrom();
+            return _beastNote;
         }
 
         #endregion

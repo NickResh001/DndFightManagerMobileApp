@@ -21,7 +21,7 @@ namespace DndFightManagerMobileApp.Utils
             return null;
         }
 
-        public static T ObjectFromPairKeyValue<T>(string parameter)
+        public static T ObjectFromUriValue<T>(string parameter)
         {
             if (string.IsNullOrEmpty(parameter))
                 throw new ArgumentNullException("Пустой параметр");
@@ -31,7 +31,7 @@ namespace DndFightManagerMobileApp.Utils
 
         public static T ObjectFromUrl<T>(string url)
         {
-            return ObjectFromPairKeyValue<T>(HttpUtility.UrlDecode(url));
+            return ObjectFromUriValue<T>(HttpUtility.UrlDecode(url));
         }
 
     }

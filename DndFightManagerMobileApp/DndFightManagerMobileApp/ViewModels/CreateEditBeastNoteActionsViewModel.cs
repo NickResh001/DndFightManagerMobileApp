@@ -65,9 +65,10 @@ namespace DndFightManagerMobileApp.ViewModels
             string navigationCondition = NPConv.ObjectToPairKeyValue(NavigationCondition.Create, nameof(navigationCondition));
             string spellSlots = NPConv.ObjectToPairKeyValue(_beastNote.SpellSlots, nameof(spellSlots));
             string actions = NPConv.ObjectToPairKeyValue(_beastNote.Actions, nameof(actions));
+            string incomingLairInitiative = NPConv.ObjectToPairKeyValue(_beastNote.LairInitiative, nameof(incomingLairInitiative));
 
             MoreMenusClosing();
-            await Shell.Current.GoToAsync($"{nameof(CreateEditBeastNoteActionsCRUDPage)}?{navigationCondition}&{spellSlots}&{actions}");
+            await Shell.Current.GoToAsync($"{nameof(CreateEditBeastNoteActionsCRUDPage)}?{navigationCondition}&{spellSlots}&{actions}&{incomingLairInitiative}");
         }
 
         [RelayCommand]
@@ -77,9 +78,10 @@ namespace DndFightManagerMobileApp.ViewModels
             string spellSlots = NPConv.ObjectToPairKeyValue(_beastNote.SpellSlots, nameof(spellSlots));
             string actions = NPConv.ObjectToPairKeyValue(_beastNote.Actions, nameof(actions));
             string actionId = NPConv.ObjectToPairKeyValue(id, nameof(actionId));
+            string incomingLairInitiative = NPConv.ObjectToPairKeyValue(_beastNote.LairInitiative, nameof(incomingLairInitiative));
 
             MoreMenusClosing();
-            await Shell.Current.GoToAsync($"{nameof(CreateEditBeastNoteActionsCRUDPage)}?{navigationCondition}&{spellSlots}&{actions}&{actionId}");
+            await Shell.Current.GoToAsync($"{nameof(CreateEditBeastNoteActionsCRUDPage)}?{navigationCondition}&{spellSlots}&{actions}&{actionId}&{incomingLairInitiative}");
         }
 
         public override void OnNavigateTo(object parameter)

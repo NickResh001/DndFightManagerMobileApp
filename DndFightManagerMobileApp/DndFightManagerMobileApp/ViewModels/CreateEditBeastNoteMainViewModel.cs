@@ -3,12 +3,14 @@ using CommunityToolkit.Mvvm.Input;
 using DndFightManagerMobileApp.Models;
 using DndFightManagerMobileApp.Utils;
 using DndFightManagerMobileApp.Views;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Xml.Linq;
 using Xamarin.Forms;
@@ -163,9 +165,12 @@ namespace DndFightManagerMobileApp.ViewModels
                 BeastNote.Actions.Remove(oldAction);
             }
             BeastNote.Actions.Add(_action);
-
+            BeastNote.LairInitiative = (int)_action.Lair_InitiativeBonus;
+            foreach(var action in BeastNote.Actions)
+            {
+                action.Lair_InitiativeBonus = BeastNote.LairInitiative;
+            }
         }
-
 
         #region Navigation
 
@@ -271,6 +276,18 @@ namespace DndFightManagerMobileApp.ViewModels
                     bool isNeedRefresh = true;
                     string parameter = NPConv.ObjectToPairKeyValue(isNeedRefresh, nameof(isNeedRefresh));
                     Shell.Current.GoToAsync($"..?{parameter}");
+
+                    // Временное решение для быстрого заполнения начальной библиотеки
+                    if (false)
+                    {
+                        string jsonBackup = JsonConvert.SerializeObject(beast);
+                        string results = Regex.Replace(jsonBackup, "(.{1,100})", "\"$1\"\n");
+                        Console.WriteLine($" =====> you need new mob =====> ");
+                        Console.WriteLine(results);
+                        Console.WriteLine($" <===== thats all <===== ");
+                        int a = 0;
+                    }
+                    
                 }
                 else
                 {
