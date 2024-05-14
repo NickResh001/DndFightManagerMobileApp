@@ -99,7 +99,7 @@ namespace DndFightManagerMobileApp.ViewModels
             }
         }
 
-        [ObservableProperty] private ObservableCollection<ActionModel> _passiveActions;
+        [ObservableProperty] private ObservableCollection<ActionWatchingHelper> _passiveActions;
         [ObservableProperty] private ObservableCollection<ActionWatchingHelper> _mainActions;
         [ObservableProperty] private ObservableCollection<ActionWatchingHelper> _bonusActions;
         [ObservableProperty] private ObservableCollection<ActionWatchingHelper> _freeActions;
@@ -435,7 +435,12 @@ namespace DndFightManagerMobileApp.ViewModels
             #endregion
             #region PassiveActions
             {
-                PassiveActions = [.._beastNote.Actions.Where(x => x.ActionResource.Title == "Пассивное")];
+                var passiveActions = _beastNote.Actions
+                    .Where(x => x.ActionResource.Title == "Пассивное")
+                    .Select(x => new ActionWatchingHelper(x))
+                    .ToList();
+
+                PassiveActions = [.. passiveActions];
                 OnPropertyChanged(nameof(IsPassiveActionsVisible));
             }
             #endregion

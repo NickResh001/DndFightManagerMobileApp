@@ -543,6 +543,11 @@ namespace DndFightManagerMobileApp.Services.MockData
                 Id = Guid.NewGuid().ToString(),
                 Title = "Друидический язык"
             });
+            await Language.Create(new LanguageModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Телепатия"
+            });
             #endregion
             #region Sense
 
@@ -897,7 +902,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                 var SkillStore = Skill as SkillDataStore;
                 var SpeedStore = Speed as SpeedDataStore;
 
-
+                // Волк
                 await BeastNote.Create(new BeastNoteModel
                 {
                     Id = Guid.NewGuid().ToString(),
@@ -926,11 +931,13 @@ namespace DndFightManagerMobileApp.Services.MockData
                         {
                             Id = Guid.NewGuid().ToString(),
                             Skill = await SkillStore.GetByTitle("Внимательность"),
+                            Value = 3
                         },
                         new SkillListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Skill = await SkillStore.GetByTitle("Скрытность"),
+                            Value = 4
                         },
                     ],
                     AbilityList = 
@@ -1060,20 +1067,20 @@ namespace DndFightManagerMobileApp.Services.MockData
                         }
                     ]
                 });
-
+                // Вегепигмей
                 await BeastNote.Create(new BeastNoteModel
                 {
                     Id = Guid.NewGuid().ToString(),
-                    HitPoitsDice = "2d8+2",
+                    HitPoitsDice = "2d6+2",
                     ArmorClass = 13,
                     SpecialBonus = 2,
                     //Image = [],
-                    Title = "Волчара",
-                    Alignment = await AlignmentStore.GetByTitle("Без мировоззрения"),
-                    Size = await SizeStore.GetByTitle("Средний"),
-                    BeastType = await BestTypeStore.GetByTitle("Зверь"),
+                    Title = "Вегепигмей",
+                    Alignment = await AlignmentStore.GetByTitle("Нейтрально-Нейтральный"),
+                    Size = await SizeStore.GetByTitle("Маленький"),
+                    BeastType = await BestTypeStore.GetByTitle("Растение"),
                     ChallengeRating = 0.25,
-                    Description = "Волки встречаются в субарктических и умеренных регионах мира, где они часто передвигаются стаями через холмы и леса.",
+                    Description = "Вегепигмеи, также называемые плесневый народец или плесневики, населяют тёмные области, в которых тепло и влажно, так что чаще всего их можно встретить под землёй или в плотных лесах, которые не пропускают солнечный свет. Хоть они и предпочитают есть свежее мясо, кости и кровь, вегепигмеи также могут поглощать питательные вещества из почвы и многих видов органической материи, что означает, что они редко бывают голодны. Друг с другом вегепигмеи общаются свистом, жестами и ритмичными постукиваниями по телу.\r\n\r\nВегепигмеи мало что изготавливают и строят; все снаряжение они берут у других существ или строят копии простых зданий, которые видели.\r\n\r\nПока вегепигмей стареет, он становится мощнее и развивает области спор на своём теле. Вегепигмеи переносящие споры уважаемы другими вегепигмеями, так что чужаки часто обращаются к таким вегепигмеям как к вождям. Вождь может испустить свои споры облаком, и заразить ближайших существ.",
                     CreationDate = DateTime.Today,
                     LastEditingDate = DateTime.Now,
                     SpeedList =
@@ -1082,7 +1089,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                         {
                             Id = Guid.NewGuid().ToString(),
                             Speed = await SpeedStore.GetByTitle("Обычная"),
-                            DistanceInFeet = 40
+                            DistanceInFeet = 30
                         }
                     ],
                     SkillList =
@@ -1091,11 +1098,13 @@ namespace DndFightManagerMobileApp.Services.MockData
                         {
                             Id = Guid.NewGuid().ToString(),
                             Skill = await SkillStore.GetByTitle("Внимательность"),
+                            Value = 2
                         },
                         new SkillListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Skill = await SkillStore.GetByTitle("Скрытность"),
+                            Value = 4
                         },
                     ],
                     AbilityList =
@@ -1104,38 +1113,62 @@ namespace DndFightManagerMobileApp.Services.MockData
                         {
                             Id = Guid.NewGuid().ToString(),
                             Ability = await AbilityStore.GetByTitle("Сила"),
-                            Value = 12
+                            Value = 7
                         },
                         new AbilityListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Ability = await AbilityStore.GetByTitle("Ловкость"),
-                            Value = 15
+                            Value = 14
                         },
                         new AbilityListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Ability = await AbilityStore.GetByTitle("Телосложение"),
-                            Value = 12
+                            Value = 13
                         },
                         new AbilityListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Ability = await AbilityStore.GetByTitle("Интеллект"),
-                            Value = 3
+                            Value = 6
                         },
                         new AbilityListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Ability = await AbilityStore.GetByTitle("Мудрость"),
-                            Value = 12
+                            Value = 11
                         },
                         new AbilityListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Ability = await AbilityStore.GetByTitle("Харизма"),
-                            Value = 6
+                            Value = 7
                         },
+                    ],
+                    SenseList = 
+                    [
+                        new SenseListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Sense = await SenseStore.GetByTitle("Темное зрение"),
+                            DistanceInFeet = 60
+                        }
+                    ],
+                    DamageTendencyList = 
+                    [
+                        new DamageTendencyModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            DamageTendencyType = await DamageTendencyType.GetByTitle("Сопротивление"),
+                            DamageType = await DamageType.GetByTitle("Электричеством"),
+                        },
+                        new DamageTendencyModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            DamageTendencyType = await DamageTendencyType.GetByTitle("Сопротивление"),
+                            DamageType = await DamageType.GetByTitle("Колющий"),
+                        }
                     ],
                     HabitatList =
                     [
@@ -1147,23 +1180,65 @@ namespace DndFightManagerMobileApp.Services.MockData
                         new HabitatListModel
                         {
                             Id = Guid.NewGuid().ToString(),
-                            Habitat = await HabitatTypeStore.GetByTitle("Равнина/луг"),
-                        },
-                        new HabitatListModel
-                        {
-                            Id = Guid.NewGuid().ToString(),
-                            Habitat = await HabitatTypeStore.GetByTitle("Холмы"),
+                            Habitat = await HabitatTypeStore.GetByTitle("Болото"),
                         }
                     ],
                     Actions = [
 
                         new ActionModel
                         {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
+
                             Id = Guid.NewGuid().ToString(),
-                            Title = "Укус",
+                            Title = "Растительный камуфляж",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Пассивное"),
+                            Description = "Вегепигмей имеет преимущество на проверки Ловкости (Скрытность), которые он делает в любой местности, достаточно укрытой растительностью.",
+                        },
+                        new ActionModel
+                        {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
+
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Регенерация",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Пассивное"),
+                            Description = "Вегепигмей восстанавливает 3 хита в начале своего хода. Если он получает урон холодом, огнем или некротический урон, то эта черта не работает в начале следующего хода вегепигмея. Он умирает только если начинает ход с 0 хитов и не может регенерировать.",
+                        },
+
+                        new ActionModel
+                        {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
+
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Когти",
                             CooldownType = await CooldownType.GetByTitle("Нет"),
                             ActionResource = await ActionResource.GetByTitle("Основное"),
-                            Description = "Рукопашная атака оружием: d20+4 к попаданию, досягаемость 5 фт., одна цель. Попадание: 7 (2к4 + 2) колющего урона. Если цель — существо, она должна преуспеть в спасброске Силы со Сл 11, иначе будет сбита с ног.",
+                            Description = "Рукопашная атака оружием: к20+4 к попаданию, досягаемость 5 фт., одна цель. Попадание: 5 (1к6+2) рубящего урона.",
                             ActionThrows = [
                                 new ActionThrowModel
                                 {
@@ -1174,62 +1249,150 @@ namespace DndFightManagerMobileApp.Services.MockData
                                 new ActionThrowModel
                                 {
                                     Id = Guid.NewGuid().ToString(),
-                                    Title = "Колющий урон",
-                                    Throw = "2к8+2"
+                                    Title = "Рубящий урон",
+                                    Throw = "1к6+2"
                                 },
                             ]
-                        }
+                        },
+                        new ActionModel
+                        {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
+
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Праща",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Основное"),
+                            Description = "Дальнобойная атака оружием: к20+4 к попаданию, дистанция 30/120 фт., одна цель. Попадание: 4 (1к4+2) дробящего урона",
+                            ActionThrows = [
+                                new ActionThrowModel
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Title = "Бросок на попадание",
+                                    Throw = "к20+4"
+                                },
+                                new ActionThrowModel
+                                {
+                                    Id = Guid.NewGuid().ToString(),
+                                    Title = "Дробящий урон",
+                                    Throw = "1к4+2"
+                                },
+                            ]
+                        },
                     ]
                 });
+                // Балханот
+                var actionTentacle = new ActionModel
+                {
+                    Cooldown1_SpellSlotLevel = 1,
+                    Cooldown2_LowerRangeLimit = 5,
+                    Cooldown2_UpperRangeLimit = 6,
+                    Cooldown2_DiceSize = 6,
+                    Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                    Cooldown3_MeasureMultiply = 1,
+                    Cooldown3_HowManyTimes = 1,
+                    Reaction_Condition = "",
+                    Lair_InitiativeBonus = 20,
 
-                /*await BeastNote.Create(new BeastNoteModel
+                    Id = Guid.NewGuid().ToString(),
+                    Title = "Щупальце",
+                    CooldownType = await CooldownType.GetByTitle("Нет"),
+                    ActionResource = await ActionResource.GetByTitle("Основное"),
+                    Description = "Рукопашная атака оружием: к20+7 к попаданию, досягаемость 10 фт., одна цель. Попадание: 10 (2к6+3) дробящего урона, и цель становится схваченной (Сл высвобождения 15) и притягивается на 5 футов ближе к балханноту. Пока цель схвачена, она опутана; у балханнота 4 щупальца и каждое может держать в захвате только одну цель.",
+                    ActionThrows = 
+                    [
+                        new ActionThrowModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Бросок на попадание",
+                            Throw = "к20+7"
+                        },
+                        new ActionThrowModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Дробящий урон",
+                            Throw = "2к6+3"
+                        },
+                    ]
+                };
+                var actionBait = new ActionModel
+                {
+                    Cooldown1_SpellSlotLevel = 1,
+                    Cooldown2_LowerRangeLimit = 5,
+                    Cooldown2_UpperRangeLimit = 6,
+                    Cooldown2_DiceSize = 6,
+                    Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                    Cooldown3_MeasureMultiply = 1,
+                    Cooldown3_HowManyTimes = 1,
+                    Reaction_Condition = "",
+                    Lair_InitiativeBonus = 20,
+
+                    Id = Guid.NewGuid().ToString(),
+                    Title = "Укус",
+                    CooldownType = await CooldownType.GetByTitle("Нет"),
+                    ActionResource = await ActionResource.GetByTitle("Основное"),
+                    Description = "Рукопашная атака оружием: к20+7 к попаданию, досягаемость 5 фт., одна цель. Попадание: 25 (4к10+3) колющего урона.",
+                    ActionThrows = [
+                        new ActionThrowModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Бросок на попадание",
+                            Throw = "к20+7"
+                        },
+                        new ActionThrowModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Колющий урон",
+                            Throw = "4к10+3"
+                        },
+                    ]
+                };
+                await BeastNote.Create(new BeastNoteModel
                 {
                     Id = Guid.NewGuid().ToString(),
-                    HitPoitsDice = "2d8+2",
-                    //InitiativeBonus = 2,
-                    ArmorClass = 13,
-                    SpecialBonus = 2,
+                    HitPoitsDice = "12к10+48",
+                    ArmorClass = 17,
+                    SpecialBonus = 4,
                     //Image = [],
-                    Title = "Волк",
-                    Alignment = await AlignmentStore.GetByTitle("Без мировоззрения"),
-                    Size = await SizeStore.GetByTitle("Средний"),
-                    BeastType = await BestTypeStore.GetByTitle("Зверь"),
-                    ChallengeRating = 0.25,
-                    Description = "Волки встречаются в субарктических и умеренных регионах мира, где они часто передвигаются стаями через холмы и леса.",
-                    //SpellAbility = null,
-                    //SpellAttackBonus = 0,
-                    //SpellSaveThrowDifficulty = 0,
-                    //ModeratorComment = string.Empty,
+                    Title = "Балханот",
+                    Alignment = await AlignmentStore.GetByTitle("Хаотично-Злой"),
+                    Size = await SizeStore.GetByTitle("Большой"),
+                    BeastType = await BestTypeStore.GetByTitle("Абберация"),
+                    ChallengeRating = 11,
+                    Description = "Родом из Царства Теней злобные, хищные балханноты меняют облик своего гнезда на место, привлекающее внимание путников. Как только они входят на них набрасывается балханнот.\r\n\r\nЛожная надежда. Благодаря ограниченным возможностям телепатии, балханнот может учуять желания других существ и воображать места, которые те хотели бы встретить на своём пути. Затем балханнот искажает реальность, преобразовывая своё логово в то место, которое жертва желает найти. Балханноты не могут справляться с детализацией объектов, и поэтому многие несоответствия могут разоблачить иллюзию, но подделка достаточно хороша, чтобы обмануть отчаявшихся существ забрести в объятия чудища.\r\n\r\nЗлобные существа. Балханноты получают удовольствие, наживаясь на страхе и отчаянии страдающей жертвы. Оно запугивает свою добычу, пользуясь способностями, искажающими реальность, скрывая самого себя, пока не сцапает свою жертву. После чего, оно перемещается в другое место и пожирает свою добычу.\r\n\r\nПолезные рабы. Охотничьи группы дроу и иные посетители Подземья, порой осмеливаются войти в Царство Теней чтобы изловить балханнота. Этих существ оставляют в качестве стражей, защищая проходы от вторжения врагов и отрезая им пути к отступлению, а также в качестве надсмотрщиков над рабами.",
                     CreationDate = DateTime.Today,
                     LastEditingDate = DateTime.Now,
-                    //AllUses = 0,
-                    //UniqueUses = 0,
-                    //UserRating = 0,
-                    //IsBeingModerated = false,
-                    //IsPublished = false,
-
+                    LairInitiative = 20,
                     SpeedList =
                     [
                         new SpeedListModel
                         {
                             Id = Guid.NewGuid().ToString(),
-                            Speed = await SpeedStore.GetByTitle(),
-                            DistanceInFeet = 40
+                            Speed = await SpeedStore.GetByTitle("Обычная"),
+                            DistanceInFeet = 25
+                        },
+                        new SpeedListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Speed = await SpeedStore.GetByTitle("Лазая"),
+                            DistanceInFeet = 25
                         }
                     ],
-                    //DamageTendencyList = [],
                     SkillList =
                     [
                         new SkillListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Skill = await SkillStore.GetByTitle("Внимательность"),
-                        },
-                        new SkillListModel
-                        {
-                            Id = Guid.NewGuid().ToString(),
-                            Skill = await SkillStore.GetByTitle("Скрытность"),
-                        },
+                            Value = 6
+                        }
                     ],
                     AbilityList =
                     [
@@ -1237,62 +1400,276 @@ namespace DndFightManagerMobileApp.Services.MockData
                         {
                             Id = Guid.NewGuid().ToString(),
                             Ability = await AbilityStore.GetByTitle("Сила"),
-                            Value = 12
+                            Value = 17
                         },
                         new AbilityListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Ability = await AbilityStore.GetByTitle("Ловкость"),
-                            Value = 15
+                            Value = 8
                         },
                         new AbilityListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Ability = await AbilityStore.GetByTitle("Телосложение"),
-                            Value = 12
+                            Value = 18
                         },
                         new AbilityListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Ability = await AbilityStore.GetByTitle("Интеллект"),
-                            Value = 3
+                            Value = 6
                         },
                         new AbilityListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Ability = await AbilityStore.GetByTitle("Мудрость"),
-                            Value = 12
+                            Value = 15
                         },
                         new AbilityListModel
                         {
                             Id = Guid.NewGuid().ToString(),
                             Ability = await AbilityStore.GetByTitle("Харизма"),
-                            Value = 6
+                            Value = 8
                         },
                     ],
-                    //SpellSlots = [],
-                    //Things = [],
+                    SenseList =
+                    [
+                        new SenseListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Sense = await SenseStore.GetByTitle("Слепое зрение"),
+                            DistanceInFeet = 500
+                        }
+                    ],
+                    LanguageList =
+                    [
+                        new LanguageListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Language = await Language.GetByTitle("Глубинная Речь")
+                        },
+                        new LanguageListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Language = await Language.GetByTitle("Телепатия")
+                        }
+                    ],
+                    ConditionImmunitiesList = 
+                    [
+                        new ConditionImmunitiesListModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Condition = await Condition.GetByTitle("Ослепленный")
+                        }
+                    ],
                     HabitatList =
                     [
                         new HabitatListModel
                         {
                             Id = Guid.NewGuid().ToString(),
-                            Habitat = await HabitatTypeStore.GetByTitle("Лес"),
+                            Habitat = await HabitatTypeStore.GetByTitle("Горы"),
                         },
                         new HabitatListModel
                         {
                             Id = Guid.NewGuid().ToString(),
-                            Habitat = await HabitatTypeStore.GetByTitle("Равнина/луг"),
-                        },
-                        new HabitatListModel
-                        {
-                            Id = Guid.NewGuid().ToString(),
-                            Habitat = await HabitatTypeStore.GetByTitle("Холмы"),
+                            Habitat = await HabitatTypeStore.GetByTitle("Подземье"),
                         }
                     ],
-                    //SenseList = [],
-                    //ConditionImmunitiesList = []
-                });*/
+                    Actions = [
+
+                        new ActionModel
+                        {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
+
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Легендарное сопротивление",
+                            CooldownType = await CooldownType.GetByTitle("Время"),
+                            Cooldown3_HowManyTimes = 2,
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Сутки"),
+                            ActionResource = await ActionResource.GetByTitle("Пассивное"),
+                            Description = "Если балханнот проваливает спасбросок, он может вместо этого сделать спасбросок успешным."
+                        },
+                        actionBait,
+                        actionTentacle,
+                        new ActionModel
+                        {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
+
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Мультиатака",
+                            IsMultiaction = true,
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Основное"),
+                            ChildActions = 
+                            [
+                                new MultiActionList
+                                {
+                                    ChildAction = actionBait,
+                                    SequenceNumber = 1,
+                                    RepititionNumber = 1
+                                },
+                                new MultiActionList
+                                {
+                                    ChildAction = actionTentacle,
+                                    SequenceNumber = 2,
+                                    RepititionNumber = 2
+                                }
+                            ],
+                        },
+                        new ActionModel
+                        {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
+
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Мультиатака",
+                            IsMultiaction = true,
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Основное"),
+                            ChildActions =
+                            [
+                                new MultiActionList
+                                {
+                                    ChildAction = actionTentacle,
+                                    SequenceNumber = 1,
+                                    RepititionNumber = 4
+                                }
+                            ],
+                        },
+
+                        new ActionModel
+                        {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
+
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Атака укусом",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Легендарное"),
+                            Description = "Балханнот совершает одну атаку Укусом по существу, cхваченным его Щупальцем.",
+                        },
+                        new ActionModel
+                        {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
+
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Телепортация",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Легендарное"),
+                            Description = "Балханнот магическим образом телепортируется вместе с cхваченным существом, со всем своим несомым и носимым снаряжением, на расстояние до 60 футов в свободное пространство, которое он видит.",
+                        },
+                        new ActionModel
+                        {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+                            Lair_InitiativeBonus = 20,
+
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Исчезновение",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Легендарное"),
+                            Description = "Балханнот магическим образом становится невидимым до 10 минут, либо пока не совершит бросок атаки.",
+                        },
+
+                        new ActionModel
+                        {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Искажение",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Логова"),
+                            Lair_InitiativeBonus = 20,
+                            Description = "Балханнот искажает реальность вокруг себя на расстоянии 500 футов. Через 10 минут часть местной территории преобразуется в ту местность, о котором подумал разумный гуманоид, чьи мысли были прочитаны балханнотом (смотрите описанный раздел «Эффекты Местности» ниже. Преобразования касаются только неживых объектов окружения, и не могут воссоздать движущиеся элементы и магические свойства. Любой объект, воссозданный на этой местности, при близком осмотре оказывается подделкой. К примеру, в книгах пустые страницы, а золотые предметы фальшивые и так далее. Преобразование длится до тех пор, пока балханнот не будет убит, либо ещё раз не воспользуется этим же действием логова.",
+                        },
+                        new ActionModel
+                        {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Перенос",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Логова"),
+                            Lair_InitiativeBonus = 20,
+                            Description = "Балханнот наводится на любое существо в пределах 500 футов от него. Существо должно успешно пройти спасбросок Мудрости со Сл 16, в противном случае, существо вместе с тем, во что он одет и носит, перемещается в любое свободное пространство по выбору балханнота в пределах 60 футов его видимости.",
+                        },
+                        new ActionModel
+                        {
+                            Cooldown1_SpellSlotLevel = 1,
+                            Cooldown2_LowerRangeLimit = 5,
+                            Cooldown2_UpperRangeLimit = 6,
+                            Cooldown2_DiceSize = 6,
+                            Cooldown3_TimeMeasure = await TimeMeasure.GetByTitle("Раунд"),
+                            Cooldown3_MeasureMultiply = 1,
+                            Cooldown3_HowManyTimes = 1,
+                            Reaction_Condition = "",
+
+                            Id = Guid.NewGuid().ToString(),
+                            Title = "Слепое пятно",
+                            CooldownType = await CooldownType.GetByTitle("Нет"),
+                            ActionResource = await ActionResource.GetByTitle("Логова"),
+                            Lair_InitiativeBonus = 20,
+                            Description = "Балханнот выбирает целью любое существо в пределах 500 футов от него. Цель должна преуспеть в спасброске Мудрости Сл 16, иначе балханнот становится невидимым для неё на 1 минуту. Эффект оканчивается, если балханнот проводит по цели атаку.",
+                        },
+                    ]
+                });
             }
 
 
