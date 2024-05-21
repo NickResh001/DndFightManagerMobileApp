@@ -1370,6 +1370,21 @@ namespace DndFightManagerMobileApp.Services.MockData
                     CreationDate = DateTime.Today,
                     LastEditingDate = DateTime.Now,
                     LairInitiative = 20,
+                    SpellSlots = 
+                    [
+                        new SpellSlotModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Level = 1,
+                            Count = 3
+                        },
+                        new SpellSlotModel
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            Level = 2,
+                            Count = 1
+                        }
+                    ],
                     SpeedList =
                     [
                         new SpeedListModel

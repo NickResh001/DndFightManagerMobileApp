@@ -330,7 +330,8 @@
 
                         <Label Text="Количество"                  
                                Style="{DynamicResource Header3}"
-                               FontAttributes="Bold,Italic"/>
+                               FontAttributes="Bold,Italic"
+                               LineBreakMode="MiddleTruncation"/>
 
                     </StackLayout>
 

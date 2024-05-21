@@ -10,7 +10,7 @@
         <StackLayout>
 
             <!-- Не использует заклинания -->
-            <Frame BackgroundColor="{DynamicResource MainDark}"
+            <Frame BackgroundColor="{DynamicResource MainDark}" IsVisible="false"
                    CornerRadius="5"
                    Padding="5,6"
                    Margin="0,12,0,7">
@@ -52,7 +52,8 @@
             <!-- Характеристика заклинателя -->
             <Frame BackgroundColor="{DynamicResource MainDark}"
                    CornerRadius="5"
-                   Padding="5,6">
+                   Padding="5,6"
+                   Margin="0,12,0,0">
                 <StackLayout Orientation="Horizontal"
                              Spacing="0">
                     <Button Grid.Column="0"

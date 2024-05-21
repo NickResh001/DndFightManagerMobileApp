@@ -175,7 +175,7 @@ namespace DndFightManagerMobileApp.ViewModels
                     var spellSlotHepler = new SpellSlotCrudHelper(spellSlot);
                     int count = spellSlot.Count;
                     bool selected = count > 0;
-                    spellSlotsItems.Add(new MultiSelectCRUDHelper(spellSlotHepler, count.ToString(), selected));
+                    spellSlotsItems.Add(new MultiSelectCRUDHelper(spellSlotHepler, count.ToString(), selected, 2));
                 }
                 SpellSlotsMS = new CrudMultiSelectVM
                 (

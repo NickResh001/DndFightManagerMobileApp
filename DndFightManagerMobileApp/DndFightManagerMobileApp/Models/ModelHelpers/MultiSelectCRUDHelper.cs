@@ -38,14 +38,16 @@ namespace DndFightManagerMobileApp.Models.ModelHelpers
             }
         }
         public bool Selected { get; set; }
+        public int ValueMaxLength { get; set; }
 
         public MultiSelectCRUDHelper() { }
-        public MultiSelectCRUDHelper(HardcodeDirectoryModel directoryModel, string value = "", bool selected = false)
+        public MultiSelectCRUDHelper(HardcodeDirectoryModel directoryModel, string value = "", bool selected = false, int valueMaxLength = 3)
         {
             DirectoryModel = directoryModel;
             Title = DirectoryModel.Title;
             Value = value;
             Selected = selected;
+            ValueMaxLength = valueMaxLength;
         }
     }
 }

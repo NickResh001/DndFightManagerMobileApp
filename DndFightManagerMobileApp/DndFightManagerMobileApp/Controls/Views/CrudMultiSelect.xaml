@@ -103,6 +103,7 @@
                                            HorizontalOptions="FillAndExpand"
                                            HorizontalTextAlignment="Center"
                                            Keyboard="Numeric"
+                                           MaxLength="{Binding ValueMaxLength}"
                                            Text="{Binding Value, Mode=TwoWay}"
                                            WidthRequest="60"
                                            IsVisible="{Binding Source={x:Reference this}, Path=MultiSelectVM.HaveValue}"/>

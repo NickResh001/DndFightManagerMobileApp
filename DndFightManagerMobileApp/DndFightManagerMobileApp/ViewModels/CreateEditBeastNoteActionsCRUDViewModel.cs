@@ -548,7 +548,7 @@ namespace DndFightManagerMobileApp.ViewModels
                     RepititionNumber = repetitionNumber
                 };
 
-                actionsMS.Add(new MultiSelectCRUDHelper(multiaction, multiaction.RepititionNumber.ToString(), selected));
+                actionsMS.Add(new MultiSelectCRUDHelper(multiaction, multiaction.RepititionNumber.ToString(), selected, 2));
             }
 
             MultiActionMS = new CrudMultiSelectVM
