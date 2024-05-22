@@ -78,7 +78,7 @@ namespace DndFightManagerMobileApp.ViewModels
                 }
             }
 
-            Settings = [.. await dataStore.Setting.GetAll()];
+            Settings = [.. await dataStore.Setting.GetAll()]; 
             ClosePopup();
         }
 
@@ -86,7 +86,7 @@ namespace DndFightManagerMobileApp.ViewModels
         private void CreateSetting()
         {
             _currentId = null;
-            PopupTitle = "Редактирование";
+            PopupTitle = "Добавление";
             OpenPopup();
         }
 

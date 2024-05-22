@@ -27,7 +27,7 @@ namespace DndFightManagerMobileApp.ViewModels
         private string tabTitle;
     }
 
-    public partial class ScenesListMainViewModel : BaseViewModel
+    public partial class ScenesListMainViewModel : BaseViewModel, IQueryAttributable
     {
         #region ObservableProperties
 
@@ -38,7 +38,6 @@ namespace DndFightManagerMobileApp.ViewModels
         private ObservableCollection<TabHelper> _crudViews;
 
         #endregion
-
 
         #region LogicProperties
 
@@ -80,6 +79,8 @@ namespace DndFightManagerMobileApp.ViewModels
             SwitchTab(0);
         }
 
+
+
         #region Navigation
 
         [RelayCommand]
@@ -91,13 +92,21 @@ namespace DndFightManagerMobileApp.ViewModels
         [RelayCommand]
         private void SwitchTab(int newTabIndex)
         {
-            CrudViews[currentTabIndex].IsEnable = true;
+            for (int i = 0; i < CrudViews.Count; i++)
+            {
+                CrudViews[i].IsEnable = true;
+            }
             currentTabIndex = newTabIndex;
             CrudViews[currentTabIndex].IsEnable = false;
             CurrentView = CrudViews[currentTabIndex].View;
             CrudViews[currentTabIndex].ViewModel.OnNavigateTo(null);
         }
 
+        public void ApplyQueryAttributes(IDictionary<string, string> query)
+        {
+            currentTabIndex = 0;
+            SwitchTab(0);
+        }
         #endregion
     }
 }
