@@ -31,16 +31,15 @@ namespace DndFightManagerMobileApp.Services
         IBaseHardoceDirectoryDataStore<ActionResourceModel> ActionResource { get; }
         IBaseHardoceDirectoryDataStore<CooldownTypeModel> CooldownType { get; }
 
+
+        IBaseHardoceDirectoryDataStore<SettingModel> Setting { get; }
+        IBaseHardoceDirectoryDataStore<CampaignModel> Campaign { get; }
+        IDataStore<SceneModel> Scene { get; }
+
         //IDataStore<BeastModel> Beast { get; }
-        //IDataStore<SceneModel> Scene { get; }
         //IDataStore<SceneSaveModel> SceneSave { get; }
-        //IDataStore<CampaignModel> Campaign { get; }
-        //IDataStore<SettingModel> Setting { get; }
         //IDataStore<UserModel> User { get; }
         //IDataStore<FightTeamModel> FightTeam { get; }
 
-        //IDataStore<TimeMeasureModel> TimeMeasure { get; }
-        //IDataStore<CooldownTypeModel> CooldownType { get; }
-        //IDataStore<ActionResourceModel> CooldownType { get; }
     }
 }

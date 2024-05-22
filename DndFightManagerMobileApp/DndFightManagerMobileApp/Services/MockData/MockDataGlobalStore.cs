@@ -31,6 +31,10 @@ namespace DndFightManagerMobileApp.Services.MockData
         public IBaseHardoceDirectoryDataStore<ActionResourceModel> ActionResource { get; private set; }
         public IBaseHardoceDirectoryDataStore<CooldownTypeModel> CooldownType { get; private set; }
 
+        public IBaseHardoceDirectoryDataStore<SettingModel> Setting { get; private set; }
+        public IBaseHardoceDirectoryDataStore<CampaignModel> Campaign { get; private set; }
+        public IDataStore<SceneModel> Scene { get; private set; }
+
         public MockDataGlobalStore()
         {
             Ability = new AbilityDataStore();
@@ -52,6 +56,10 @@ namespace DndFightManagerMobileApp.Services.MockData
             TimeMeasure = new BaseHardDirMockDataStore<TimeMeasureModel>();
             ActionResource = new BaseHardDirMockDataStore<ActionResourceModel>();
             CooldownType = new BaseHardDirMockDataStore<CooldownTypeModel>();
+
+            Setting = new BaseHardDirMockDataStore<SettingModel>();
+            Campaign = new BaseHardDirMockDataStore<CampaignModel>();
+            Scene = new BaseMockDataStore<SceneModel>();
 
             InitializeData();
         }
@@ -1690,6 +1698,97 @@ namespace DndFightManagerMobileApp.Services.MockData
 
 
 
+            #endregion
+
+            #region Setting, Campaign, Scenes and ScenesSaves
+            {
+                #region Setting
+                string _ebberon = "Эбберон";
+                string _forgottenKingdoms = "Забытые королевства";
+                await Setting.Create(new SettingModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = _ebberon
+                });
+                await Setting.Create(new SettingModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = _forgottenKingdoms
+                });
+
+                #endregion
+                #region Campaign
+
+                string _viaspiriasBreath = "Дыхание Виаспирии";
+                string _frostCoveredLand = "Заиндевевший край";
+                string _oppressionIncarnate = "Воплощенный гнет";
+
+                await Campaign.Create(new CampaignModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = _viaspiriasBreath,
+                    Setting = await Setting.GetByTitle(_ebberon)
+                });
+                await Campaign.Create(new CampaignModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = _frostCoveredLand,
+                    Setting = await Setting.GetByTitle(_forgottenKingdoms)
+                });
+                await Campaign.Create(new CampaignModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = _oppressionIncarnate,
+                    Setting = await Setting.GetByTitle(_forgottenKingdoms)
+                });
+
+                #endregion
+                #region Scenes
+
+                await Scene.Create(new SceneModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = "Василиск в деревне",
+                    Campaign = await Campaign.GetByTitle(_viaspiriasBreath),
+                });
+                await Scene.Create(new SceneModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = "Гоблины на горе",
+                    Campaign = await Campaign.GetByTitle(_viaspiriasBreath),
+                });
+                await Scene.Create(new SceneModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = "Гарпии вокруг фуникулера",
+                    Campaign = await Campaign.GetByTitle(_frostCoveredLand),
+                });
+                await Scene.Create(new SceneModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = "Великан в своем логове",
+                    Campaign = await Campaign.GetByTitle(_frostCoveredLand),
+                });
+                await Scene.Create(new SceneModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = "Жуки у входа в улей",
+                    Campaign = await Campaign.GetByTitle(_frostCoveredLand),
+                });
+                await Scene.Create(new SceneModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = "Дуэль с рыцарем",
+                    Campaign = await Campaign.GetByTitle(_oppressionIncarnate),
+                });
+                await Scene.Create(new SceneModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = "Бандиты в подворотне",
+                    Campaign = await Campaign.GetByTitle(_oppressionIncarnate),
+                });
+                #endregion
+            }
             #endregion
 
             InitializeBeastNoteWithJsonInput();

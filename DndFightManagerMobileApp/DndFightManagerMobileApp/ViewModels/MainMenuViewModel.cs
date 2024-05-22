@@ -22,5 +22,11 @@ namespace DndFightManagerMobileApp.ViewModels
         {
             await Shell.Current.GoToAsync($"{nameof(BestiaryPage)}");
         }
+
+        [RelayCommand]
+        private async Task NavigateToScenes(object parameter)
+        {
+            await Shell.Current.GoToAsync($"{nameof(ScenesListMainPage)}");
+        }
     }
 }
