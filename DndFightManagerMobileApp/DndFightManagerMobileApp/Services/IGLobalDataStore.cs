@@ -32,9 +32,9 @@ namespace DndFightManagerMobileApp.Services
         IBaseHardoceDirectoryDataStore<CooldownTypeModel> CooldownType { get; }
 
 
-        IBaseHardoceDirectoryDataStore<SettingModel> Setting { get; }
-        IBaseHardoceDirectoryDataStore<CampaignModel> Campaign { get; }
-        IDataStore<SceneModel> Scene { get; }
+        ISettingDataStore Setting { get; }
+        ICampaignDataStore Campaign { get; }
+        ISceneDataStore Scene { get; }
 
         //IDataStore<BeastModel> Beast { get; }
         //IDataStore<SceneSaveModel> SceneSave { get; }

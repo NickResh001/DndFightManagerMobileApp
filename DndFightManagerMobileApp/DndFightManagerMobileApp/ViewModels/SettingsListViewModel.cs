@@ -20,22 +20,93 @@ namespace DndFightManagerMobileApp.ViewModels
         [ObservableProperty]
         private string _popupTitle;
 
-
         [ObservableProperty]
         private bool _popupIsOpen;
 
         [ObservableProperty]
         private string _popupSettingTitle;
 
+        [ObservableProperty]
+        private bool _deleteAlertIsOpen;
+
+        [ObservableProperty]
+        private ObservableCollection<CampaignModel> _campaigns;
         #endregion
 
         private string _currentId;
 
         public SettingsListViewModel()
         {
-            Settings = [.. dataStore.Setting.GetAll().Result];
+            Settings = [.. dataStore.Setting.GetAll(false).Result];
             _currentId = null;
             ClosePopup();
+        }
+
+        #region DeleteAlert
+
+        [RelayCommand]
+        private async Task DeleteSetting(string id)
+        {
+            _currentId = id;
+            Campaigns = [.. await dataStore.Campaign.GetAllBySettingId(id)];
+            if (Campaigns != null && Campaigns.Count > 0)
+            {
+                OpenDeleteAlert();
+            }
+            else
+            {
+                await dataStore.Setting.Delete(_currentId);
+                Settings = [.. await dataStore.Setting.GetAll(false)];
+            }
+        }
+
+        private void OpenDeleteAlert()
+        {
+            DeleteAlertIsOpen = true;
+        }
+
+        [RelayCommand]
+        private void CloseDeleteAlert()
+        {
+            DeleteAlertIsOpen = false;
+        }
+
+        [RelayCommand]
+        private async Task ConfirmDeleting(string isCasсading)
+        {
+            if (isCasсading.ToLower() == "false")
+            {
+                CampaignModel[] campaigns = [ .. await dataStore.Campaign.GetAllBySettingId(_currentId)];
+                SettingModel authorSetting = await dataStore.Setting.GetByTitle("Авторский");
+                for (int i = 0; i < campaigns.Length; i++)
+                {
+                    campaigns[i].Setting = authorSetting; 
+                    await dataStore.Campaign.Update(campaigns[i]);
+                }
+            }
+
+            await dataStore.Setting.Delete(_currentId);
+            Settings = [.. await dataStore.Setting.GetAll(false)];
+
+            CloseDeleteAlert();
+        }
+        #endregion
+
+        #region Create/Edit Popup
+        [RelayCommand]
+        private void CreateSetting()
+        {
+            _currentId = null;
+            PopupTitle = "Добавление";
+            OpenPopup();
+        }
+
+        [RelayCommand]
+        private void EditSetting(string id)
+        {
+            _currentId = id;
+            PopupTitle = "Редактирование";
+            OpenPopup();
         }
         private void OpenPopup()
         {
@@ -78,37 +149,16 @@ namespace DndFightManagerMobileApp.ViewModels
                 }
             }
 
-            Settings = [.. await dataStore.Setting.GetAll()]; 
+            Settings = [.. await dataStore.Setting.GetAll(false)];
             ClosePopup();
         }
-
-        [RelayCommand]
-        private void CreateSetting()
-        {
-            _currentId = null;
-            PopupTitle = "Добавление";
-            OpenPopup();
-        }
-
-        [RelayCommand]
-        private void EditSetting(string id)
-        {
-            _currentId = id;
-            PopupTitle = "Редактирование";
-            OpenPopup();
-        }
-
-        [RelayCommand]
-        private async Task DeleteSetting(string id)
-        {
-            await dataStore.Setting.Delete(id);
-            Settings = [.. await dataStore.Setting.GetAll()];
-        }
-
+        #endregion
+        
         #region Navigation
 
         public override void OnNavigateTo(object parameter)
         {
+            CloseDeleteAlert();
             ClosePopup();
         }
 

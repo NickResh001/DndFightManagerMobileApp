@@ -6,5 +6,6 @@ namespace DndFightManagerMobileApp.Models
 {
     public class SettingModel : HardcodeDirectoryModel
     {
+        public bool IsSpecial { get; set; } = false;
     }
 }

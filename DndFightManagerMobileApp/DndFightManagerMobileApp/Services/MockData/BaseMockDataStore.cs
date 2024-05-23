@@ -9,7 +9,7 @@ namespace DndFightManagerMobileApp.Services.MockData
 {
     public class BaseMockDataStore<T> : IDataStore<T> where T : BaseEntityModel
     {
-        private List<T> items = new List<T>();
+        protected List<T> items = new List<T>();
 
         public virtual async Task<bool> Create(T item)
         {

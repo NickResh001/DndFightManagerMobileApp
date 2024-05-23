@@ -13,7 +13,7 @@ namespace DndFightManagerMobileApp.ViewModels
 {
     public class BaseViewModel : ObservableObject
     {
-        protected static IGLobalDataStore dataStore = new MockDataGlobalStore();
+        public static IGLobalDataStore dataStore = new MockDataGlobalStore();
         //public event PropertyChangedEventHandler PropertyChanged;
         //protected void OnPropertyChanged(string propertyName)
         //{

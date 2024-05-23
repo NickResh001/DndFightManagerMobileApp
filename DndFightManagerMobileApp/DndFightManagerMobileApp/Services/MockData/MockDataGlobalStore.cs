@@ -31,9 +31,9 @@ namespace DndFightManagerMobileApp.Services.MockData
         public IBaseHardoceDirectoryDataStore<ActionResourceModel> ActionResource { get; private set; }
         public IBaseHardoceDirectoryDataStore<CooldownTypeModel> CooldownType { get; private set; }
 
-        public IBaseHardoceDirectoryDataStore<SettingModel> Setting { get; private set; }
-        public IBaseHardoceDirectoryDataStore<CampaignModel> Campaign { get; private set; }
-        public IDataStore<SceneModel> Scene { get; private set; }
+        public ISettingDataStore Setting { get; private set; }
+        public ICampaignDataStore Campaign { get; private set; }
+        public ISceneDataStore Scene { get; private set; }
 
         public MockDataGlobalStore()
         {
@@ -57,9 +57,9 @@ namespace DndFightManagerMobileApp.Services.MockData
             ActionResource = new BaseHardDirMockDataStore<ActionResourceModel>();
             CooldownType = new BaseHardDirMockDataStore<CooldownTypeModel>();
 
-            Setting = new BaseHardDirMockDataStore<SettingModel>();
-            Campaign = new BaseHardDirMockDataStore<CampaignModel>();
-            Scene = new BaseMockDataStore<SceneModel>();
+            Setting = new SettingDataStore();
+            Campaign = new CampaignDataStore();
+            Scene = new SceneDataStore();
 
             InitializeData();
         }
@@ -1703,8 +1703,15 @@ namespace DndFightManagerMobileApp.Services.MockData
             #region Setting, Campaign, Scenes and ScenesSaves
             {
                 #region Setting
+                string _authors = "Авторский";
                 string _ebberon = "Эбберон";
                 string _forgottenKingdoms = "Забытые королевства";
+                await Setting.Create(new SettingModel
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = _authors,
+                    IsSpecial = true,
+                });
                 await Setting.Create(new SettingModel
                 {
                     Id = Guid.NewGuid().ToString(),
