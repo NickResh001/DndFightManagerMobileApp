@@ -52,6 +52,7 @@ namespace DndFightManagerMobileApp.ViewModels
 
         #region Commands
 
+
         [RelayCommand]
         private async Task CreateBeastNote()
         {
@@ -103,9 +104,13 @@ namespace DndFightManagerMobileApp.ViewModels
 
         #endregion
 
-
         #region Navigation
 
+        [RelayCommand]
+        private async Task NavigateBackTo()
+        {
+            await Shell.Current.GoToAsync($"..");
+        }
         private async Task NavigateToCRUD(string parametres)
         {
             await Shell.Current.GoToAsync($"{nameof(CreateEditBeastNoteMainPage)}?{parametres}");

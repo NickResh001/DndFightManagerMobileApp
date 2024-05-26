@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DndFightManagerMobileApp.Models;
+using DndFightManagerMobileApp.Utils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -20,6 +21,21 @@ namespace DndFightManagerMobileApp.ViewModels
         private ObservableCollection<SceneModel> _scenes;
 
         [ObservableProperty]
+        private ObservableCollection<SceneModel> _filteredScenes;
+
+        private bool _isFilterActive;
+        public bool IsFilterActive
+        {
+            get { return _isFilterActive; }
+            set
+            {
+                _isFilterActive = value;
+                OnPropertyChanged(nameof(IsFilterActive));
+                RefreshCollection();
+            }
+        }
+
+        [ObservableProperty]
         private string _popupTitle;
 
         [ObservableProperty]
@@ -33,6 +49,9 @@ namespace DndFightManagerMobileApp.ViewModels
 
         [ObservableProperty]
         private CampaignModel _popupSelectedCampaign;
+
+        [ObservableProperty]
+        private CampaignModel _filterSelectedCampaign;
 
         [ObservableProperty]
         private bool _deleteAlertIsOpen;
@@ -51,8 +70,25 @@ namespace DndFightManagerMobileApp.ViewModels
             Scenes = [.. dataStore.Scene.GetAll().Result];
             DeleteMessange = "";
             _currentId = null;
+            _isFilterActive = false;
+            RefreshCollection();
             CloseCreateAlert();
             ClosePopup();
+        }
+
+        private void RefreshCollection()
+        {
+            if (IsFilterActive && FilterSelectedCampaign != null)
+            {
+                FilteredScenes = [.. Scenes
+                    .Where(x => x.Campaign.Id == FilterSelectedCampaign.Id)
+                    .ToObservableCollection()
+                    .Sort((x, y) => string.Compare(x.Title, y.Title))];
+            }
+            else
+            {
+                FilteredScenes = Scenes.Sort((x, y) => string.Compare(x.Title, y.Title));
+            }
         }
 
         #region MoreMenu
@@ -157,7 +193,8 @@ namespace DndFightManagerMobileApp.ViewModels
 
             if (success)
             {
-                Scenes = [.. await dataStore.Scene.GetAll()];
+                Scenes = [.. dataStore.Scene.GetAll().Result];
+                RefreshCollection();
                 ClosePopup();
             }
         }
@@ -178,7 +215,8 @@ namespace DndFightManagerMobileApp.ViewModels
             else
             {
                 await dataStore.Scene.Delete(_currentId);
-                Scenes = [.. await dataStore.Scene.GetAll()];
+                Scenes = [.. dataStore.Scene.GetAll().Result];
+                RefreshCollection();
             }
         }
 
@@ -198,7 +236,8 @@ namespace DndFightManagerMobileApp.ViewModels
         private async Task ConfirmDeleting()
         {
             await dataStore.Scene.Delete(_currentId);
-            Scenes = [.. await dataStore.Scene.GetAll()];
+            Scenes = [.. dataStore.Scene.GetAll().Result];
+            RefreshCollection();
             CloseDeleteAlert();
         }
         #endregion
@@ -215,13 +254,21 @@ namespace DndFightManagerMobileApp.ViewModels
 
         public override async void OnNavigateTo(object parameter)
         {
-            Scenes = [.. dataStore.Scene.GetAll().Result];
             _currentId = null;
+            IsFilterActive = false;
+            Scenes = [.. dataStore.Scene.GetAll().Result];
+            RefreshCollection();
             Campaigns = [.. await dataStore.Campaign.GetAll()];
             if (Campaigns != null && Campaigns.Count > 0)
+            {
+                FilterSelectedCampaign = Campaigns[0];
                 PopupSelectedCampaign = Campaigns[0];
+            }
             else
+            {
+                FilterSelectedCampaign = null;
                 PopupSelectedCampaign = null;
+            }
 
             MoreMenusClosing();
             ClosePopup(); 

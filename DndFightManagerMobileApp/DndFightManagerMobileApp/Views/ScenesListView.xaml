@@ -6,9 +6,11 @@
     <ContentView.Content>
         <Grid RowSpacing="0">
 
-            <Grid>
+            <Grid RowSpacing="0">
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
@@ -19,7 +21,7 @@
                                 BackgroundColor="Transparent"
                                 VerticalOptions="Fill"
                                 HorizontalOptions="Center">
-                        <StackLayout BindableLayout.ItemsSource="{Binding Scenes}"
+                        <StackLayout BindableLayout.ItemsSource="{Binding FilteredScenes}"
                                      Padding="0"
                                      Spacing="0">
                             <BindableLayout.ItemTemplate>
@@ -144,6 +146,36 @@
                     <Button Style="{DynamicResource LinkButton}"
                             Text="Добавить сцену"
                             Command="{Binding CreateSceneCommand}"/>
+                </Grid>
+                
+                <Grid Grid.Row="2" 
+                      RowSpacing="0"
+                      BackgroundColor="{DynamicResource MainDark}"
+                      Padding="12,0">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <StackLayout Grid.Column="0"
+                                 Orientation="Vertical"
+                                 Spacing="0">
+                        <Label Text="Фильтр по кампаниям"
+                               Style="{DynamicResource Header3}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Start"/>
+                        <Picker ItemsSource="{Binding Campaigns}"
+                                SelectedItem="{Binding FilterSelectedCampaign, Mode=TwoWay}"
+                                ItemDisplayBinding="{Binding Title}"
+                                VerticalOptions="Center"
+                                HorizontalOptions="Fill"/>
+                    </StackLayout>
+
+                    <CheckBox Grid.Column="1"
+                              VerticalOptions="Center"
+                              HorizontalOptions="Center"
+                              IsChecked="{Binding IsFilterActive, Mode=TwoWay}"/>
                 </Grid>
 
             </Grid>

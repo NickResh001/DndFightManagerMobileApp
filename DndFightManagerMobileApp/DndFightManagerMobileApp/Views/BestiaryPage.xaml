@@ -10,8 +10,8 @@
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*"/>
-                <RowDefinition Height="80*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0"
@@ -24,10 +24,17 @@
                 <Button Style="{DynamicResource AddButton}"
                         Command="{Binding CreateBeastNoteCommand}"
                         HorizontalOptions="End"
-                        VerticalOptions="Start"
-                        Margin="10"                        
-                        x:Name="ButtonAdd"
-                        WidthRequest="{Binding Height, Source={x:Reference ButtonAdd}}"/>
+                        VerticalOptions="Center"
+                        Margin="10"
+                        WidthRequest="40"
+                        HeightRequest="40"/>
+                <Button Style="{DynamicResource BackButton}"
+                        Command="{Binding NavigateBackToCommand}"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Margin="10"
+                        WidthRequest="40"
+                        HeightRequest="40"/>
             </Grid>
 
             <Grid Grid.Row="1"
