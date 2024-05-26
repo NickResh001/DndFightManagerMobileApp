@@ -2,6 +2,7 @@
 using DndFightManagerMobileApp.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -34,6 +35,9 @@ namespace DndFightManagerMobileApp.Services.MockData
         public ISettingDataStore Setting { get; private set; }
         public ICampaignDataStore Campaign { get; private set; }
         public ISceneDataStore Scene { get; private set; }
+        public ISceneSaveDataStore SceneSave { get; private set; }
+        public IDataStore<BeastModel> Beast { get; private set; }
+        public IBaseHardoceDirectoryDataStore<FightTeamModel> FightTeam { get; private set; }
 
         public MockDataGlobalStore()
         {
@@ -60,6 +64,9 @@ namespace DndFightManagerMobileApp.Services.MockData
             Setting = new SettingDataStore();
             Campaign = new CampaignDataStore();
             Scene = new SceneDataStore();
+            SceneSave = new SceneSaveDataStore();
+            Beast = new BaseMockDataStore<BeastModel>();
+            FightTeam = new BaseHardDirMockDataStore<FightTeamModel>();
 
             InitializeData();
         }
@@ -1752,12 +1759,22 @@ namespace DndFightManagerMobileApp.Services.MockData
                 #endregion
                 #region Scenes
 
+                string tempSceneId = Guid.NewGuid().ToString();
                 await Scene.Create(new SceneModel
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = tempSceneId,
                     Title = "Василиск в деревне",
                     Campaign = await Campaign.GetByTitle(_viaspiriasBreath),
                 });
+                await SceneSave.Create(new SceneSaveModel
+                {
+                    Scene = await Scene.GetById(tempSceneId)
+                });
+                await SceneSave.Create(new SceneSaveModel
+                {
+                    Scene = await Scene.GetById(tempSceneId)
+                });
+
                 await Scene.Create(new SceneModel
                 {
                     Id = Guid.NewGuid().ToString(),
@@ -1794,6 +1811,11 @@ namespace DndFightManagerMobileApp.Services.MockData
                     Title = "Бандиты в подворотне",
                     Campaign = await Campaign.GetByTitle(_oppressionIncarnate),
                 });
+                #endregion
+
+                #region SceneSaves
+                List<SceneModel> scenes = [.. await Scene.GetAll()];
+
                 #endregion
             }
             #endregion

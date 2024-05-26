@@ -172,10 +172,8 @@
     <AndroidResource Include="Resources\drawable\PressedAddButton.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\PressedCloseButton.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\CloseButton.png" />
+    <AndroidResource Include="Resources\drawable\ClosedButton.png" />
+    <AndroidResource Include="Resources\drawable\PressedClosedButton.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

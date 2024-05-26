@@ -35,11 +35,11 @@ namespace DndFightManagerMobileApp.Services
         ISettingDataStore Setting { get; }
         ICampaignDataStore Campaign { get; }
         ISceneDataStore Scene { get; }
+        ISceneSaveDataStore SceneSave { get; }
+        IDataStore<BeastModel> Beast { get; }
+        IBaseHardoceDirectoryDataStore<FightTeamModel> FightTeam { get; }
 
-        //IDataStore<BeastModel> Beast { get; }
-        //IDataStore<SceneSaveModel> SceneSave { get; }
         //IDataStore<UserModel> User { get; }
-        //IDataStore<FightTeamModel> FightTeam { get; }
 
     }
 }

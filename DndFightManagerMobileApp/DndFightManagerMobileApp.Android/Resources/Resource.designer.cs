@@ -21961,7 +21961,7 @@ namespace DndFightManagerMobileApp.Droid
 			public const int BurgerButton = 2131165281;
 			
 			// aapt resource value: 0x7F070062
-			public const int CloseButton = 2131165282;
+			public const int ClosedButton = 2131165282;
 			
 			// aapt resource value: 0x7F070063
 			public const int CopyButton = 2131165283;
@@ -22135,7 +22135,7 @@ namespace DndFightManagerMobileApp.Droid
 			public const int PressedBurgerButton = 2131165339;
 			
 			// aapt resource value: 0x7F07009C
-			public const int PressedCloseButton = 2131165340;
+			public const int PressedClosedButton = 2131165340;
 			
 			// aapt resource value: 0x7F07009D
 			public const int PressedCopyButton = 2131165341;

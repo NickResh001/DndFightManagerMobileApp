@@ -1,12 +1,360 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="DndFightManagerMobileApp.Views.ScenesListView">
+             x:Class="DndFightManagerMobileApp.Views.ScenesListView"
+             x:Name="this">
     <ContentView.Content>
-        <StackLayout>
-            <Label Text="ScenesListView" />
-            <Button Text="Прост кнопка"
-                    Style="{DynamicResource DefaultButton}"/>
-        </StackLayout>
+        <Grid RowSpacing="0">
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"
+                      RowSpacing="0"
+                      Padding="0,2">
+                    <ScrollView Padding="10,0"
+                                BackgroundColor="Transparent"
+                                VerticalOptions="Fill"
+                                HorizontalOptions="Center">
+                        <StackLayout BindableLayout.ItemsSource="{Binding Scenes}"
+                                     Padding="0"
+                                     Spacing="0">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Frame CornerRadius="10"
+                                           BackgroundColor="{DynamicResource MainDark}"
+                                           Padding="4,4"
+                                           Margin="0,4">
+                                        <Grid>
+                                            
+                                            <Grid BackgroundColor="Transparent"
+                                                  IsVisible="{Binding IsMoreMenuClosed}">
+
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <StackLayout Grid.Column="0"
+                                                             Orientation="Vertical"
+                                                             Padding="0"
+                                                             Margin="0"
+                                                             Spacing="0"
+                                                             VerticalOptions="Center"
+                                                             HorizontalOptions="StartAndExpand">
+                                                    <Label Grid.Column="0"
+                                                           Text="{Binding Title}"
+                                                           Style="{DynamicResource Header3}"
+                                                           HorizontalTextAlignment="Start"
+                                                           Margin="8,0,0,0"
+                                                           LineBreakMode="TailTruncation"/>
+                                                    <Label Grid.Column="0"
+                                                           Text="{Binding Campaign.Title}"
+                                                           Style="{DynamicResource SecondaryText}"
+                                                           FontSize="12"
+                                                           HorizontalTextAlignment="Start"
+                                                           Margin="8,0,0,0"
+                                                           LineBreakMode="TailTruncation"/>
+                                                </StackLayout>
+
+                                                <Rectangle Grid.Column="0"
+                                                           BackgroundColor="{DynamicResource MainMedium}"
+                                                           VerticalOptions="Fill"
+                                                           HorizontalOptions="End"
+                                                           WidthRequest="2"/>
+
+                                                <Button Grid.Column="1"
+                                                        Style="{DynamicResource MoreButton}"
+                                                        VerticalOptions="Center"
+                                                        HorizontalOptions="Center"
+                                                        HeightRequest="40"
+                                                        WidthRequest="40"
+                                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.MoreMenuOpenCloseCommand}"
+                                                        CommandParameter="{Binding Id}"/>
+
+                                            </Grid>
+
+                                            <Grid BackgroundColor="Transparent"
+                                                  IsVisible="{Binding IsMoreMenuOpened}">
+
+                                                <StackLayout Grid.Column="0"
+                                                             Orientation="Horizontal"
+                                                             Padding="0"
+                                                             Margin="0"
+                                                             Spacing="6"
+                                                             VerticalOptions="Center"
+                                                             HorizontalOptions="End">
+
+                                                    <Button Style="{DynamicResource DeleteButton}"
+                                                            VerticalOptions="Center"
+                                                            HorizontalOptions="Center"
+                                                            HeightRequest="40"
+                                                            WidthRequest="40"
+                                                            Command="{Binding Source={x:Reference this}, Path=BindingContext.DeleteSceneCommand}"
+                                                            CommandParameter="{Binding Id}"/>
+
+                                                    <Button Style="{DynamicResource EditButton}"
+                                                            VerticalOptions="Center"
+                                                            HorizontalOptions="Center"
+                                                            HeightRequest="40"
+                                                            WidthRequest="40"
+                                                            Command="{Binding Source={x:Reference this}, Path=BindingContext.EditSceneCommand}"
+                                                            CommandParameter="{Binding Id}"/>
+
+                                                    <Button Style="{DynamicResource ForwardButton}"
+                                                            VerticalOptions="Center"
+                                                            HorizontalOptions="Center"
+                                                            HeightRequest="40"
+                                                            WidthRequest="40"
+                                                            Command="{Binding Source={x:Reference this}, Path=BindingContext.EditSceneCommand}"
+                                                            CommandParameter="{Binding Id}"/>
+
+                                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                                               VerticalOptions="Fill"
+                                                               HorizontalOptions="End"
+                                                               WidthRequest="2"/>
+                                                    
+                                                    <Button Style="{DynamicResource CloseButton}"
+                                                            VerticalOptions="Center"
+                                                            HorizontalOptions="Center" 
+                                                            HeightRequest="40"
+                                                            WidthRequest="40"
+                                                            Command="{Binding Source={x:Reference this}, Path=BindingContext.MoreMenuOpenCloseCommand}"
+                                                            CommandParameter="{Binding Id}"/>
+
+                                                </StackLayout>
+
+                                            </Grid>
+
+                                        </Grid>
+                                    </Frame>
+
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+                </Grid>
+
+                <Grid Grid.Row="1"
+                      BackgroundColor="{DynamicResource MainDark}">
+                    <Button Style="{DynamicResource LinkButton}"
+                            Text="Добавить сцену"
+                            Command="{Binding CreateSceneCommand}"/>
+                </Grid>
+
+            </Grid>
+
+            <!-- popup -->
+            <Grid IsVisible="{Binding PopupIsOpen}"
+                  BackgroundColor="Transparent"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand">
+
+                <Frame BackgroundColor="{DynamicResource MainLight}"
+                       Padding="2"
+                       CornerRadius="12"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       WidthRequest="300">
+                    <Frame BackgroundColor="{DynamicResource MainDark}"
+                           Padding="2"
+                           CornerRadius="10"
+                           VerticalOptions="FillAndExpand"
+                           HorizontalOptions="FillAndExpand">
+                        <Grid RowSpacing="16">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Grid.Row="0"
+                                    Style="{DynamicResource CloseButton}"
+                                    HeightRequest="40"
+                                    WidthRequest="40"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="End"
+                                    Command="{Binding ClosePopupCommand}"/>
+
+                            <Label Grid.Row="0"
+                                   Text="{Binding PopupTitle}"
+                                   Style="{DynamicResource Header2}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   Margin="12,0,0,0"/>
+
+                            <StackLayout Grid.Row="1"
+                                         Orientation="Vertical"
+                                         Spacing="0">
+
+                                <Label Grid.Row="0"
+                                       Text="Название сцены:"
+                                       Style="{DynamicResource Header3}"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"
+                                       Margin="12,0,0,0"/>
+                                <Entry HorizontalOptions="Fill"
+                                       MaxLength="200"
+                                       Text="{Binding PopupSceneTitle, Mode=TwoWay}"
+                                       Margin="8,0"/>
+                                <Label Grid.Row="0"
+                                       Text="Кампания:"
+                                       Style="{DynamicResource Header3}"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"
+                                       Margin="12,0,0,0"/>
+                                <Picker HorizontalOptions="Fill"
+                                        ItemsSource="{Binding Campaigns}"
+                                        SelectedItem="{Binding PopupSelectedCampaign, Mode=TwoWay}"
+                                        ItemDisplayBinding="{Binding Title}"
+                                        Margin="8,0"/>
+
+                            </StackLayout>
+
+                            <Button Grid.Row="2"
+                                    Style="{DynamicResource LinkButton}"
+                                    Text="Подтвердить"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Command="{Binding ConfirmActionPopupCommand}"/>
+
+                        </Grid>
+                    </Frame>
+                </Frame>
+
+
+            </Grid>
+
+            <!-- delete alert -->
+            <Grid IsVisible="{Binding DeleteAlertIsOpen}"
+                  BackgroundColor="Transparent"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand">
+
+                <Frame BackgroundColor="{DynamicResource MainLight}"
+                       Padding="2"
+                       CornerRadius="12"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       WidthRequest="300">
+                    <Frame BackgroundColor="{DynamicResource MainDark}"
+                           Padding="2"
+                           CornerRadius="10"
+                           VerticalOptions="FillAndExpand"
+                           HorizontalOptions="FillAndExpand">
+                        <Grid RowSpacing="0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Grid.Row="0"
+                                    Style="{DynamicResource CloseButton}"
+                                    HeightRequest="40"
+                                    WidthRequest="40"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="End"
+                                    Command="{Binding CloseDeleteAlertCommand}"/>
+
+                            <Label Grid.Row="0"
+                                   Text="Удаление"
+                                   Style="{DynamicResource Header2}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"
+                                   Margin="12,0,0,0"/>
+
+                            <StackLayout Grid.Row="1"
+                                         Orientation="Vertical"
+                                         Padding="12,0">
+                                <Rectangle Grid.Column="0"
+                                           BackgroundColor="{DynamicResource MainMedium}"
+                                           VerticalOptions="Start"
+                                           HorizontalOptions="Fill"
+                                           HeightRequest="2"
+                                           Margin="0,10"/>
+                                <Label Text="{Binding DeleteMessange}"
+                                       Style="{DynamicResource Header3}"/>
+                                <Rectangle Grid.Column="0"
+                                           BackgroundColor="{DynamicResource MainMedium}"
+                                           VerticalOptions="Start"
+                                           HorizontalOptions="Fill"
+                                           HeightRequest="2"
+                                           Margin="0,10"/>
+                                <Label Text="Удалить сцену со всеми ее сохранениями?"
+                                       Style="{DynamicResource Header3}"/>
+                            </StackLayout>
+
+                            <StackLayout Grid.Row="2"
+                                         Orientation="Vertical"
+                                         Padding="12,0"
+                                         Spacing="0">
+                                <Button Text="Удалить"
+                                        Style="{DynamicResource LinkButton}"
+                                        Command="{Binding ConfirmDeletingCommand}"/>
+                                <Button Text="Отмена"
+                                        Style="{DynamicResource LinkButton}"
+                                        Command="{Binding CloseDeleteAlertCommand}"/>
+                            </StackLayout>
+
+                        </Grid>
+                    </Frame>
+                </Frame>
+
+
+            </Grid>
+            
+            <!-- create alert -->
+            <Grid IsVisible="{Binding CreateAlertIsOpen}"
+                  BackgroundColor="Transparent"
+                  HorizontalOptions="FillAndExpand"
+                  VerticalOptions="FillAndExpand">
+
+                <Frame BackgroundColor="{DynamicResource MainLight}"
+                       Padding="2"
+                       CornerRadius="12"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       WidthRequest="300">
+                    <Frame BackgroundColor="{DynamicResource MainDark}"
+                           Padding="2"
+                           CornerRadius="10"
+                           VerticalOptions="FillAndExpand"
+                           HorizontalOptions="FillAndExpand">
+                        <Grid RowSpacing="0">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Button Grid.Row="0"
+                                    Style="{DynamicResource CloseButton}"
+                                    HeightRequest="40"
+                                    WidthRequest="40"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="End"
+                                    Command="{Binding CloseCreateAlertCommand}"/>
+
+                            <Label Grid.Row="1"
+                                   Text="Сначала создайте минимум одну кампанию"
+                                   Style="{DynamicResource Header3}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"
+                                   Margin="12,10"/>
+
+                        </Grid>
+                    </Frame>
+                </Frame>
+            </Grid>
+
+        </Grid>
     </ContentView.Content>
 </ContentView>

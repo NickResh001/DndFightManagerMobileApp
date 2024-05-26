@@ -28,6 +28,10 @@ namespace DndFightManagerMobileApp.Services.MockData
         {
             return await Task.FromResult(items);
         }
+        public virtual async Task<bool> GetAny()
+        {
+            return await Task.FromResult(items.Any());
+        }
         public virtual async Task<T> GetById(string id)
         {
             return await Task.FromResult(items.Where((x) => x.Id == id).FirstOrDefault());

@@ -45,12 +45,12 @@
                             <DataTemplate>
 
                                 <StackLayout Orientation="Vertical"
-                                             Spacing="6"
+                                             Spacing="0"
                                              Padding="0"
                                              Margin="0">
                                     <Rectangle BackgroundColor="{DynamicResource MainMedium}"
                                                HeightRequest="1"
-                                               Margin="0,2"
+                                               Margin="0,4"
                                                VerticalOptions="Start"
                                                HorizontalOptions="Fill"/>
                                     

@@ -13,6 +13,7 @@ namespace DndFightManagerMobileApp.Services
     {
         public Task<IEnumerable<T>> GetAll();
         public Task<T> GetById(string id);
+        public Task<bool> GetAny();
         public Task<bool> Create(T item);
         public Task<bool> Update(T item);
         public Task<bool> Delete(string id);

@@ -311,7 +311,7 @@ namespace DndFightManagerMobileApp.Utils
 
 
 
-        public DiceThrowInfo Throw(string input, bool advantage, bool disadvantage)
+        public DiceThrowInfo Throw(string input, bool advantage = false, bool disadvantage = false)
         {
             if (advantage == disadvantage && advantage == true)
                 advantage = disadvantage = false;

@@ -112,6 +112,26 @@
                 </VisualStateGroupList>
             </Setter>
         </Style>
+        <Style TargetType="Button" x:Key="ForwardButton" BasedOn="{StaticResource BaseCommonButton}">
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="BorderColor" Value="Transparent"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="ForwardButton.png"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="ImageSource" Value="PressedForwardButton.png"/>
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
         <Style TargetType="Button" x:Key="LeftScrollButton" BasedOn="{StaticResource BaseCommonButton}">
             <Setter Property="BackgroundColor" Value="Transparent"/>
             <Setter Property="BorderColor" Value="Transparent"/>
@@ -282,12 +302,12 @@
                     <VisualStateGroup x:Name="CommonStates">
                         <VisualState x:Name="Normal">
                             <VisualState.Setters>
-                                <Setter Property="ImageSource" Value="CloseButton.png"/>
+                                <Setter Property="ImageSource" Value="ClosedButton.png"/>
                             </VisualState.Setters>
                         </VisualState>
                         <VisualState x:Name="Pressed">
                             <VisualState.Setters>
-                                <Setter Property="ImageSource" Value="PressedCloseButton.png"/>
+                                <Setter Property="ImageSource" Value="PressedClosedButton.png"/>
                             </VisualState.Setters>
                         </VisualState>
                     </VisualStateGroup>

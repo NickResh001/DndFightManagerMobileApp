@@ -48,6 +48,24 @@ namespace DndFightManagerMobileApp.ViewModels
             _currentId = null;
             ClosePopup();
         }
+
+        #region Create/Edit Popup
+        [RelayCommand]
+        private void CreateCampaign()
+        {
+            _currentId = null;
+            PopupTitle = "Добавление";
+            OpenPopup();
+        }
+
+        [RelayCommand]
+        private void EditCampaign(string id)
+        {
+            _currentId = id;
+            PopupTitle = "Редактирование";
+            OpenPopup();
+        }
+
         private void OpenPopup()
         {
             PopupCampaignTitle = "";
@@ -101,23 +119,7 @@ namespace DndFightManagerMobileApp.ViewModels
                 ClosePopup();
             }
         }
-
-        [RelayCommand]
-        private void CreateCampaign()
-        {
-            _currentId = null;
-            PopupTitle = "Добавление";
-            OpenPopup();
-        }
-
-        [RelayCommand]
-        private void EditCampaign(string id)
-        {
-            _currentId = id;
-            PopupTitle = "Редактирование";
-            OpenPopup();
-        }
-
+        #endregion
 
         #region DeleteAlert
 
@@ -156,8 +158,6 @@ namespace DndFightManagerMobileApp.ViewModels
             CloseDeleteAlert();
         }
         #endregion
-
-
 
         #region Navigation
 
