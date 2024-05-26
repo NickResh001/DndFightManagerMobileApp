@@ -112,7 +112,7 @@
                                                             HorizontalOptions="Center"
                                                             HeightRequest="40"
                                                             WidthRequest="40"
-                                                            Command="{Binding Source={x:Reference this}, Path=BindingContext.EditSceneCommand}"
+                                                            Command="{Binding Source={x:Reference this}, Path=BindingContext.NavigateToSceneSavesCommand}"
                                                             CommandParameter="{Binding Id}"/>
 
                                                     <Rectangle BackgroundColor="{DynamicResource MainMedium}"

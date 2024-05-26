@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using DndFightManagerMobileApp.Models;
 using DndFightManagerMobileApp.Utils;
+using DndFightManagerMobileApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+
+using NPConv = DndFightManagerMobileApp.Utils.NavigationParameterConverter;
 
 namespace DndFightManagerMobileApp.ViewModels
 {
@@ -112,9 +115,10 @@ namespace DndFightManagerMobileApp.ViewModels
             }
         }
         [RelayCommand]
-        private async Task NavigateToSceneSaves(string sceneId)
+        private async Task NavigateToSceneSaves(string id)
         {
-            await Shell.Current.GoToAsync($"");
+            string sceneId = NPConv.ObjectToPairKeyValue(id, nameof(sceneId));
+            await Shell.Current.GoToAsync($"{nameof(SceneSavesListPage)}?{sceneId}");
         }
         
         #endregion

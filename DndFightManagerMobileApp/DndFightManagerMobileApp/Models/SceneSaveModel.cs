@@ -11,6 +11,27 @@ namespace DndFightManagerMobileApp.Models
         public string CurrentBeastInitiative { get; set; }
         public int RoundNumber { get; set; } = 1;
         public SceneModel Scene { get; set; }
-        
+
+        //=======================
+
+
+        private bool _isMoreMenuOpened = false;
+        public bool IsMoreMenuOpened
+        {
+            get { return _isMoreMenuOpened; }
+            set
+            {
+                _isMoreMenuOpened = value;
+                OnPropertyChanged(nameof(IsMoreMenuOpened));
+                OnPropertyChanged(nameof(IsMoreMenuClosed));
+            }
+        }
+        public bool IsMoreMenuClosed
+        {
+            get
+            {
+                return !IsMoreMenuOpened;
+            }
+        }
     }
 }

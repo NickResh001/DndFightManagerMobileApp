@@ -1768,10 +1768,14 @@ namespace DndFightManagerMobileApp.Services.MockData
                 });
                 await SceneSave.Create(new SceneSaveModel
                 {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = "Заготовка",
                     Scene = await Scene.GetById(tempSceneId)
                 });
                 await SceneSave.Create(new SceneSaveModel
                 {
+                    Id = Guid.NewGuid().ToString(),
+                    Title = "Партия 1",
                     Scene = await Scene.GetById(tempSceneId)
                 });
 
