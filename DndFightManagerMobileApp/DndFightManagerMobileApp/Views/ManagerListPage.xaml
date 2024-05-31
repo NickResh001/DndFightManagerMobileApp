@@ -297,7 +297,8 @@
                             VerticalOptions="Center"
                             HorizontalOptions="Center"
                             WidthRequest="40"
-                            HeightRequest="40"/>
+                            HeightRequest="40"
+                            Command="{Binding NavigateToManagerCRUDCommand}"/>
 
                     <Button Grid.Column="3"
                             Style="{DynamicResource ForwardButton}"
@@ -457,7 +458,11 @@
                                        Style="{DynamicResource Header3}"
                                        Text="Команда:"
                                        VerticalOptions="Center"/>
+                                
                                 <Picker Grid.Column="1" Grid.Row="1"
+                                        ItemsSource="{Binding FightTeams}"
+                                        SelectedItem="{Binding SelectedFightTeam, Mode=TwoWay}"
+                                        ItemDisplayBinding="{Binding Title}"
                                         VerticalOptions="Center"
                                         HorizontalOptions="FillAndExpand"/>
 
@@ -484,6 +489,13 @@
                                     HorizontalOptions="Center"
                                     Text="Пересчитать иницитаиву"
                                     IsVisible="{Binding SelectedManagedBeast.IsBeast}"/>
+
+                            <Button Style="{DynamicResource LinkButton}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Text="Подтвердить изменения"
+                                    IsVisible="{Binding SelectedManagedBeast.IsBeast}"/>
+                            
                         </StackLayout>
 
                     </StackLayout>

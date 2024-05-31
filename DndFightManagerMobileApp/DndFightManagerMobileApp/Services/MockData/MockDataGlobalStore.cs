@@ -37,7 +37,7 @@ namespace DndFightManagerMobileApp.Services.MockData
         public ISceneDataStore Scene { get; private set; }
         public ISceneSaveDataStore SceneSave { get; private set; }
         public IBeastDataStore Beast { get; private set; }
-        public IBaseHardoceDirectoryDataStore<FightTeamModel> FightTeam { get; private set; }
+        public IFightTeamDataStore FightTeam { get; private set; }
 
         public MockDataGlobalStore()
         {
@@ -66,7 +66,7 @@ namespace DndFightManagerMobileApp.Services.MockData
             Scene = new SceneDataStore();
             SceneSave = new SceneSaveDataStore();
             Beast = new BeastDataStore();
-            FightTeam = new BaseHardDirMockDataStore<FightTeamModel>();
+            FightTeam = new FightTeamDataStore();
 
             InitializeData();
         }

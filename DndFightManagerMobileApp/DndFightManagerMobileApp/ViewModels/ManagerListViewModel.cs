@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using DndFightManagerMobileApp.Models;
 using DndFightManagerMobileApp.Models.ModelHelpers;
 using DndFightManagerMobileApp.Utils;
+using DndFightManagerMobileApp.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -31,6 +32,7 @@ namespace DndFightManagerMobileApp.ViewModels
         #endregion
 
         private SceneSaveModel _currentSceneSave;
+        private FightTeamModel _emptyFightTeam;
 
         #region Observable Props
 
@@ -58,11 +60,27 @@ namespace DndFightManagerMobileApp.ViewModels
         [ObservableProperty]
         private bool _isEditMenuOpened;
 
+        [ObservableProperty]
+        private ObservableCollection<FightTeamModel> _fightTeams;
+
+        [ObservableProperty]
+        private FightTeamModel _selectedFightTeam;
+
         #endregion
 
         public ManagerListViewModel() 
         {
             EmptyInitialize();
+            _emptyFightTeam = new FightTeamModel
+            {
+                Id = Guid.NewGuid().ToString(),
+                Title = "Нет команды"
+            };
+        }
+        private async Task FightTeamsRefresh()
+        {
+            FightTeams = [.. await dataStore.FightTeam.GetAllBySceneSaveId(_sceneSaveId)];
+            FightTeams.Insert(0, _emptyFightTeam);
         }
         private void EmptyInitialize()
         {
@@ -135,6 +153,13 @@ namespace DndFightManagerMobileApp.ViewModels
             
             ManagedBeasts[TurnNumber].IsSelected = true;
         }
+
+        [RelayCommand]
+        private async Task NavigateToManagerCRUD()
+        {
+            string sceneSaveId = NPConv.ObjectToPairKeyValue(_sceneSaveId, nameof(sceneSaveId));
+            await Shell.Current.GoToAsync($"{nameof(ManagerCRUDMainPage)}?{sceneSaveId}");
+        }
         #endregion
 
         #region Additional game menu
@@ -174,6 +199,7 @@ namespace DndFightManagerMobileApp.ViewModels
         #endregion
 
         #region EditMenu
+
         [RelayCommand]
         private void OpenEditMenu()
         {
@@ -187,17 +213,37 @@ namespace DndFightManagerMobileApp.ViewModels
             CloseAllMenus();
         }
 
-
-
         [RelayCommand]
         private void EditBeast(string id)
         {
             SelectedManagedBeast = ManagedBeasts.FirstOrDefault(x => x.Id == id);
             if (SelectedManagedBeast != null)
             {
+                SelectedFightTeam = FightTeams.FirstOrDefault(x => x.Id == SelectedManagedBeast.FightTeam.Id);
                 OpenEditMenu();
             }
         }
+        
+        [RelayCommand]
+        private void ConfirmEditing()
+        {
+            //bool success = false;
+            //var beast = ManagedBeasts.FirstOrDefault(x => x.Id == _currentId);
+            //if (beast != null && PopupSelectedSetting != null)
+            //{
+            //    beast.Title = PopupCampaignTitle;
+            //    beast.Setting = PopupSelectedSetting;
+            //    success = await dataStore.Campaign.Update(beast);
+            //}
+            
+
+            //if (success)
+            //{
+            //    Campaigns = [.. await dataStore.Campaign.GetAll()];
+            //    ClosePopup();
+            //}
+        }
+        
         #endregion
 
         #region Navigation
@@ -219,6 +265,7 @@ namespace DndFightManagerMobileApp.ViewModels
                     await ArrivalFromBeastPage();
                     break;
                 case NavigationCondition.Refreshing:
+                    await ArrivalFromSceneSaveList();
                     break;
                 case NavigationCondition.Nothing:
                     break;
@@ -232,6 +279,7 @@ namespace DndFightManagerMobileApp.ViewModels
             RoundNumber = _currentSceneSave.RoundNumber;
             ManagedBeasts = [];
             ActionResources = [];
+            FightTeamsRefresh();
             List<BeastModel> beasts = [.. await dataStore.Beast.GetAll()];
 
             foreach (var beast in beasts)
@@ -241,10 +289,16 @@ namespace DndFightManagerMobileApp.ViewModels
                     type = ManagedBeastHelperType.Player;
 
                 ManagedBeastHelper beastHelper = new ManagedBeastHelper(beast, type);
+                if (beastHelper.FightTeam == null)
+                    beastHelper.FightTeam = _emptyFightTeam;
                 ManagedBeasts.Add(beastHelper);
+
                 if (beast.HaveLair)
                 {
-                    ManagedBeasts.Add(new ManagedBeastHelper(beast, ManagedBeastHelperType.Lair));
+                    var someLair = new ManagedBeastHelper(beast, ManagedBeastHelperType.Lair);
+                    if (someLair.FightTeam == null)
+                        someLair.FightTeam = _emptyFightTeam;
+                    ManagedBeasts.Add(someLair);
                 }
             }
 
@@ -266,6 +320,10 @@ namespace DndFightManagerMobileApp.ViewModels
         {
 
         }
+        private async Task ArrivalFromManagerCRUD()
+        {
+
+        }
         public async void ApplyQueryAttributes(IDictionary<string, string> query)
         {
             if (query == null)
@@ -284,7 +342,6 @@ namespace DndFightManagerMobileApp.ViewModels
 
             await ArrivalInitialize();
         }
-
 
         #endregion
 

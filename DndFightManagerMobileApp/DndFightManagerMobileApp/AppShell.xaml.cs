@@ -24,6 +24,7 @@ namespace DndFightManagerMobileApp
             Routing.RegisterRoute(nameof(ScenesListMainPage), typeof(ScenesListMainPage));
             Routing.RegisterRoute(nameof(SceneSavesListPage), typeof(SceneSavesListPage));
             Routing.RegisterRoute(nameof(ManagerListPage), typeof(ManagerListPage));
+            Routing.RegisterRoute(nameof(ManagerCRUDMainPage), typeof(ManagerCRUDMainPage));
 
         }
     }
