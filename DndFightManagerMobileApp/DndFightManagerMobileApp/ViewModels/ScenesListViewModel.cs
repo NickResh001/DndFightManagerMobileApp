@@ -114,6 +114,7 @@ namespace DndFightManagerMobileApp.ViewModels
                     scene.IsMoreMenuOpened = false;
             }
         }
+        
         [RelayCommand]
         private async Task NavigateToSceneSaves(string id)
         {

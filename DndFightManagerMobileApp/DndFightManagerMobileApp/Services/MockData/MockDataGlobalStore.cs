@@ -29,14 +29,14 @@ namespace DndFightManagerMobileApp.Services.MockData
         public IDataStore<ActionModel> Action { get; private set; }
         public IDataStore<ActionThrowModel> ActionThrow { get; private set; }
         public IBaseHardoceDirectoryDataStore<TimeMeasureModel> TimeMeasure { get; private set; }
-        public IBaseHardoceDirectoryDataStore<ActionResourceModel> ActionResource { get; private set; }
+        public IActionResourceDataStore ActionResource { get; private set; }
         public IBaseHardoceDirectoryDataStore<CooldownTypeModel> CooldownType { get; private set; }
 
         public ISettingDataStore Setting { get; private set; }
         public ICampaignDataStore Campaign { get; private set; }
         public ISceneDataStore Scene { get; private set; }
         public ISceneSaveDataStore SceneSave { get; private set; }
-        public IDataStore<BeastModel> Beast { get; private set; }
+        public IBeastDataStore Beast { get; private set; }
         public IBaseHardoceDirectoryDataStore<FightTeamModel> FightTeam { get; private set; }
 
         public MockDataGlobalStore()
@@ -58,14 +58,14 @@ namespace DndFightManagerMobileApp.Services.MockData
             Action = new BaseMockDataStore<ActionModel>();
             ActionThrow = new BaseMockDataStore<ActionThrowModel>();
             TimeMeasure = new BaseHardDirMockDataStore<TimeMeasureModel>();
-            ActionResource = new BaseHardDirMockDataStore<ActionResourceModel>();
+            ActionResource = new ActionResourceDataStore();
             CooldownType = new BaseHardDirMockDataStore<CooldownTypeModel>();
 
             Setting = new SettingDataStore();
             Campaign = new CampaignDataStore();
             Scene = new SceneDataStore();
             SceneSave = new SceneSaveDataStore();
-            Beast = new BaseMockDataStore<BeastModel>();
+            Beast = new BeastDataStore();
             FightTeam = new BaseHardDirMockDataStore<FightTeamModel>();
 
             InitializeData();
@@ -902,8 +902,11 @@ namespace DndFightManagerMobileApp.Services.MockData
             });
 
             #endregion
-            
+
             #region BeastNote
+            string wolfId = Guid.NewGuid().ToString();
+            string balhanotId = Guid.NewGuid().ToString();
+            string vegepigmeyId = Guid.NewGuid().ToString();
             {
                 var AbilityStore = Ability as AbilityDataStore;
                 var AlignmentStore = Alignment as AlignmentDataStore;
@@ -920,7 +923,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                 // Волк
                 await BeastNote.Create(new BeastNoteModel
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = wolfId,
                     HitPoitsDice = "2d8+2",
                     ArmorClass = 13,
                     SpecialBonus = 2,
@@ -1085,7 +1088,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                 // Вегепигмей
                 await BeastNote.Create(new BeastNoteModel
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = vegepigmeyId,
                     HitPoitsDice = "2d6+2",
                     ArmorClass = 13,
                     SpecialBonus = 2,
@@ -1371,7 +1374,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                 };
                 await BeastNote.Create(new BeastNoteModel
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = balhanotId,
                     HitPoitsDice = "12к10+48",
                     ArmorClass = 17,
                     SpecialBonus = 4,
@@ -1707,7 +1710,7 @@ namespace DndFightManagerMobileApp.Services.MockData
 
             #endregion
 
-            #region Setting, Campaign, Scenes and ScenesSaves
+            #region Setting, Campaign, Scenes, ScenesSaves, Beasts
             {
                 #region Setting
                 string _authors = "Авторский";
@@ -1757,7 +1760,7 @@ namespace DndFightManagerMobileApp.Services.MockData
                 });
 
                 #endregion
-                #region Scenes
+                #region Scenes and SceneSaves
 
                 string tempSceneId = Guid.NewGuid().ToString();
                 await Scene.Create(new SceneModel
@@ -1772,9 +1775,10 @@ namespace DndFightManagerMobileApp.Services.MockData
                     Title = "Заготовка",
                     Scene = await Scene.GetById(tempSceneId)
                 });
+                string tempSceneSaveId = Guid.NewGuid().ToString();
                 await SceneSave.Create(new SceneSaveModel
                 {
-                    Id = Guid.NewGuid().ToString(),
+                    Id = tempSceneSaveId,
                     Title = "Партия 1",
                     Scene = await Scene.GetById(tempSceneId)
                 });
@@ -1817,9 +1821,24 @@ namespace DndFightManagerMobileApp.Services.MockData
                 });
                 #endregion
 
-                #region SceneSaves
-                List<SceneModel> scenes = [.. await Scene.GetAll()];
+                #region Beasts
+                List<ActionResourceModel> actionResources = [.. await ActionResource.GetAll()];
 
+                await Beast.Create(new BeastModel(await BeastNote.GetById(balhanotId), tempSceneSaveId, actionResources)
+                {
+                    Title = "Балханот 1",
+                });
+                await Beast.Create(new BeastModel(await BeastNote.GetById(wolfId), tempSceneSaveId, actionResources)
+                {
+                    Title = "Волк 1",
+                }); 
+                await Beast.Create(new BeastModel(await BeastNote.GetById(wolfId), tempSceneSaveId, actionResources)
+                {
+                    Title = "Волк 2",
+                });
+                await Beast.Create(new BeastModel("Гарг", null, "16", false)
+                {
+                });
                 #endregion
             }
             #endregion

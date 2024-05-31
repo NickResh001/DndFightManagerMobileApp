@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DndFightManagerMobileApp.Views.ManagerListPage"
+             x:Name="this">
+    <ContentPage.Content>
+
+        <Grid RowSpacing="0" ColumnSpacing="0">
+
+            <!-- основное -->
+            <Grid RowSpacing="0"
+                  BackgroundColor="{DynamicResource MainMedium}">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                
+                <!-- хэдер -->
+                <Grid Grid.Row="0" RowSpacing="0" ColumnSpacing="0"
+                      BackgroundColor="{DynamicResource MainDark}"
+                      Padding="4,4">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0"
+                            Style="{DynamicResource BurgerButton}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            Command="{Binding OpenBurgerMenuCommand}"/>
+
+                    <StackLayout Grid.Column="1"
+                                 Orientation="Vertical"
+                                 VerticalOptions="Center"
+                                 HorizontalOptions="Center"
+                                 Spacing="0">
+
+                        <Label Grid.Column="1"
+                               Text="Заголовок"
+                               Style="{DynamicResource Header2}"
+                               VerticalOptions="Center"
+                               HorizontalOptions="Center"/>
+                        <StackLayout Orientation="Horizontal"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     Spacing="10">
+
+                            <Label Grid.Column="0"
+                                   Style="{DynamicResource CommonText}"
+                                   Text="Раунд:"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"/>
+                            <Label Grid.Column="1"
+                                   Style="{DynamicResource CommonText}"
+                                   Text="{Binding RoundNumber}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Center"/>
+                            
+                        </StackLayout>
+                    </StackLayout>
+                    
+                    <Frame Grid.Column="2"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"
+                           Padding="0"
+                           Margin="0"
+                           WidthRequest="40"
+                           HeightRequest="40"
+                           BackgroundColor="Transparent"/>
+                </Grid>
+
+                <!-- коллекция -->
+                <Grid Grid.Row="1" RowSpacing="0" ColumnSpacing="0"
+                      BackgroundColor="{DynamicResource MainMedium}">
+                    <ScrollView>
+                        <StackLayout Orientation="Vertical"
+                                     BindableLayout.ItemsSource="{Binding ManagedBeasts}"
+                                     Spacing="0"
+                                     Padding="6,4">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+
+                                    <Grid>
+                                        
+                                        <Frame BackgroundColor="{DynamicResource MainLight}"
+                                               IsVisible="{Binding IsSelected}"
+                                               Padding="6"
+                                               CornerRadius="12"/>
+
+                                        <Frame BackgroundColor="{DynamicResource SecondaryTextColor}"
+                                               IsVisible="{Binding IsSuprised}"
+                                               Padding="6"
+                                               CornerRadius="12"/>
+
+                                        <Frame BackgroundColor="{DynamicResource LightRed}"
+                                               IsVisible="{Binding IsKilled}"
+                                               Padding="6"
+                                               CornerRadius="12"/>
+
+                                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                                               CornerRadius="10"
+                                               Margin="6"
+                                               Padding="0"
+                                               VerticalOptions="FillAndExpand"
+                                               HorizontalOptions="FillAndExpand">
+                                            <Grid RowSpacing="0" ColumnSpacing="0"
+                                                  Padding="0,8">
+
+                                                <!-- Моб -->
+                                                <Grid RowSpacing="0" ColumnSpacing="0"
+                                                      IsVisible="{Binding IsBeast}">
+
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Button Grid.Column="0"
+                                                            Style="{DynamicResource EditButton}"
+                                                            Margin="4,0"
+                                                            WidthRequest="40"
+                                                            HeightRequest="40"
+                                                            Command="{Binding Source={x:Reference this}, Path=BindingContext.EditBeastCommand}"
+                                                            CommandParameter="{Binding Id}"/>
+                                                    
+                                                    <StackLayout Grid.Column="1"
+                                                                 Orientation="Vertical"
+                                                                 Spacing="4"
+                                                                 Padding="0,0,0,0">
+
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     HorizontalOptions="FillAndExpand">
+
+                                                            <Label Text="{Binding Title}"
+                                                                   Style="{DynamicResource Header3}"
+                                                                   FontAttributes="Bold"
+                                                                   VerticalOptions="Center"
+                                                                   HorizontalOptions="Start"
+                                                                   LineBreakMode="TailTruncation"/>
+
+                                                            <Label Text="{Binding ChallengeRatingString}"
+                                                                   Style="{DynamicResource SecondaryText}"
+                                                                   FontAttributes="Bold"
+                                                                   VerticalOptions="Center"
+                                                                   HorizontalOptions="EndAndExpand"
+                                                                   HorizontalTextAlignment="Center"/>
+
+                                                        </StackLayout>
+
+                                                        <StackLayout Orientation="Horizontal"
+                                                                     HorizontalOptions="FillAndExpand">
+
+                                                            <Label Text="{Binding ShowingHP}"
+                                                                   Style="{DynamicResource CommonText}"/>
+
+                                                            <Label Text="{Binding ShowingTeam}"
+                                                                   Style="{DynamicResource SecondaryText}"
+                                                                   HorizontalOptions="EndAndExpand"/>
+                                                        </StackLayout>
+
+                                                    </StackLayout>
+
+                                                    <Button Grid.Column="2"
+                                                            Style="{DynamicResource ForwardButton}"
+                                                            Padding="0"
+                                                            Margin="4,0"
+                                                            WidthRequest="40"
+                                                            HeightRequest="40"/>
+                                                </Grid>
+
+                                                <!-- Игрок -->
+                                                <Grid RowSpacing="0" ColumnSpacing="0"
+                                                      IsVisible="{Binding IsPlayer}">
+
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <Button Style="{DynamicResource EditButton}"
+                                                            Padding="0"
+                                                            Margin="4,0"
+                                                            WidthRequest="40"
+                                                            HeightRequest="40"
+                                                            Command="{Binding Source={x:Reference this}, Path=BindingContext.EditBeastCommand}"
+                                                            CommandParameter="{Binding Id}"/>
+                                                    
+                                                    <StackLayout Grid.Column="1"
+                                                                 Orientation="Vertical"
+                                                                 Spacing="4"
+                                                                 Padding="0,0,6,0">
+
+                                                        <Label Text="{Binding Title}"
+                                                               Style="{DynamicResource Header3}"
+                                                               FontAttributes="Bold"
+                                                               VerticalOptions="Center"
+                                                               HorizontalOptions="Start"
+                                                               LineBreakMode="TailTruncation"/>
+
+                                                        <Label Text="{Binding ShowingTeam}"
+                                                               Style="{DynamicResource SecondaryText}"
+                                                               HorizontalOptions="Start"/>
+
+                                                    </StackLayout>
+                                                    
+                                                </Grid>
+
+                                                <!-- Логово -->
+                                                <Grid RowSpacing="0" ColumnSpacing="0"
+                                                      IsVisible="{Binding IsLair}">
+
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="10"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+
+                                                    <!--<Button Style="{DynamicResource EditButton}"
+                                                            Padding="0"
+                                                            Margin="4"
+                                                            WidthRequest="40"
+                                                            HeightRequest="40"/>-->
+
+                                                    <StackLayout Grid.Column="1"
+                                                                 Orientation="Vertical"
+                                                                 Spacing="4"
+                                                                 Padding="0,0,6,0">
+
+                                                        <Label Text="{Binding LairTitle}"
+                                                                Style="{DynamicResource Header3}"
+                                                                FontAttributes="Bold"
+                                                                VerticalOptions="Center"
+                                                                HorizontalOptions="Start"
+                                                                LineBreakMode="TailTruncation"/>
+
+                                                        <Label Text="{Binding ShowingTeam}"
+                                                                Style="{DynamicResource SecondaryText}"
+                                                                HorizontalOptions="Start"/>
+
+                                                    </StackLayout>
+
+                                                    <Button Grid.Column="2"
+                                                            Style="{DynamicResource ForwardButton}"
+                                                            Padding="0"
+                                                            Margin="4,0"
+                                                            WidthRequest="40"
+                                                            HeightRequest="40"/>
+                                                </Grid>
+
+                                            </Grid>
+                                        </Frame>
+                                    </Grid>
+                                    
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+                </Grid>
+
+                <!-- доп действия -->
+                <Grid Grid.Row="2" RowSpacing="0" ColumnSpacing="0"
+                      BackgroundColor="{DynamicResource MainDark}"
+                      Padding="0,10">
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0"
+                            Style="{DynamicResource MoreButton}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            Command="{Binding OpenAdditionalMenuCommand}"/>
+                    
+                    <Button Grid.Column="1"
+                            Style="{DynamicResource DiceButton}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            WidthRequest="40"
+                            HeightRequest="40"/>
+
+                    <Button Grid.Column="2"
+                            Style="{DynamicResource AddButton}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            WidthRequest="40"
+                            HeightRequest="40"/>
+
+                    <Button Grid.Column="3"
+                            Style="{DynamicResource ForwardButton}"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            Command="{Binding NextTurnCommand}"/>
+
+                </Grid>
+                
+            </Grid>
+
+            <!-- бургер-меню -->
+            <Grid RowSpacing="0" ColumnSpacing="0"
+                  IsVisible="{Binding IsBurgerMenuOpened}"
+                  VerticalOptions="FillAndExpand"
+                  HorizontalOptions="FillAndExpand">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid Grid.Column="0">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Frame Grid.Row="0"
+                           BackgroundColor="{DynamicResource MainDark}"
+                           BorderColor="{DynamicResource MainLight}"
+                           Padding="0,0,0,0"
+                           Margin="-1,-1,0,0"
+                           CornerRadius="0"
+                           WidthRequest="200">
+                        <StackLayout Orientation="Vertical"
+                                     HorizontalOptions="FillAndExpand"
+                                     Spacing="0">
+
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="Назад"
+                                    HorizontalOptions="FillAndExpand"
+                                    Command="{Binding NavigateBackToCommand}"/>
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="К сценам"
+                                    HorizontalOptions="FillAndExpand"
+                                    Command="{Binding NavigateBackToScenesCommand}"/>
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="В главное меню"
+                                    HorizontalOptions="FillAndExpand"
+                                    Command="{Binding NavigateBackToMainMenuCommand}"/>
+                            
+                            <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="FillAndExpand"
+                                       HeightRequest="2"
+                                       Margin="10,0"/>
+                            
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="Сохранить"
+                                    HorizontalOptions="FillAndExpand"/>
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="Сохранить как..."
+                                    HorizontalOptions="FillAndExpand"/>
+                        </StackLayout>
+                    </Frame>
+
+                    <Grid Grid.Row="1"
+                          BackgroundColor="Transparent">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CloseBurgerMenuCommand}"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+                </Grid>
+                
+                <Grid Grid.Column="1"
+                      BackgroundColor="Transparent">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding CloseBurgerMenuCommand}"/>
+                    </Grid.GestureRecognizers>
+                </Grid>
+                
+            </Grid>
+            
+            <!-- меню редактирования -->
+            <Grid RowSpacing="0"
+                  BackgroundColor="Transparent"
+                  IsVisible="{Binding IsEditMenuOpened}">
+
+                <Frame BackgroundColor="{DynamicResource MainDark}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       BorderColor="{DynamicResource MainLight}"
+                       CornerRadius="10"
+                       Padding="10"
+                       Margin="20,0">
+
+                    <StackLayout Orientation="Vertical">
+
+                        <!-- Хэдер -->
+                        <StackLayout>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Style="{DynamicResource Header2}"
+                                       Text="Редактирование"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="Start"/>
+
+                                <Button Grid.Column="1"
+                                        Style="{DynamicResource CloseButton}"
+                                        WidthRequest="40"
+                                        HeightRequest="40"
+                                        VerticalOptions="Start"
+                                        HorizontalOptions="Center"
+                                        Command="{Binding Source={x:Reference this}, Path=BindingContext.CloseEditMenuCommand}"/>
+                            </Grid>
+
+                            <Rectangle BackgroundColor="{DynamicResource MainLight}"
+                                       VerticalOptions="EndAndExpand"
+                                       Margin="0"
+                                       HeightRequest="1"/>
+                        </StackLayout>
+
+                        <!-- Вар Монстр -->
+                        <StackLayout Orientation="Vertical"
+                                     Spacing="10">
+
+                            <Grid RowSpacing="0" ColumnSpacing="0" Padding="0">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Column="0" Grid.Row="0"
+                                       Style="{DynamicResource Header3}"
+                                       Text="Имя:"
+                                       VerticalOptions="Center"/>
+                                <Entry Grid.Column="1" Grid.Row="0"
+                                       Text="{Binding SelectedManagedBeast.Title, Mode=TwoWay}"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="FillAndExpand"/>
+
+                                <Label Grid.Column="0" Grid.Row="1"
+                                       Style="{DynamicResource Header3}"
+                                       Text="Команда:"
+                                       VerticalOptions="Center"/>
+                                <Picker Grid.Column="1" Grid.Row="1"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="FillAndExpand"/>
+
+                            </Grid>
+
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="0">
+                                <CheckBox IsChecked="{Binding SelectedManagedBeast.IsSuprised, Mode=TwoWay}"/>
+                                <Label Style="{DynamicResource Header3}"
+                                       Text="Застан врасплох"
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="0">
+                                <CheckBox IsChecked="{Binding SelectedManagedBeast.IsKilled, Mode=TwoWay}"/>
+                                <Label Style="{DynamicResource Header3}"
+                                       Text="Убит"
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+
+                            <Button Style="{DynamicResource LinkButton}"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    Text="Пересчитать иницитаиву"
+                                    IsVisible="{Binding SelectedManagedBeast.IsBeast}"/>
+                        </StackLayout>
+
+                    </StackLayout>
+
+                </Frame>
+
+            </Grid>
+
+            <!-- игральное меню действий -->
+            <Grid RowSpacing="0"
+                  BackgroundColor="Transparent"
+                  IsVisible="{Binding IsAdditionalMenuOpened}">
+
+                <Frame BackgroundColor="{DynamicResource MainDark}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       BorderColor="{DynamicResource MainLight}"
+                       CornerRadius="10"
+                       Padding="10"
+                       Margin="20,0">
+                    <StackLayout Orientation="Vertical" Spacing="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="0"
+                                   Style="{DynamicResource Header2}"
+                                   Text="{Binding SelectedManagedBeast.Title}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="Start"/>
+
+                            <Button Grid.Column="1"
+                                    Style="{DynamicResource CloseButton}"
+                                    WidthRequest="40"
+                                    HeightRequest="40"
+                                    Command="{Binding CloseAdditionalMenuCommand}"/>
+
+                        </Grid>
+
+                        <Rectangle BackgroundColor="{DynamicResource MainLight}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="FillAndExpand"
+                                   HeightRequest="1"/>
+
+                        <StackLayout Orientation="Horizontal"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="Center"
+                                     BindableLayout.ItemsSource="{Binding ActionResources}"
+                                     Spacing="4">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Grid.Column="0"
+                                           BackgroundColor="{DynamicResource MainDark}"
+                                           BorderColor="{DynamicResource MainMedium}"
+                                           Margin="0"
+                                           Padding="0,6"
+                                           CornerRadius="6"
+                                           WidthRequest="40">
+
+                                        <Grid RowSpacing="0" ColumnSpacing="0" Padding="0" Margin="0">
+                                            <Label Text="{Binding Title}"
+                                                   Style="{DynamicResource SecondaryText}"
+                                                   FontAttributes="Bold"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"/>
+                                            <Label Text="{Binding Title}"
+                                                   Style="{DynamicResource CommonText}"
+                                                   FontAttributes="Bold"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   IsVisible="{Binding IsAvailable}"/>
+                                        </Grid>                                        
+                                        
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                        
+                        <Rectangle BackgroundColor="{DynamicResource MainLight}"
+                                   VerticalOptions="Center"
+                                   HorizontalOptions="FillAndExpand"
+                                   HeightRequest="1"/>
+
+                        <StackLayout Orientation="Vertical"
+                                     Spacing="0"
+                                     VerticalOptions="Center"
+                                     HorizontalOptions="FillAndExpand">
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="0"
+                                         VerticalOptions="Center"
+                                         HorizontalOptions="FillAndExpand">
+                                <Entry VerticalOptions="Center"
+                                       HorizontalOptions="FillAndExpand"/>
+                                <Button Style="{DynamicResource LinkButton}"
+                                        Text="Бросок"
+                                        VerticalOptions="Center"
+                                        HeightRequest="40"/>
+                            </StackLayout>
+
+                            <Label Style="{DynamicResource Header3}"
+                                   Text="Результат:"
+                                   VerticalOptions="Center"
+                                   Margin="0,0,0,10"/>
+
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="0">
+                                <CheckBox/>
+                                <Label Style="{DynamicResource Header3}"
+                                       Text="Преимущество"
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="0">
+                                <CheckBox/>
+                                <Label Style="{DynamicResource Header3}"
+                                       Text="Помеха"
+                                       VerticalOptions="Center"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -76,7 +76,9 @@ namespace DndFightManagerMobileApp.ViewModels
         [RelayCommand]
         private async Task NavigateToSceneManager(string id)
         {
-
+            string sceneSaveId = NPConv.ObjectToPairKeyValue(id, nameof(sceneSaveId));
+            string navigationCondition = NPConv.ObjectToPairKeyValue(NavigationCondition.Edit, nameof(navigationCondition));
+            await Shell.Current.GoToAsync($"{nameof(ManagerListPage)}?{sceneSaveId}&{navigationCondition}");
         }
 
 

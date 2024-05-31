@@ -28,7 +28,7 @@ namespace DndFightManagerMobileApp.Services
         IDataStore<ActionModel> Action { get; }
         IDataStore <ActionThrowModel> ActionThrow { get; }
         IBaseHardoceDirectoryDataStore<TimeMeasureModel> TimeMeasure { get; }
-        IBaseHardoceDirectoryDataStore<ActionResourceModel> ActionResource { get; }
+        IActionResourceDataStore ActionResource { get; }
         IBaseHardoceDirectoryDataStore<CooldownTypeModel> CooldownType { get; }
 
 
@@ -36,7 +36,7 @@ namespace DndFightManagerMobileApp.Services
         ICampaignDataStore Campaign { get; }
         ISceneDataStore Scene { get; }
         ISceneSaveDataStore SceneSave { get; }
-        IDataStore<BeastModel> Beast { get; }
+        IBeastDataStore Beast { get; }
         IBaseHardoceDirectoryDataStore<FightTeamModel> FightTeam { get; }
 
         //IDataStore<UserModel> User { get; }

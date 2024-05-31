@@ -7,6 +7,6 @@ namespace DndFightManagerMobileApp.Models
     public class ActionResourceListModel : BaseEntityModel
     {
         public ActionResourceModel ActionResource { get; set; }
-        public bool IsAvailable { get; set; }
+        public bool IsAvailable { get; set; } = true;
     }
 }

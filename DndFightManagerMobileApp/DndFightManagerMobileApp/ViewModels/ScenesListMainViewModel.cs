@@ -79,8 +79,6 @@ namespace DndFightManagerMobileApp.ViewModels
             SwitchTab(0);
         }
 
-
-
         #region Navigation
 
         [RelayCommand]
