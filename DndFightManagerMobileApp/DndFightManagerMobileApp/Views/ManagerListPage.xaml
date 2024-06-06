@@ -622,6 +622,64 @@
                 </Frame>
             </Grid>
 
+            <!-- меню перехода к доп экранам-->
+            <Grid RowSpacing="0"
+                  BackgroundColor="Transparent"
+                  IsVisible="true">
+
+                <Frame BackgroundColor="{DynamicResource MainDark}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       BorderColor="{DynamicResource MainLight}"
+                       CornerRadius="10"
+                       Padding="10"
+                       Margin="20,0">
+                    <ScrollView>
+                        <StackLayout>
+
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="Регистрация"
+                                    Command="{Binding NavigateToScreenCommand}"
+                                    CommandParameter="RegistrationPage"/>
+                            
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="Авторизация"
+                                    Command="{Binding NavigateToScreenCommand}"
+                                    CommandParameter="AuthorisationPage"/>
+                            
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="Хиты Моба"
+                                    Command="{Binding NavigateToScreenCommand}"
+                                    CommandParameter="BeastStatblockHitsView"/>
+                            
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="Харки моба"
+                                    Command="{Binding NavigateToScreenCommand}"
+                                    CommandParameter="BeastStatblockAbilitiesView"/>
+                            
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="Действия моба"
+                                    Command="{Binding NavigateToScreenCommand}"
+                                    CommandParameter="BeastStatblockActionsView"/>
+                            
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="Просмотр действия"
+                                    Command="{Binding NavigateToScreenCommand}"
+                                    CommandParameter="BeastStatblockActionsView"/>
+                            
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="Подготовка действий"
+                                    Command="{Binding NavigateToScreenCommand}"
+                                    CommandParameter="BeastStatblockActionsView"/>
+
+                            <!-- Корректное отображение команд -->
+                            <!-- Показ результатов бросков -->
+                            <!-- Добавление мобов в сцену -->
+                            <!-- Модальное окно с подсказками -->
+                        </StackLayout>
+                    </ScrollView>
+                </Frame>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -20,9 +20,9 @@
                     Style="{DynamicResource Key=DefaultButton}"
                     Command="{Binding NavigateToScenesCommand}"
                     Margin="0,3"/>
-            
-            <Button Text="Модерация"
-                    Style="{DynamicResource Key=DefaultButton}"
+
+            <Button Text="Выйти из аккаунта"
+                    Style="{DynamicResource Key=LinkButton}"
                     Margin="0,3"/>
             <!--<Button
                 Text="Последний моб"

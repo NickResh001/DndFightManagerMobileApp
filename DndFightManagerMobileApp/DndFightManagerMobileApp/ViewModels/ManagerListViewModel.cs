@@ -345,6 +345,14 @@ namespace DndFightManagerMobileApp.ViewModels
 
         #endregion
 
+        #region ScreensMenu
 
+        [RelayCommand]
+        private async Task NavigateToScreen(string screenName)
+        {
+            await Shell.Current.GoToAsync($"{screenName}");
+        }
+
+        #endregion
     }
 }

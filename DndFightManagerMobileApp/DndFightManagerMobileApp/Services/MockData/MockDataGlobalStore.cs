@@ -1827,17 +1827,37 @@ namespace DndFightManagerMobileApp.Services.MockData
                 await Beast.Create(new BeastModel(await BeastNote.GetById(balhanotId), tempSceneSaveId, actionResources)
                 {
                     Title = "Балханот 1",
+                    FightTeam = new FightTeamModel
+                    {
+                        Title = "Против всех",
+                        SceneSaveId = tempSceneSaveId,
+                    }
                 });
                 await Beast.Create(new BeastModel(await BeastNote.GetById(wolfId), tempSceneSaveId, actionResources)
                 {
                     Title = "Волк 1",
+                    FightTeam = new FightTeamModel
+                    {
+                        Title = "Стая волков",
+                        SceneSaveId = tempSceneSaveId,
+                    }
                 }); 
                 await Beast.Create(new BeastModel(await BeastNote.GetById(wolfId), tempSceneSaveId, actionResources)
                 {
                     Title = "Волк 2",
+                    FightTeam = new FightTeamModel
+                    {
+                        Title = "Стая волков",
+                        SceneSaveId = tempSceneSaveId,
+                    }
                 });
                 await Beast.Create(new BeastModel("Гарг", null, "16", false)
                 {
+                    FightTeam = new FightTeamModel
+                    {
+                        Title = "Игроки",
+                        SceneSaveId = tempSceneSaveId,
+                    }
                 });
                 #endregion
             }

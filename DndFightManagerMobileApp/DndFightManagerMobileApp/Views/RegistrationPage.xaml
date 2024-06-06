@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DndFightManagerMobileApp.Views.RegistrationPage"
+             BackgroundColor="{DynamicResource MainDark}">
+    <ContentPage.Content>
+        <Grid>
+        
+            <StackLayout Orientation="Vertical"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Fill"
+                         Margin="24,0">
+
+                <Label Style="{DynamicResource Header1}"
+                       Text="Регистрация"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,20"/>
+
+                <!--<Grid RowSpacing="0" ColumnSpacing="0">
+                
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Label Grid.Column="0" Grid.Row="0" Style="{DynamicResource Header3}"
+                           Text="Логин"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"/>
+                    <Label Grid.Column="0" Grid.Row="1" Style="{DynamicResource Header3}"
+                           Text="Пароль"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"/>
+                    <Label Grid.Column="0" Grid.Row="2" Style="{DynamicResource Header3}"
+                           Text="Повтор пароля"
+                           VerticalOptions="Center"
+                           HorizontalOptions="End"/>
+
+                    <Entry Grid.Column="1" Grid.Row="0" HorizontalOptions="Fill"/>
+                    <Entry Grid.Column="1" Grid.Row="1" HorizontalOptions="Fill"/>
+                    <Entry Grid.Column="1" Grid.Row="2" HorizontalOptions="Fill"/>
+
+                </Grid>-->
+
+                <Entry Placeholder="Логин"/>
+                <Entry Placeholder="Пароль"/>
+                <Entry Placeholder="Повтор пароля"/>
+
+                <Button Style="{DynamicResource LinkButton}"
+                        Text="Зарегестрироваться"
+                        VerticalOptions="Center"/>
+            </StackLayout>
+
+            <Button Style="{DynamicResource LinkButton}"
+                    Text="К авторизации"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"
+                    Margin="12"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

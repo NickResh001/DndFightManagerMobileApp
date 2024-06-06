@@ -26,6 +26,12 @@ namespace DndFightManagerMobileApp
             Routing.RegisterRoute(nameof(ManagerListPage), typeof(ManagerListPage));
             Routing.RegisterRoute(nameof(ManagerCRUDMainPage), typeof(ManagerCRUDMainPage));
 
+            Routing.RegisterRoute(nameof(RegistrationPage), typeof(RegistrationPage));
+            Routing.RegisterRoute(nameof(AuthorisationPage), typeof(AuthorisationPage));
+            Routing.RegisterRoute(nameof(BeastStatblockHitsView), typeof(BeastStatblockHitsView));
+            Routing.RegisterRoute(nameof(BeastStatblockAbilitiesView), typeof(BeastStatblockAbilitiesView));
+            Routing.RegisterRoute(nameof(BeastStatblockActionsView), typeof(BeastStatblockActionsView));
+
         }
     }
 }

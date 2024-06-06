@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DndFightManagerMobileApp.Views.AuthorisationPage"
+             BackgroundColor="{DynamicResource MainDark}">
+    <ContentPage.Content>
+        <Grid>
+
+            <StackLayout Orientation="Vertical"
+                         VerticalOptions="Center"
+                         HorizontalOptions="Fill"
+                         Margin="24,0">
+
+                <Label Style="{DynamicResource Header1}"
+                       Text="Авторизация"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,20"/>
+
+                <Entry Placeholder="Логин"/>
+                <Entry Placeholder="Пароль"/>
+
+                <Button Style="{DynamicResource LinkButton}"
+                        Text="Войти"
+                        VerticalOptions="Center"/>
+                
+                <Label Style="{DynamicResource CommonText}"
+                       TextColor="{DynamicResource LightRed}"
+                       Text="Неверные данные"
+                       HorizontalOptions="Center"
+                       IsVisible="false"/>
+                
+                <Label Style="{DynamicResource CommonText}"
+                       Text=" "
+                       HorizontalOptions="Center"
+                       IsVisible="true"/>
+                
+            </StackLayout>
+
+            <Button Style="{DynamicResource LinkButton}"
+                    Text="Создать аккаунт"
+                    VerticalOptions="End"
+                    HorizontalOptions="Start"
+                    Margin="12"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

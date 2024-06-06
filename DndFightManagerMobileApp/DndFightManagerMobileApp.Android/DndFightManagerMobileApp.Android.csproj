@@ -179,5 +179,11 @@
     <AndroidResource Include="Resources\drawable\DiceButton.png" />
     <AndroidResource Include="Resources\drawable\PressedDiceButton.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ExecuteButton.png" />
+    <AndroidResource Include="Resources\drawable\EyeButton.png" />
+    <AndroidResource Include="Resources\drawable\PressedExecuteButton.png" />
+    <AndroidResource Include="Resources\drawable\PressedEyeButton.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

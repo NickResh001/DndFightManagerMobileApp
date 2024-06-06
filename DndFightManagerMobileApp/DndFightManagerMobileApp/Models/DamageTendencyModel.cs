@@ -8,7 +8,7 @@ namespace DndFightManagerMobileApp.Models
     {
         public DamageTypeModel DamageType { get; set; }
         public DamageTendencyTypeModel DamageTendencyType { get; set; }
-        public bool Magical { get; set; }
-        public bool NonMagical { get; set; }
+        public bool Magical { get; set; } // ?
+        public bool NonMagical { get; set; } // ?
     }
 }

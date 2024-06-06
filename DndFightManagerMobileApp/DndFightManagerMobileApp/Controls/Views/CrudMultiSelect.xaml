@@ -72,17 +72,17 @@
                                 Command="{Binding AddNoteCommand}"/>
 
                     </StackLayout>
-                    
+
                     <Rectangle BackgroundColor="{DynamicResource MainMedium}"
                                HeightRequest="2"
                                Margin="7,4"/>
-                    
+
                     <StackLayout BindableLayout.ItemsSource="{Binding SelectedItems, Mode=TwoWay}"
                                  Padding="5,0"
                                  Spacing="0">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
-                                <Grid> 
+                                <Grid>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="35*"/>
                                         <ColumnDefinition Width="10*"/>
@@ -118,12 +118,8 @@
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
-                    
-                </StackLayout>
-                
-                
 
-                
+                </StackLayout>
             </StackLayout>
         </Frame>
     </ContentView.Content>

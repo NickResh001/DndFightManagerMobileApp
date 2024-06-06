@@ -1,0 +1,459 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DndFightManagerMobileApp.Views.BeastStatblockHitsView"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:vm="clr-namespace:DndFightManagerMobileApp.ViewModels"
+             xmlns:ctrl="clr-namespace:DndFightManagerMobileApp.Controls.Views"
+             BackgroundColor="{DynamicResource MainDark}">
+    <ContentPage.Content>
+        <Grid RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="80*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" RowSpacing="0" ColumnSpacing="0">
+                
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                        Style="{DynamicResource BackButton}"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Margin="6,0,0,0"/>
+
+                <StackLayout Grid.Column="1" Orientation="Vertical"
+                             VerticalOptions="Center" HorizontalOptions="Center"
+                             Margin="0,6" Padding="0" Spacing="0">
+                    <Label Grid.Column="1"
+                           Style="{DynamicResource Header2}"
+                           Text="Волк 1"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                    <Label Grid.Column="1"
+                           Style="{DynamicResource SecondaryText}"
+                           Text="Стая волков"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <Button Grid.Column="2"
+                        Style="{DynamicResource InfoButton}"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        VerticalOptions="Center"
+                        Scale="1"
+                        HorizontalOptions="Center"
+                        Margin="0,0,6,0"/>
+
+            </Grid>
+
+            <Grid Grid.Row="1" BackgroundColor="{DynamicResource MainMedium}"
+                  Margin="0" Padding="0,2,0,4" RowSpacing="0" ColumnSpacing="0">
+                <ScrollView>
+                    <StackLayout Spacing="14" Padding="12,0" Margin="0,0">
+
+                        <!-- Хиты -->
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Padding="5,6"
+                               Margin="0,7,0,0">
+                            <StackLayout Orientation="Vertical"
+                                         Padding="0" Margin="0" Spacing="0">
+                                <StackLayout Orientation="Horizontal">
+                                    <Button Style="{DynamicResource InfoButton}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="40"
+                                            HeightRequest="40"/>
+                                    <Label Style="{DynamicResource Header2}"
+                                           Text="Хиты"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+                                </StackLayout>
+
+                                <Grid RowSpacing="0" ColumnSpacing="0"
+                                      Margin="12,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Column="0" Grid.Row="0"
+                                           Style="{DynamicResource Header3}"
+                                           Text="Текущие хиты"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="Center"/>
+                                    <Label Grid.Column="0" Grid.Row="1"
+                                           Style="{DynamicResource Header3}"
+                                           Text="Временные хиты"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="Center"/>
+
+                                    <Entry Grid.Column="1" Grid.Row="0"
+                                           HorizontalTextAlignment="Center"
+                                           Text="11"/>
+                                    <Entry Grid.Column="1" Grid.Row="1"
+                                           HorizontalTextAlignment="Center"
+                                           Text="0"/>
+
+                                </Grid>
+
+                            </StackLayout>
+                        </Frame>
+
+                        <!-- Изменение хитов -->
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Padding="5,6">
+                            <StackLayout Orientation="Vertical"
+                                         Padding="0" Margin="0" Spacing="0">
+
+                                <StackLayout Orientation="Horizontal">
+                                    <Button Style="{DynamicResource InfoButton}"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            WidthRequest="40"
+                                            HeightRequest="40"/>
+                                    <Label Style="{DynamicResource Header2}"
+                                           Text="Изменение хитов"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="Center"/>
+                                </StackLayout>
+
+                                <Grid RowSpacing="0" ColumnSpacing="0"
+                                      Margin="12,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Label Grid.Column="0" Grid.Row="0"
+                                           Style="{DynamicResource Header3}"
+                                           Text="Объем хитов"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="Center"/>
+                                    <Label Grid.Column="0" Grid.Row="1"
+                                           Style="{DynamicResource Header3}"
+                                           Text="Тип урона"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="Center"/>
+                                    <Label Grid.Column="0" Grid.Row="2"
+                                           Style="{DynamicResource Header3}"
+                                           Text="Зависимость"
+                                           HorizontalOptions="End"
+                                           VerticalOptions="Center"/>
+
+                                    <Entry Grid.Column="1" Grid.Row="0"
+                                           HorizontalTextAlignment="Center"
+                                           Text="2к6+2"/>
+                                    <Entry Grid.Column="1" Grid.Row="1"
+                                           HorizontalTextAlignment="Center"
+                                           Text="Рубящий"/>
+                                    <Entry Grid.Column="1" Grid.Row="2"
+                                           HorizontalTextAlignment="Center"
+                                           Text="Ничего"/>
+
+                                </Grid>
+
+                                <Grid VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+
+                                    <Button Grid.Column="0"
+                                            Style="{DynamicResource LinkButton}"
+                                            Text="Нанести урон"
+                                            VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+                                    <Button Grid.Column="1"
+                                            Style="{DynamicResource LinkButton}"
+                                            Text="Излечить"
+                                            VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+
+                                </Grid>
+        
+
+                            </StackLayout>
+                        </Frame>
+
+                        <!-- Состояния -->
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Padding="5,6">
+                            
+                            <StackLayout Spacing="0">
+
+                                <Grid HeightRequest="40">
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="90*"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <StackLayout Grid.Column="0"
+                                                 Orientation="Horizontal"
+                                                 Spacing="6"
+                                                 VerticalOptions="Center"
+                                                 HorizontalOptions="Start">
+                                        <Button Grid.Column="0"
+                                                Style="{DynamicResource InfoButton}"
+                                                VerticalOptions="Center"
+                                                HorizontalOptions="Center"
+                                                WidthRequest="40"
+                                                HeightRequest="30"/>
+                                        <Label Text="Состояния"
+                                               Style="{DynamicResource Header3}"
+                                               VerticalOptions="CenterAndExpand"
+                                               HorizontalOptions="StartAndExpand"
+                                               LineBreakMode="TailTruncation"/>
+                                    </StackLayout>
+
+                                    <CheckBox Grid.Column="1"
+                                              VerticalOptions="Center"
+                                              HorizontalOptions="End"
+                                              WidthRequest="40"
+                                              HeightRequest="30"
+                                              x:Name="ConditionsCheckbox"
+                                              IsChecked="False"/>
+                                </Grid>
+
+                                <StackLayout IsVisible="{Binding Source={x:Reference ConditionsCheckbox}, Path=IsChecked}" Spacing="0">
+
+                                    <Grid RowSpacing="0" ColumnSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="4*"/>
+                                            <ColumnDefinition Width="3*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Entry Grid.Column="0"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="FillAndExpand"/>
+
+                                        <Entry Grid.Column="1"
+                                               Text="Испуганный"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="FillAndExpand"
+                                               HorizontalTextAlignment="Center"
+                                               Margin="7,0,7,0"/>
+
+                                        <Button Grid.Column="2"
+                                                Text="Добавить"
+                                                Style="{DynamicResource LinkButton}"
+                                                Command="{Binding AddNoteCommand}"/>
+
+                                    </Grid>
+
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               HeightRequest="2"
+                                               Margin="7,4"/>
+
+                                    <StackLayout Padding="5,0"
+                                                 Spacing="0">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0"
+                                                   Text="Отравлен"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   Style="{DynamicResource CommonText}"
+                                                   FontSize="18"
+                                                   HorizontalTextAlignment="Start"
+                                                   LineBreakMode="TailTruncation"/>
+
+                                            <Label Grid.Column="1"
+                                                   Text="3"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="Center"
+                                                   Style="{DynamicResource CommonText}"
+                                                   FontSize="18"
+                                                   HorizontalTextAlignment="Center"
+                                                   LineBreakMode="TailTruncation"/>
+
+                                            <Button Grid.Column="2"
+                                                    Text="Удалить"
+                                                    HorizontalOptions="Start"
+                                                    Style="{DynamicResource LinkButton}"/>
+                                        </Grid>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="3*"/>
+                                                <ColumnDefinition Width="1*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <Label Grid.Column="0"
+                                                   Text="Схвачен"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center"
+                                                   Style="{DynamicResource CommonText}"
+                                                   FontSize="18"
+                                                   HorizontalTextAlignment="Start"
+                                                   LineBreakMode="TailTruncation"/>
+
+                                            <Label Grid.Column="1"
+                                                   Text="-"
+                                                   HorizontalOptions="Start"
+                                                   VerticalOptions="Center"
+                                                   Style="{DynamicResource CommonText}"
+                                                   FontSize="18"
+                                                   HorizontalTextAlignment="Center"
+                                                   LineBreakMode="TailTruncation"/>
+
+                                            <Button Grid.Column="2"
+                                                    Text="Удалить"
+                                                    HorizontalOptions="Start"
+                                                    Style="{DynamicResource LinkButton}"/>
+                                        </Grid>
+                                    </StackLayout>
+
+                                </StackLayout>
+                            </StackLayout>
+                        </Frame>
+
+                        <!-- КД -->
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Padding="5,6"
+                               Margin="0,0,0,0">
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="0">
+                                <Button Grid.Column="0"
+                                        Style="{DynamicResource InfoButton}"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        WidthRequest="40"/>
+                                <StackLayout Orientation="Vertical"
+                                             Spacing="0"
+                                             Margin="6,0"
+                                             HorizontalOptions="FillAndExpand">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0"
+                                               Style="{DynamicResource Header3}"
+                                               Margin="0,6,0,0"
+                                               Text="Текущий КД"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Start"/>
+                                        <Button Grid.Column="1"
+                                                Style="{DynamicResource LinkButton}"
+                                                Text="сброс"
+                                                Padding="0,0,-34,0"
+                                                HeightRequest="20"
+                                                VerticalOptions="EndAndExpand"
+                                                HorizontalOptions="EndAndExpand"/>
+                                    </Grid>
+
+                                    <Entry Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                                           Text="13"
+                                           HorizontalTextAlignment="Start"
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                </StackLayout>
+                            </StackLayout>
+
+                        </Frame>
+
+                        <!-- Макс хиты -->
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Padding="5,6"
+                               Margin="0,0,0,7">
+                            <StackLayout Orientation="Horizontal"
+                                         Spacing="0">
+                                <Button Grid.Column="0"
+                                        Style="{DynamicResource InfoButton}"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        WidthRequest="40"/>
+                                <StackLayout Orientation="Vertical"
+                                             Spacing="0"
+                                             Margin="6,0"
+                                             HorizontalOptions="FillAndExpand">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Column="0"
+                                               Style="{DynamicResource Header3}"
+                                               Margin="0,6,0,0"
+                                               Text="Максимальные Хиты"
+                                               VerticalOptions="Center"
+                                               HorizontalOptions="Start"/>
+                                        <Button Grid.Column="1"
+                                                Style="{DynamicResource LinkButton}"
+                                                Text="сброс"
+                                                Padding="0,0,-34,0"
+                                                HeightRequest="20"
+                                                VerticalOptions="EndAndExpand"
+                                                HorizontalOptions="EndAndExpand"/>
+                                    </Grid>
+
+                                    <Entry Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                                           Text="11"
+                                           HorizontalTextAlignment="Start"
+                                           HorizontalOptions="FillAndExpand"/>
+
+                                </StackLayout>
+                            </StackLayout>
+
+                        </Frame>
+
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+
+            <StackLayout Grid.Row="2" Orientation="Horizontal"
+                         VerticalOptions="Start" HorizontalOptions="FillAndExpand"
+                         Margin="0" Padding="0,-4,0,0" Spacing="0"
+                         HeightRequest="46">
+
+                <Button Style="{DynamicResource TabButton}" HorizontalOptions="FillAndExpand"
+                        Text="Хиты"
+                        IsEnabled="False"/>
+
+                <Button Style="{DynamicResource TabButton}" HorizontalOptions="FillAndExpand"
+                        Text="Хар-ки"
+                        IsEnabled="True"/>
+
+                <Button Style="{DynamicResource TabButton}" HorizontalOptions="FillAndExpand"
+                        Text="Действия"
+                        IsEnabled="True"/>
+
+            </StackLayout>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -10,7 +10,7 @@ namespace DndFightManagerMobileApp.Models
         public int InitiativeBonus { get; set; }
         public int ArmorClass { get; set; }
         public int SpecialBonus { get; set; }
-        public byte[] Image { get; set; }
+        public byte[] Image { get; set; } //?
         public string Title { get; set; }
         public AlignmentModel Alignment { get; set; }
         public SizeModel Size { get; set; }
