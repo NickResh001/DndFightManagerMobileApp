@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DndFightManagerMobileApp.Views.BeastMultiactionViewPage"
+             BackgroundColor="{DynamicResource MainDark}">
+    <ContentPage.Content>
+        <Grid RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Column="0" RowSpacing="0" ColumnSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                        Style="{DynamicResource BackButton}"
+                        WidthRequest="60" HeightRequest="40"
+                        HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                <StackLayout Grid.Column="1" Orientation="Vertical"
+                             Padding="0" Margin="0,4,0,6" Spacing="0"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Center">
+                    <Label Style="{DynamicResource Header2}"
+                           Text="Укус + Хватка"
+                           VerticalOptions="Center" HorizontalOptions="Center"/>
+                    <Label Style="{DynamicResource SecondaryText}"
+                           Text="Основное"
+                           VerticalOptions="Center" HorizontalOptions="Center"/>
+                </StackLayout>
+
+                <Button Grid.Column="2"
+                        Style="{DynamicResource ExecuteButton}"
+                        WidthRequest="60" HeightRequest="40"
+                        HorizontalOptions="Center" VerticalOptions="Center"/>
+
+                <Rectangle Grid.Column="0" Grid.ColumnSpan="3"
+                           BackgroundColor="{DynamicResource MainMedium}"
+                           HeightRequest="2"
+                           VerticalOptions="End" HorizontalOptions="FillAndExpand"
+                           Margin="12,0"/>
+
+            </Grid>
+
+            <Grid Grid.Row="1" RowSpacing="0" ColumnSpacing="0"
+                  BackgroundColor="{DynamicResource MainDark}"
+                  Margin="0,0" Padding="0,0">
+                <ScrollView>
+                    <StackLayout Orientation="Vertical"
+                                 Spacing="8" Margin="0" Padding="12,0">
+                        <Label Style="{DynamicResource Header1}"
+                               Text="Откат"
+                               Margin="0,7,0,0"/>
+                        <Label Style="{DynamicResource Header3}"
+                               Text="Перезарядка: от 5 до 6 на d6"
+                               Margin="0,0,0,0"/>
+
+                        <Rectangle Grid.Column="0" Grid.ColumnSpan="3"
+                               BackgroundColor="{DynamicResource MainMedium}"
+                               HeightRequest="2"
+                               VerticalOptions="End" HorizontalOptions="FillAndExpand"
+                               Margin="0,0"/>
+                        <Label Style="{DynamicResource Header1}"
+                               Text="Содержит действия"
+                               Margin="0,0,0,0"/>
+
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Padding="12,6" Margin="0,0,0,0" BorderColor="Transparent"
+                               VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       Text="Укус"
+                                       Style="{DynamicResource Header3}"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="TailTruncation"/>
+
+                                <StackLayout Grid.Column="1"
+                                             Orientation="Horizontal"
+                                             VerticalOptions="Center" HorizontalOptions="End"
+                                             Spacing="0" Padding="0,0" Margin="0,0">
+
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               WidthRequest="1"
+                                               VerticalOptions="FillAndExpand"
+                                               Margin="6,0"/>
+
+                                    <Button Style="{DynamicResource ExecuteButton}"
+                                            WidthRequest="30"
+                                            HeightRequest="30"/>
+
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               WidthRequest="1"
+                                               VerticalOptions="FillAndExpand"
+                                               Margin="6,0"/>
+
+                                    <Button Style="{DynamicResource EyeButton}"
+                                            WidthRequest="30"
+                                            HeightRequest="30"/>
+
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Padding="12,6" Margin="0,0,0,0" BorderColor="Transparent"
+                               VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       Text="Хватка"
+                                       Style="{DynamicResource Header3}"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="TailTruncation"/>
+
+                                <StackLayout Grid.Column="1"
+                                             Orientation="Horizontal"
+                                             VerticalOptions="Center" HorizontalOptions="End"
+                                             Spacing="0" Padding="0,0" Margin="0,0">
+
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               WidthRequest="1"
+                                               VerticalOptions="FillAndExpand"
+                                               Margin="6,0"/>
+
+                                    <Button Style="{DynamicResource ExecuteButton}"
+                                            WidthRequest="30"
+                                            HeightRequest="30"/>
+
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               WidthRequest="1"
+                                               VerticalOptions="FillAndExpand"
+                                               Margin="6,0"/>
+
+                                    <Button Style="{DynamicResource EyeButton}"
+                                            WidthRequest="30"
+                                            HeightRequest="30"/>
+
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

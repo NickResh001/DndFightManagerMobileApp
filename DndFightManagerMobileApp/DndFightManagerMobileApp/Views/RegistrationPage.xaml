@@ -53,7 +53,7 @@
                 <Entry Placeholder="Повтор пароля"/>
 
                 <Button Style="{DynamicResource LinkButton}"
-                        Text="Зарегестрироваться"
+                        Text="Зарегистрироваться"
                         VerticalOptions="Center"/>
             </StackLayout>
 

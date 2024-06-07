@@ -3,8 +3,245 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DndFightManagerMobileApp.Views.ManagerCRUDBeastView">
     <ContentView.Content>
-        <StackLayout>
-            <Label Text="Hello Xamarin.Forms!" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0"
+                  RowSpacing="0"
+                  Padding="0,2">
+                <ScrollView Padding="10,0"
+                            BackgroundColor="Transparent"
+                            VerticalOptions="Fill"
+                            HorizontalOptions="Center">
+                    <StackLayout Spacing="0" Padding="0" Margin="0">
+
+                        <Frame CornerRadius="10"
+                               BackgroundColor="{DynamicResource MainDark}"
+                               Padding="0"
+                               Margin="0,4">
+                            <Grid BackgroundColor="Transparent"
+                                  Padding="4,8">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0" Orientation="Vertical"
+                                             VerticalOptions="Center" HorizontalOptions="Start"
+                                             Spacing="0" Margin="6,0,0,0" Padding="0">
+
+                                    <Label Grid.Row="0"
+                                           Text="Балханот"
+                                           Style="{DynamicResource Header3}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                                    <Label Grid.Row="1"
+                                           Text="11, Абберация"
+                                           Style="{DynamicResource SecondaryText}"
+                                           FontSize="12"
+                                           VerticalOptions="Start"
+                                           HorizontalOptions="Start"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               VerticalOptions="Fill"
+                                               HorizontalOptions="Start"
+                                               WidthRequest="2"/>
+
+                                    <Entry Margin="0"
+                                           VerticalOptions="Center" HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Text="0"
+                                           WidthRequest="40"/>
+
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               VerticalOptions="Fill"
+                                               HorizontalOptions="Start"
+                                               WidthRequest="2"/>
+
+                                    <Button Style="{DynamicResource InfoButton}"
+                                            VerticalOptions="Center" HorizontalOptions="Center"
+                                            WidthRequest="40" HeightRequest="30"/>     
+                                </StackLayout>
+
+
+                            </Grid>
+                        </Frame>
+                        <Frame CornerRadius="10"
+                               BackgroundColor="{DynamicResource MainDark}"
+                               Padding="0"
+                               Margin="0,4">
+                            <Grid BackgroundColor="Transparent"
+                                  Padding="4,8">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0" Orientation="Vertical"
+                                             VerticalOptions="Center" HorizontalOptions="Start"
+                                             Spacing="0" Margin="6,0,0,0" Padding="0">
+
+                                    <Label Grid.Row="0"
+                                           Text="Волк"
+                                           Style="{DynamicResource Header3}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                                    <Label Grid.Row="1"
+                                           Text="1/4, Зверь"
+                                           Style="{DynamicResource SecondaryText}"
+                                           FontSize="12"
+                                           VerticalOptions="Start"
+                                           HorizontalOptions="Start"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               VerticalOptions="Fill"
+                                               HorizontalOptions="Start"
+                                               WidthRequest="2"/>
+
+                                    <Entry Margin="0"
+                                           VerticalOptions="Center" HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Text="0"
+                                           WidthRequest="40"/>
+
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               VerticalOptions="Fill"
+                                               HorizontalOptions="Start"
+                                               WidthRequest="2"/>
+
+                                    <Button Style="{DynamicResource InfoButton}"
+                                            VerticalOptions="Center" HorizontalOptions="Center"
+                                            WidthRequest="40" HeightRequest="30"/>
+                                </StackLayout>
+
+
+                            </Grid>
+                        </Frame>
+                        <Frame CornerRadius="10"
+                               BackgroundColor="{DynamicResource MainDark}"
+                               Padding="0"
+                               Margin="0,4">
+                            <Grid BackgroundColor="Transparent"
+                                  Padding="4,8">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0" Orientation="Vertical"
+                                             VerticalOptions="Center" HorizontalOptions="Start"
+                                             Spacing="0" Margin="6,0,0,0" Padding="0">
+
+                                    <Label Grid.Row="0"
+                                           Text="Вегепигмей"
+                                           Style="{DynamicResource Header3}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                                    <Label Grid.Row="1"
+                                           Text="1/4, Растение"
+                                           Style="{DynamicResource SecondaryText}"
+                                           FontSize="12"
+                                           VerticalOptions="Start"
+                                           HorizontalOptions="Start"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               VerticalOptions="Fill"
+                                               HorizontalOptions="Start"
+                                               WidthRequest="2"/>
+
+                                    <Entry Margin="0"
+                                           VerticalOptions="Center" HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Text="0"
+                                           WidthRequest="40"/>
+
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               VerticalOptions="Fill"
+                                               HorizontalOptions="Start"
+                                               WidthRequest="2"/>
+
+                                    <Button Style="{DynamicResource InfoButton}"
+                                            VerticalOptions="Center" HorizontalOptions="Center"
+                                            WidthRequest="40" HeightRequest="30"/>
+                                </StackLayout>
+
+
+                            </Grid>
+                        </Frame>
+                        <Frame CornerRadius="10"
+                               BackgroundColor="{DynamicResource MainDark}"
+                               Padding="0"
+                               Margin="0,4">
+                            <Grid BackgroundColor="Transparent"
+                                  Padding="4,8">
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <StackLayout Grid.Column="0" Orientation="Vertical"
+                                             VerticalOptions="Center" HorizontalOptions="Start"
+                                             Spacing="0" Margin="6,0,0,0" Padding="0">
+
+                                    <Label Grid.Row="0"
+                                           Text="Персонаж игрока"
+                                           Style="{DynamicResource Header3}"
+                                           FontAttributes="Bold"
+                                           VerticalOptions="Center" HorizontalOptions="Start"/>
+                                </StackLayout>
+
+                                <StackLayout Grid.Column="1" Orientation="Horizontal">
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               VerticalOptions="Fill"
+                                               HorizontalOptions="Start"
+                                               WidthRequest="2"/>
+
+                                    <Entry Margin="0"
+                                           VerticalOptions="Center" HorizontalOptions="Center"
+                                           HorizontalTextAlignment="Center"
+                                           Text="0"
+                                           WidthRequest="40"/>
+
+                                    <Rectangle BackgroundColor="{DynamicResource MainMedium}"
+                                               VerticalOptions="Fill"
+                                               HorizontalOptions="Start"
+                                               WidthRequest="2"/>
+
+                                    <Button Style="{DynamicResource InfoButton}"
+                                            VerticalOptions="Center" HorizontalOptions="Center"
+                                            WidthRequest="40" HeightRequest="30"/>
+                                </StackLayout>
+
+
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+
+            <Grid Grid.Row="1"
+                  RowSpacing="0" ColumnSpacing="0" BackgroundColor="{DynamicResource MainDark}">
+                <Button Style="{DynamicResource LinkButton}"
+                        Text="Добавить выбранных мобов"/>
+            </Grid>
+            
+            
+        </Grid>
     </ContentView.Content>
 </ContentView>

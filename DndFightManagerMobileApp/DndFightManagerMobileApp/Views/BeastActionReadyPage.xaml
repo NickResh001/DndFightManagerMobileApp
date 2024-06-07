@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DndFightManagerMobileApp.Views.BeastActionReadyPage"
+             BackgroundColor="{DynamicResource MainDark}">
+    <ContentPage.Content>
+        <Grid RowSpacing="0" ColumnSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" RowSpacing="0" ColumnSpacing="0">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Button Grid.Column="0"
+                        Style="{DynamicResource BackButton}"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Margin="6,0,0,0"/>
+
+                <Label Grid.Column="1"
+                       Style="{DynamicResource Header2}"
+                       Text="Подготовка"
+                       VerticalOptions="Center"
+                       HorizontalOptions="Center"/>
+
+                <Button Grid.Column="2"
+                        Style="{DynamicResource InfoButton}"
+                        WidthRequest="40"
+                        HeightRequest="40"
+                        VerticalOptions="Center"
+                        Scale="1"
+                        HorizontalOptions="Center"
+                        Margin="0,0,6,0"/>
+
+            </Grid>
+
+            <Grid Grid.Row="1" BackgroundColor="{DynamicResource MainMedium}"
+                  Margin="0" Padding="0,2,0,4" RowSpacing="0" ColumnSpacing="0">
+                <ScrollView>
+                    <StackLayout Spacing="14" Padding="12,0" Margin="0,0">
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Padding="12,6" Margin="0,7,0,0"
+                               VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       Text="Укус"
+                                       Style="{DynamicResource Header3}"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="TailTruncation"/>
+
+                                <CheckBox Grid.Column="1"/>
+                            </Grid>
+                        </Frame>
+                        <Frame BackgroundColor="{DynamicResource MainDark}"
+                               CornerRadius="5"
+                               Padding="12,6" Margin="0,0,0,0"
+                               VerticalOptions="Center" HorizontalOptions="FillAndExpand">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Column="0"
+                                       Text="Хватка"
+                                       Style="{DynamicResource Header3}"
+                                       VerticalOptions="Center"
+                                       LineBreakMode="TailTruncation"/>
+
+                                <CheckBox Grid.Column="1"/>
+                            </Grid>
+                        </Frame>
+                    </StackLayout>
+                </ScrollView>
+            </Grid>
+
+            <StackLayout Grid.Row="2" Orientation="Vertical"
+                         VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                         Margin="0" Padding="6,6" Spacing="0">
+                <Label Style="{DynamicResource Header2}"
+                        Text="Условие"
+                       Margin="6,0,0,0"/>
+                <Frame HorizontalOptions="FillAndExpand"
+                       Padding="2"
+                       Margin="6"
+                       BackgroundColor="{DynamicResource MainMedium}">
+                    <Editor VerticalOptions="Fill"
+                           HorizontalOptions="Fill"                                               
+                           IsSpellCheckEnabled="True"
+                           IsTextPredictionEnabled="True"
+                           TextTransform="None"
+                           Text=""
+                           HeightRequest="100"
+                           MaxLength="1000"
+                           BackgroundColor="{DynamicResource MainDark}"/>
+                </Frame>
+                <Button Style="{DynamicResource LinkButton}"
+                        Text="Подтвердить"/>
+
+            </StackLayout>
+
+            <Grid Grid.Row="0" Grid.RowSpan="3"
+                  RowSpacing="0" ColumnSpacing="0" Padding="0" Margin="0" BackgroundColor="Transparent"
+                  IsVisible="True">
+                <Frame Grid.Row="0" Grid.RowSpan="3"
+                       BackgroundColor="{DynamicResource MainDark}"
+                       VerticalOptions="Center"
+                       HorizontalOptions="FillAndExpand"
+                       BorderColor="{DynamicResource MainLight}"
+                       CornerRadius="10"
+                       Padding="10"
+                       Margin="6,0">
+                    <StackLayout Orientation="Vertical"
+                                 Spacing="8" Margin="0" Padding="0">
+                        <Label Style="{DynamicResource Header2}"
+                               Text="Подготовка действий"/>
+                        <Label Style="{DynamicResource CommonText}"
+                               Text="Потратив ресурс Основного действия, вы можете подготовить действие. Подготовленное действие можно использовать Реакцией при срабатывании условия, которое вы указываете при подготовке."/>
+                        <Label Style="{DynamicResource CommonText}"
+                               Text="Подготовить можно Основное, Бонусное или Свободное действие. Подготовленное действие доступно до вашего следующего хода, после чего оно сбрасывается и требует повторной подготовки."/>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

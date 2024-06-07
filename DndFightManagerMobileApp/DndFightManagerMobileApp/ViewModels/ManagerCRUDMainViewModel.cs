@@ -49,8 +49,8 @@ namespace DndFightManagerMobileApp.ViewModels
                     },
                     new TabHelper
                     {
-                        View = new CampaignsListView(),
-                        ViewModel = CampaignsListView._vm,
+                        View = new ManagerCRUDBeastView(),
+                        ViewModel = ManagerCRUDBeastView._vm,
                         IsEnable = true,
                         TabIndex = 1,
                         TabTitle = "Мобы"

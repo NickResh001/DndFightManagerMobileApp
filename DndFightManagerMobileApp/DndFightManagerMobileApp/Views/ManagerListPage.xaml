@@ -43,7 +43,7 @@
                                  Spacing="0">
 
                         <Label Grid.Column="1"
-                               Text="Заголовок"
+                               Text="Партия 1"
                                Style="{DynamicResource Header2}"
                                VerticalOptions="Center"
                                HorizontalOptions="Center"/>
@@ -290,7 +290,8 @@
                             VerticalOptions="Center"
                             HorizontalOptions="Center"
                             WidthRequest="40"
-                            HeightRequest="40"/>
+                            HeightRequest="40"
+                            Command="{Binding OpenScreensMenuCommand}"/>
 
                     <Button Grid.Column="2"
                             Style="{DynamicResource AddButton}"
@@ -458,11 +459,14 @@
                                        Style="{DynamicResource Header3}"
                                        Text="Команда:"
                                        VerticalOptions="Center"/>
-                                
-                                <Picker Grid.Column="1" Grid.Row="1"
+
+                                <!--<Picker Grid.Column="1" Grid.Row="1"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="FillAndExpand"
                                         ItemsSource="{Binding FightTeams}"
                                         SelectedItem="{Binding SelectedFightTeam, Mode=TwoWay}"
-                                        ItemDisplayBinding="{Binding Title}"
+                                        ItemDisplayBinding="{Binding Title}"/>-->
+                                <Entry Grid.Column="1" Grid.Row="1" Text="Против всех"
                                         VerticalOptions="Center"
                                         HorizontalOptions="FillAndExpand"/>
 
@@ -494,7 +498,7 @@
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                     Text="Подтвердить изменения"
-                                    IsVisible="{Binding SelectedManagedBeast.IsBeast}"/>
+                                    IsVisible="True"/>
                             
                         </StackLayout>
 
@@ -625,7 +629,12 @@
             <!-- меню перехода к доп экранам-->
             <Grid RowSpacing="0"
                   BackgroundColor="Transparent"
-                  IsVisible="true">
+                  IsVisible="{Binding IsScreensMenuOpen}">
+
+                <Button Style="{DynamicResource CloseButton}"
+                        VerticalOptions="Start"
+                        HorizontalOptions="End"
+                        Command="{Binding CloseScreensMenuCommand}"/>
 
                 <Frame BackgroundColor="{DynamicResource MainDark}"
                        VerticalOptions="Center"
@@ -665,12 +674,17 @@
                             <Button Style="{DynamicResource LinkButton}"
                                     Text="Просмотр действия"
                                     Command="{Binding NavigateToScreenCommand}"
-                                    CommandParameter="BeastStatblockActionsView"/>
+                                    CommandParameter="BeastActionViewPage"/>
+                            
+                            <Button Style="{DynamicResource LinkButton}"
+                                    Text="Просмотр мультидействия"
+                                    Command="{Binding NavigateToScreenCommand}"
+                                    CommandParameter="BeastMultiactionViewPage"/>
                             
                             <Button Style="{DynamicResource LinkButton}"
                                     Text="Подготовка действий"
                                     Command="{Binding NavigateToScreenCommand}"
-                                    CommandParameter="BeastStatblockActionsView"/>
+                                    CommandParameter="BeastActionReadyPage"/>
 
                             <!-- Корректное отображение команд -->
                             <!-- Показ результатов бросков -->

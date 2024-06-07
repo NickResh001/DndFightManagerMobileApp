@@ -76,6 +76,7 @@ namespace DndFightManagerMobileApp.ViewModels
                 Id = Guid.NewGuid().ToString(),
                 Title = "Нет команды"
             };
+            IsScreensMenuOpen = false;
         }
         private async Task FightTeamsRefresh()
         {
@@ -347,10 +348,24 @@ namespace DndFightManagerMobileApp.ViewModels
 
         #region ScreensMenu
 
+        [ObservableProperty]
+        private bool _isScreensMenuOpen;
+
         [RelayCommand]
         private async Task NavigateToScreen(string screenName)
         {
             await Shell.Current.GoToAsync($"{screenName}");
+        }
+
+        [RelayCommand]
+        private async Task OpenScreensMenu()
+        {
+            IsScreensMenuOpen = true;
+        }
+        [RelayCommand]
+        private async Task CloseScreensMenu()
+        {
+            IsScreensMenuOpen = false;
         }
 
         #endregion
